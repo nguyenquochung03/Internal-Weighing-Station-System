@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -478,6 +477,9 @@
       justify-content: space-between;
       font-size: var(--text-xs);
       color: var(--text-secondary);
+    }
+    .btn-edit-ticket-modal:hover {
+      color: var(--blue) !important;
     }
 
     /* COLUMN MIDDLE: flex 1 */
@@ -1801,6 +1803,143 @@
         color: black !important;
       }
     }
+    /* ═══════════════════════════════════════════════════════════════════
+       RESPONSIVE — MÀN HÌNH NHỎ (TABLET / ĐIỆN THOẠI)
+    ═══════════════════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .ticket-page-layout {
+        flex-direction: column !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        display: block !important; /* switch to block to avoid flex squishing */
+      }
+      .col-left, .col-middle, .col-right {
+        width: 100% !important;
+        border-right: none !important;
+        border-left: none !important;
+        border-bottom: 1px solid var(--border-default) !important;
+        flex: none !important; /* disable flex: 1 */
+        height: auto !important;
+      }
+      .col-left {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .col-right {
+        border-top: none !important;
+      }
+      .col-middle {
+        padding: 16px !important;
+        overflow-y: visible !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        height: auto;
+        flex-wrap: wrap;
+        padding: 10px 14px;
+        gap: 10px;
+        row-gap: 8px;
+      }
+      .logo-subtext { display: none; }
+      .nav-tabs {
+        order: 3;
+        width: 100%;
+        justify-content: stretch;
+      }
+      .nav-tab {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+      main {
+        height: auto;
+        min-height: calc(100vh - 64px);
+        padding: 12px;
+      }
+      .info-banner-blue {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+      }
+      .info-banner-blue button {
+        width: 100%;
+        justify-content: center;
+      }
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr !important;
+      }
+      .stat-cards-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .report-filters {
+        flex-wrap: wrap;
+      }
+      .modal-content {
+        width: 92vw !important;
+        padding: 18px !important;
+      }
+      .card {
+        padding: 14px !important;
+      }
+      .history-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+      }
+      .history-header div {
+        width: 100% !important;
+      }
+      .history-header div input,
+      .history-header div select {
+        flex: 1 !important;
+        width: 100% !important;
+      }
+      #history-table-card {
+        height: auto !important;
+        min-height: calc(100vh - 150px) !important;
+      }
+      #history-details-view {
+        height: auto !important;
+      }
+      .table-responsive {
+        overflow-x: auto;
+      }
+      .table-responsive table {
+        min-width: 720px;
+      }
+      .col-right {
+        width: 100% !important;
+      }
+      .ticket-action-row {
+        flex-wrap: wrap;
+      }
+      .ticket-action-row button {
+        flex: 1;
+        min-width: 140px;
+      }
+      /* Thu gọn các khu vực nhập liệu nhiều cột trên 1 hàng thành xếp dọc */
+      .weighing-input-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      .weighing-input-row > button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-text { font-size: 14px; }
+      .nav-tab span, .nav-tab { font-size: 11px; }
+      .card-title { font-size: 13px; }
+      .ticket-card-header, .result-row { flex-wrap: wrap; }
+      .stat-cards-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1821,31 +1960,16 @@
       </div>
     </div>
     
+    
     <!-- APP TAB NAVIGATION -->
-    <div class="nav-tabs" style="display:none;">
+    <div class="nav-tabs">
       <button class="nav-tab active" data-tab="tickets" onclick="switchTab('tickets')">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-2.24.75-3 .11-.76.64-2.13.54-3-.11Z"/><path d="m2 16 3-8 3 8c-.87.65-2.24.75-3 .11-.76.64-2.13.54-3-.11Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h18"/></svg>
-        Phiếu Cân
+        Đang thực hiện
       </button>
-      <button class="nav-tab" data-tab="customers" onclick="switchTab('customers')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Khách Hàng
-      </button>
-      <button class="nav-tab" data-tab="vehicles" onclick="switchTab('vehicles')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v10Z"/><path d="M19 14h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H20a2 2 0 0 1-2-2V14Z"/><circle cx="7.5" cy="18.5" r="2.5"/><circle cx="16.5" cy="18.5" r="2.5"/></svg>
-        Xe
-      </button>
-      <button class="nav-tab" data-tab="products" onclick="switchTab('products')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
-        Sản Phẩm
-      </button>
-      <button class="nav-tab" data-tab="reports" onclick="switchTab('reports')">
+      <button class="nav-tab" data-tab="history" onclick="switchTab('history')">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-        Báo Cáo
-      </button>
-      <button class="nav-tab" data-tab="settings" onclick="switchTab('settings')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        Cấu Hình
+        Lịch sử phiếu
       </button>
     </div>
 
@@ -1871,304 +1995,253 @@
       </button>
     </div>
 
-    <!-- ==================== TAB 1: PHIẾU CÂN ==================== -->
+    
+    <!-- ==================== TAB 1: ĐANG THỰC HIỆN ==================== -->
     <div class="tab-content active" id="tab-tickets">
       <div class="ticket-page-layout">
         
-        <!-- MASTER VIEW: TICKET TABLE -->
-        <div id="ticket-master-view" style="display: block; padding: 20px; width: 100%; height: 100%; overflow-y: auto;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-            <div style="display: flex; gap: 12px; align-items: center;">
-              <div class="search-box-container" style="margin: 0; width: 300px;">
-                <svg class="search-icon-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <input type="text" class="input-control" id="ticket-search" placeholder="Số phiếu, biển số, KH..." style="width: 100%;" onkeyup="renderTicketList()">
-              </div>
-              <select class="input-control" id="filter-type-dropdown" style="width: 180px; cursor: pointer;" onchange="filterType = this.value; renderTicketList();">
-                <option value="all">Loại Phiếu: Tất cả</option>
-                <option value="Can mu CTY">Nội bộ</option>
-                <option value="Nhap hang">Mua vào</option>
-                <option value="Xuat hang">Bán ra</option>
-              </select>
-              <select class="input-control" id="filter-status-dropdown" style="width: 180px; cursor: pointer;" onchange="filterStatus = this.value; renderTicketList();">
-                <option value="all">Trạng thái: Tất cả</option>
-                <option value="nhap">Nháp</option>
-                <option value="hoantat">Hoàn tất</option>
-                <option value="dahuy">Hủy</option>
-              </select>
-            </div>
-            <button class="btn btn-primary" id="btn-new-ticket">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        <!-- LEFT COLUMN: TICKET LIST -->
+        <div class="col-left" style="width: 320px; flex-shrink: 0; background: #FFFFFF; border-right: 1px solid var(--border-default); display: flex; flex-direction: column;">
+          <div style="padding: 16px; border-bottom: 1px solid var(--border-default);">
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 12px; justify-content: center;" onclick="showCreateTicketModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
               Tạo Phiếu Cân Mới
             </button>
+            <input type="text" class="input-control" id="ticket-search" placeholder="Biển số, số phiếu, khách hàng..." style="width: 100%; margin-bottom: 8px;" onkeyup="renderTicketList()">
+            <select class="input-control" id="filter-type-dropdown" style="width: 100%; cursor: pointer;" onchange="filterType = this.value; renderTicketList();">
+              <option value="all">Loại Phiếu: Tất cả</option>
+              <option value="Can mu CTY">Nội bộ</option>
+              <option value="Can mu mua">Mua vào</option>
+              <option value="Can hang ban">Bán ra</option>
+            </select>
           </div>
-
-          <div class="card" style="padding: 0; overflow: hidden;">
-            <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
-              <thead>
-                <tr style="background: var(--bg-sunken); border-bottom: 2px solid var(--border-default);">
-                  <th style="padding: 12px;">Số Phiếu</th>
-                  <th style="padding: 12px;">Ngày Tạo</th>
-                  <th style="padding: 12px;">Trạng Thái</th>
-                  <th style="padding: 12px;">Loại Phiếu</th>
-                  <th style="padding: 12px;">Nguồn Cung/Ứng</th>
-                  <th style="padding: 12px;">Biển Số Xe</th>
-                  <th style="padding: 12px;">Loại Mủ</th>
-                  <th style="padding: 12px; text-align: right;">TL Hàng Net (Kg)</th>
-                  <th style="padding: 12px; text-align: center;">Thao Tác</th>
-                </tr>
-              </thead>
-              <tbody id="ticket-list-container">
-                <!-- dynamically populated -->
-              </tbody>
-            </table>
+          <div id="ticket-list-sidebar" style="flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+            <!-- dynamically populated list of draft/processing tickets -->
           </div>
         </div>
 
-        <!-- DETAIL VIEW: FORM & RESULTS -->
-        <div id="ticket-detail-view" style="display: none; flex: 1; height: 100%; flex-direction: column;">
-          <div style="padding: 12px 20px; background: var(--bg-sunken); border-bottom: 1px solid var(--border-default); display: flex; align-items: center;">
-            <button class="btn" onclick="showMasterView()" style="display: flex; align-items: center; gap: 6px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-              Quay lại danh sách
-            </button>
+        <!-- MIDDLE COLUMN: TICKET FORM -->
+        <div class="col-middle" style="flex: 1; background: var(--bg-base); display: flex; flex-direction: column; overflow-y: auto; padding: 20px;">
+          <div id="no-ticket-selected" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-muted);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.5;"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="9" x2="15" y1="9" y2="9"/><line x1="9" x2="15" y1="15" y2="15"/></svg>
+            <p>Chọn một phiếu bên trái hoặc tạo mới</p>
           </div>
-          <div style="display: flex; flex: 1; overflow: hidden; height: 100%;">
+          
+          <div id="ticket-form-container" style="display: none;">
+            <div class="card" style="margin-bottom: 16px;">
+              <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="flex align-center gap-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Thông Tin Phiếu
+                </span>
+                <span class="badge badge-grey" id="ticket-status-badge">Đang thực hiện</span>
+              </div>
+              
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Mã Phiếu</label>
+                  <input type="text" class="input-control" id="form-ticket-code" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Loại Phiếu</label>
+                  <input type="text" class="input-control" id="form-ticket-type" readonly>
+                </div>
+              </div>
+              
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Khách hàng / Đối tác</label>
+                  <input type="text" class="input-control" id="form-ticket-customer" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Biển số xe</label>
+                  <input type="text" class="input-control" id="form-ticket-plate" readonly style="font-family: var(--font-mono); font-weight: bold; color: var(--green-dark);">
+                </div>
+              </div>
 
-        <!-- COLUMN MIDDLE: WORKSPACE FORM -->
-        <div class="col-middle">
-          <div class="card" style="margin-bottom: 16px;">
-            <div class="card-title">
-              <span class="flex align-center gap-8">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
-                Biểu Mẫu Thông Tin Phiếu Cân
-              </span>
-              <span class="badge badge-grey" id="ticket-status-badge">NHÁP</span>
-              <span style="font-size: 11px; color: var(--text-secondary); font-weight: normal; margin-left: auto;" id="ticket-time-badge">--/--/-- --:--</span>
+                            <div class="form-group">
+                <label>Ghi chú</label>
+                <input type="text" class="input-control" id="form-ticket-notes">
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: normal;">
+                  <input type="checkbox" id="form-driver-offset" onchange="toggleDriverOffset()" style="width: 16px; height: 16px; cursor: pointer;">
+                  Áp dụng bù trừ tài xế (-140 kg)
+                </label>
+              </div>
+            </div>
+
+            
+            <div id="weighing-input-card" class="card" style="margin-bottom: 16px; border-left: 4px solid var(--green);">
+              <div class="card-title">
+                <span class="flex align-center gap-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2" ry="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                  Ghi Nhận Khối Lượng
+                </span>
+              </div>
+              
+              <div class="weighing-input-row" style="display: flex; gap: 16px; align-items: flex-end;">
+                <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                  <label>Khối lượng trên cân (kg)</label>
+                  <input type="number" class="input-control" id="current-scale-weight" style="font-size: 24px; font-weight: bold; font-family: var(--font-mono); color: var(--teal); height: 50px; text-align: center;" placeholder="0">
+                </div>
+                <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                  <label>Tên sản phẩm (cho lượt cân này) <span style="color: var(--red);">*</span></label>
+                  <input type="text" class="input-control" id="current-weighing-product" list="product-datalist" style="height: 50px;" placeholder="Chọn hoặc nhập tên sản phẩm...">
+                  <datalist id="product-datalist"></datalist>
+                </div>
+                <button class="btn btn-primary" style="height: 50px; padding: 0 24px; font-size: 16px;" onclick="saveWeighing()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Lưu
+                </button>
+              </div>
+              <div id="first-weighing-note" style="display:none; margin-top: 10px; font-size: 12px; color: var(--text-muted); background: var(--bg-sunken); padding: 8px 10px; border-radius: 6px;">
+                ℹ️ Đây là lượt cân đầu tiên (ghi nhận khối lượng tổng của xe) nên tên sản phẩm được mặc định, chưa cần chọn. Từ lượt cân thứ 2 trở đi bạn mới chọn sản phẩm cụ thể.
+              </div>
+              
             </div>
             
-            <div class="form-section-title">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
-              1. Thông Tin Phiếu &amp; Khách Hàng
+            <div class="card" id="form-trip-card" style="display: none; margin-bottom: 16px;">
+              <div class="card-title">
+                <span class="flex align-center gap-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  Thông Tin Chuyến Xe
+                </span>
+              </div>
+              <div class="grid-2" style="font-size: 13px; line-height: 1.6;">
+                <div><strong>Mã chuyến:</strong> <span id="form-trip-code" style="color: var(--blue);"></span></div>
+                <div><strong>Đội:</strong> <span id="form-trip-teams"></span></div>
+              </div>
+              <div style="overflow-x: auto; margin-top: 12px;">
+                <table class="data-table" style="font-size: 12px;">
+                  <thead id="form-trip-thead"></thead>
+                  <tbody id="form-trip-tbody"></tbody>
+                </table>
+              </div>
             </div>
-            <div class="grid-2">
-              <div class="form-group">
-                <label>Mã Phiếu Cân</label>
-                <input type="text" class="input-control" id="form-ticket-code" readonly placeholder="Số sinh tự động">
-              </div>
-              <div class="form-group">
-                <label>Hình Thức Cân</label>
-                <input type="hidden" id="form-ticket-type" onchange="if(currentTicket) currentTicket.type = this.value; var isCTY=(this.value==='Can mu CTY'); var s3w = document.getElementById('section-3-source-wrapper'); if(s3w) s3w.style.display = (this.value==='Nhap hang') ? 'block' : 'none'; document.getElementById('form-team-container').style.display=isCTY?'grid':'none'; document.querySelectorAll('.col-team').forEach(function(el){el.style.display=isCTY?'table-cell':'none';}); var hhHead = document.getElementById('col-haohut-header'); if(hhHead) hhHead.style.display=isCTY?'':'none'; document.querySelectorAll('.col-haohut').forEach(function(el){el.style.display=isCTY?'table-cell':'none';}); var disp = document.getElementById('form-ticket-type-display'); if(disp) { if(this.value==='Can mu CTY') disp.value='Cân mủ CTY (Nội bộ)'; else if(this.value==='Nhap hang') disp.value='Nhập hàng (Mua vào)'; else disp.value='Xuất hàng (Bán ra)'; }">
-                <input type="text" class="input-control" id="form-ticket-type-display" readonly placeholder="Hình thức cân">
-              </div>
-            </div>
-            <div class="grid-2">
-              <div class="form-group" id="form-customer-container">
-                <label>Khách Hàng / Đối Tác <span style="color: var(--red);">*</span></label>
-                <div class="dropdown-wrapper">
-                  <input type="text" class="input-control dropdown-search-input" id="form-customer-search" placeholder="Gõ tìm nhanh đối tác...">
-                  <input type="hidden" id="form-customer-id">
-                  <div class="dropdown-options-list" id="form-customer-options"></div>
-                </div>
-              </div>
-              <div class="form-group" id="form-team-container" style="display: none;">
-                <label>Đội (Nội bộ)</label>
-                <input type="text" class="input-control" id="form-team" placeholder="Đội tham gia sẽ tự động hiển thị..." readonly>
-              </div>
-
-              <div class="form-group">
-                <label>Biển Số Xe Liên Kết <span style="color: var(--red);">*</span></label>
-                <div class="dropdown-wrapper">
-                  <input type="text" class="input-control dropdown-search-input" id="form-vehicle-search" placeholder="Chọn biển số xe...">
-                  <input type="hidden" id="form-vehicle-id">
-                  <div class="dropdown-options-list" id="form-vehicle-options"></div>
-                </div>
-              </div>
+            
+            <div class="ticket-action-row" style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+              <button class="btn" style="background-color: var(--blue); border-color: var(--blue); color: white; display: flex; align-items: center; gap: 8px;" onclick="window.showPrintPreviewModal(currentTicketId)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+                In Phiếu
+              </button>
+              <button class="btn btn-danger" onclick="cancelTicket()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
+                Hủy Phiếu
+              </button>
+              <button class="btn btn-primary" style="background-color: var(--green); border-color: var(--green);" onclick="completeTicket()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Hoàn Thành Phiếu
+              </button>
             </div>
 
-            <div class="form-section-title" style="margin-top: 8px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-2.24.75-3 .11-.76.64-2.13.54-3-.11Z"/><path d="m2 16 3-8 3 8c-.87.65-2.24.75-3 .11-.76.64-2.13.54-3-.11Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h18"/></svg>
-              2. Trạm Cân / Nhà Máy
-            </div>
-            <div class="grid-2">
-              <div class="form-group">
-                <label>Loại Đích Đến <span style="color: var(--red);">*</span></label>
-                <select class="input-control" id="form-dest-type" onchange="populateDestinations(); calculateAmountsRealtime();">
-                  <option value="station">Trạm Cân</option>
-                  <option value="factory">Nhà Máy</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Tên Đích Đến <span style="color: var(--red);">*</span></label>
-                <select class="input-control" id="form-dest-id" onchange="if(currentTicket) currentTicket.destinationId = this.value; calculateAmountsRealtime();"></select>
-              </div>
-            </div>
-
-            <div id="section-3-source-wrapper">
-            <div class="form-section-title" style="margin-top: 8px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              3. Xác Nhận Nguồn Mủ
-            </div>
-            <div class="grid-2">
-              <div class="form-group" style="grid-column: span 2;">
-                <label>Nhập Biển Số Xe Nguồn Mủ</label>
-                <div style="display: flex; gap: 8px;">
-                  <input type="text" class="input-control" id="form-source-plate" placeholder="VD: 70C-19869" style="flex: 1; text-transform: uppercase;" oninput="document.getElementById('source-info-card').classList.add('hidden')">
-                  <button class="btn btn-primary" id="btn-lookup-source" style="white-space: nowrap; height: 38px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    Tra cứu
-                  </button>
-                </div>
-              </div>
-            </div>
-            <!-- Rubber Source Info Card -->
-            <div class="card hidden" id="source-info-card" style="margin-bottom: 12px; border-left: 3px solid var(--green); background: rgba(16,185,129,0.03); padding: 12px;">
-              <div class="card-title" style="margin-bottom: 10px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Thông Tin Nguồn Mủ Xác Nhận
-              </div>
-              <div class="grid-2" style="gap: 8px;">
-                <div class="result-row"><span class="result-key">Đối tác cung cấp:</span><span class="result-val" id="source-supplier" style="font-weight: 600;">---</span></div>
-                <div class="result-row"><span class="result-key">Tài xế:</span><span class="result-val" id="source-driver">---</span></div>
-                <div class="result-row"><span class="result-key">Vùng nguyên liệu:</span><span class="result-val" id="source-region">---</span></div>
-                <div class="result-row"><span class="result-key">Loại mủ:</span><span class="result-val" id="source-rubber-type">---</span></div>
-                <div class="result-row" style="grid-column: span 2;"><span class="result-key">Nhà máy đích:</span><span class="result-val" id="source-factory" style="font-weight: bold; color: var(--blue);">---</span></div>
-              </div>
-            </div>
-
-            </div>
-            <div class="form-group" style="margin-bottom: 12px;">
-              <label>Ghi Chú Phiếu</label>
-              <input type="text" class="input-control" id="form-notes" placeholder="Nhập ghi chú thêm cho phiếu cân">
-            </div>
           </div>
+        </div>
 
-          <!-- TRIP INFO SECTION (Only for Internal Tickets) -->
-          <div class="card" id="trip-info-card" style="margin-bottom: 12px; padding: 15px; display: none; border-left: 3px solid var(--blue);">
-            <div class="card-title" style="margin-bottom: 10px; font-weight: bold; color: var(--blue);">
-              🚚 3.5. THÔNG TIN HÀNG HÓA TỪ CHUYẾN XE
-            </div>
-            <div class="grid-2" style="margin-bottom: 10px; font-size: 13px;">
-              <div><strong>Mã Chuyến:</strong> <span id="trip-info-code">---</span></div>
-              <div><strong>Ngày Chuyến:</strong> <span id="trip-info-date">---</span></div>
-              <div><strong>Biển Số Xe:</strong> <span id="trip-info-vehicle">---</span></div>
-              <div><strong>Các Đội:</strong> <span id="trip-info-teams">---</span></div>
-            </div>
-            <div class="table-container" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px;">
-              <table class="data-table" style="width: 100%; border-collapse: collapse; font-size: 12px;">
-                <thead id="trip-info-thead">
-                  <tr style="background: var(--bg-overlay); border-bottom: 2px solid var(--border-color);">
-                    <th style="padding: 8px;">Đội</th>
-                    <th style="padding: 8px;">Loại Mủ</th>
-                    <th style="text-align: right; padding: 8px;">TL Tại Vườn (Kg)</th>
-                  </tr>
-                </thead>
-                <tbody id="trip-info-tbody">
+        <!-- RIGHT COLUMN: CALCULATION DETAILS -->
+        <div class="col-right" style="width: 340px; flex-shrink: 0; background: #FFFFFF; border-left: 1px solid var(--border-default); display: flex; flex-direction: column; padding: 20px; overflow-y: auto;">
+          <div id="no-ticket-selected-right" style="color: var(--text-muted); text-align: center; margin-top: 50px;">
+            Chưa có dữ liệu
+          </div>
+          
+          <div id="calc-details-container" style="display: none;">
+            <div class="card calc-card">
+              <div class="card-title">
+                Chi Tiết Cân
+              </div>
+              
+              <!-- Progress vs Target -->
+              <div class="result-group" id="target-progress-group" style="display: none;">
+                <div class="result-group-label" id="target-progress-label">Tiến Độ So Với Khối Lượng Mục Tiêu Cần Đạt</div>
+                <div style="padding: 12px; background: var(--bg-sunken); border-radius: 6px; text-align: center; margin-bottom: 12px;">
+                  <div id="target-progress-text" style="font-weight: bold; font-size: 14px; margin-bottom: 4px;">Đã đạt 0 / 20,000 kg</div>
+                  <div id="target-diff-text" style="font-size: 13px; color: var(--amber);">Còn thiếu 20,000 kg</div>
+                </div>
+              </div>
+
+              <!-- Lịch sử cân -->
+              <div class="result-group">
+                <div class="result-group-label">Lịch Sử Lượt Cân</div>
+                <div id="weighings-history-list" style="font-size: 12px; display: flex; flex-direction: column; gap: 8px;">
                   <!-- dynamically populated -->
-                </tbody>
-              </table>
+                </div>
+              </div>
+              
+              <!-- Tổng cộng -->
+              <div class="result-group">
+                <div class="result-group-label">Tổng Cộng Sau Bù Trừ</div>
+                <div class="result-row">
+                  <span class="result-key">Tổng khối lượng thô (chênh lệch):</span>
+                  <span class="result-val" id="calc-raw-total">0 kg</span>
+                </div>
+                <div class="result-row" id="calc-offset-row" style="display: none;">
+                  <span class="result-key" style="color: var(--red);">Bù trừ tài xế:</span>
+                  <span class="result-val" style="color: var(--red);" id="calc-offset-val">-140 kg</span>
+                </div>
+                <div class="result-row" style="border-top: 1px dashed var(--border-default); padding-top: 6px; margin-top: 4px;">
+                  <span class="result-key" style="font-weight: bold;">Tổng khối lượng hàng:</span>
+                  <span class="result-val large" id="calc-total-net" style="font-size: 18px; font-weight: bold; color: var(--green-dark);">0 kg</span>
+                </div>
+              </div>
+              
             </div>
-          </div>
-
-          <!-- PHẦN 4: CHI TIẾT CÂN CÁC LOẠI MỦ -->
-          <div class="card" style="margin-bottom: 12px; padding: 15px;">
-            <div class="card-title" style="margin-bottom: 10px; font-weight: bold; color: var(--green-dark);">
-              ⚖️ 4. CHI TIẾT CÂN CÁC LOẠI MỦ
-            </div>
-            <div class="table-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 10px; border: 1px solid var(--border-color); border-radius: 6px;">
-              <table class="data-table" style="width: 100%; border-collapse: collapse; font-size: 12px;">
-                <thead>
-                  <tr style="background: var(--bg-overlay); border-bottom: 2px solid var(--border-color);">
-                    <th style="width: 5%; text-align: center; padding: 8px;">#</th>
-                    <th style="width: 20%; padding: 8px;">Loại Mủ</th>
-                    <th style="width: 18%; text-align: center; padding: 8px;">Cân Lần 1 (Kg)</th>
-                    <th style="width: 18%; text-align: center; padding: 8px;">Cân Lần 2 (Kg)</th>
-                    <th style="width: 15%; text-align: right; padding: 8px;">TL Hàng (Kg)</th>
-                    <th style="width: 12%; text-align: right; padding: 8px;" id="col-haohut-header">Hao Hụt (Kg)</th>
-                    <th style="width: 5%; text-align: center; padding: 8px;"></th>
-                  </tr>
-                </thead>
-                <tbody id="weighing-rows-container">
-                  <!-- JS will dynamically populate rows here -->
-                </tbody>
-              </table>
-            </div>
-            <div style="display: flex; gap: 8px; margin-top: 10px;">
-              <button class="btn btn-secondary" id="btn-add-weigh-row" style="flex: 1; height: 34px; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                Thêm Lượt Mới
-              </button>
-              <button class="btn btn-success" id="btn-save-all-weighings" onclick="saveAllWeighings()" style="flex: 1; height: 34px; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px;">
-                🔒 Lưu Dữ Liệu Cân
-              </button>
-            </div>
-          </div>
-
-          <!-- ACTION COMMAND ROW -->
-          <div class="button-group-row" style="margin-bottom: 12px;">
-            <button class="btn btn-primary" id="btn-complete-ticket" disabled style="flex: 2; height: 40px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Hoàn Tất Phiếu
-            </button>
-            <button class="btn btn-secondary" id="btn-print-ticket" disabled style="flex: 1; height: 40px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/><path d="M6 2h12v4H6z"/></svg>
-              In Phiếu (F4)
-            </button>
-
-            <button class="btn btn-danger" id="btn-cancel-ticket" style="flex: 1; height: 40px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-              Hủy Phiếu
-            </button>
           </div>
         </div>
 
-        <!-- COLUMN RIGHT: COMPUTATIONS & PENDING LIST & LOGS -->
-        <div class="col-right">
-          <!-- CALCULATION DETAILS CARD -->
-          <div class="card calc-card">
-            <div class="card-title">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="3" y2="21"/><line x1="3" x2="21" y1="12" y2="12"/></svg>
-              Chi Tiết Kết Quả Bảng Tính
-            </div>
-            
-            <!-- Nhóm 1 - Chi tiết các lượt cân mủ -->
-            <div class="result-group">
-              <div class="result-group-label">Chi Tiết Lượt Cân Mủ</div>
-              <div id="calc-weighings-list" style="font-size: 11px; max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;">
-                <!-- JS populated rows -->
-              </div>
-            </div>
-            
-            <!-- Nhóm 2 - Hàng tổng cộng -->
-            <div class="result-group">
-              <div class="result-group-label">Tổng Cộng</div>
-              <div class="result-row">
-                <span class="result-key" style="font-weight: bold;">Tổng TL hàng thực (Net):</span>
-                <span class="result-val large" id="calc-net-weight" style="font-size: 16px; font-weight: bold; color: var(--green-dark);">0 kg</span>
-              </div>
-            </div>
-            
-            <!-- Nhóm 3 - Thông tin nguồn -->
-            <div class="result-group">
-              <div class="result-group-label">Nguồn Mủ</div>
-              <div class="result-row">
-                <span class="result-key">Đích đến:</span>
-                <span class="result-val" id="calc-destination">---</span>
-              </div>
-              <div class="result-row">
-                <span class="result-key">Nguồn mủ:</span>
-                <span class="result-val" id="calc-source-plate" style="color: var(--green-dark);">---</span>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 1.5: LỊCH SỬ PHIẾU ==================== -->
+    <div class="tab-content" id="tab-history">
+      <div class="card" id="history-table-card" style="height: calc(100vh - 120px); display: flex; flex-direction: column;">
+        <div class="history-header flex justify-between align-center" style="margin-bottom: 16px;">
+          <h2 style="font-size: 15px; font-weight: 700; text-transform: uppercase;">Lịch Sử Phiếu Cân</h2>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" class="input-control" id="history-search" placeholder="Biển số, số phiếu..." style="width: 200px;" onkeyup="renderHistoryList()">
+            <input type="date" class="input-control" id="history-date-filter" style="width: 150px; cursor: pointer;" onchange="renderHistoryList()">
+            <select class="input-control" id="history-status-filter" onchange="renderHistoryList()">
+              <option value="all">Tất cả</option>
+              <option value="Hoàn thành">Hoàn thành</option>
+              <option value="Đã hủy">Đã hủy</option>
+            </select>
           </div>
-
-
-        </div> <!-- end ticket-detail-view flex row -->
-        </div> <!-- end ticket-detail-view -->
+        </div>
         
-      </div> <!-- end ticket-page-layout -->
-    </div> <!-- end tab-tickets -->
+        <div class="table-responsive" style="flex: 1; overflow-y: auto;">
+          <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+            <thead>
+              <tr style="background: var(--bg-sunken); border-bottom: 2px solid var(--border-default);">
+                <th style="padding: 12px;">Số Phiếu</th>
+                <th style="padding: 12px;">Ngày Cân</th>
+                <th style="padding: 12px;">Loại Phiếu</th>
+                <th style="padding: 12px;">Khách hàng / Đối tác</th>
+                <th style="padding: 12px;">Biển Số</th>
+                <th style="padding: 12px;">Tổng Khối Lượng Hàng</th>
+                <th style="padding: 12px;">Trạng Thái</th>
+                <th style="padding: 12px;">Hành Động</th>
+              </tr>
+            </thead>
+            <tbody id="history-list-container">
+              <!-- populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-    <!-- ==================== TAB 2: KHÁCH HÀNG ==================== -->
+      <div id="history-details-view" style="display: none; height: calc(100vh - 120px); flex-direction: column;">
+        <div style="margin-bottom: 12px; flex-shrink: 0;">
+          <button class="btn" style="background: var(--bg-overlay); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 6px; cursor: pointer; color: var(--text-base); font-weight: 500;" onclick="window.backToHistoryList()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Quay lại Lịch sử
+          </button>
+        </div>
+        <div class="ticket-page-layout" id="history-details-layout" style="flex: 1; overflow: hidden; display: flex; height: 100%;">
+          <!-- col-middle and col-right will be moved here -->
+        </div>
+      </div>
+    </div>
+<!-- ==================== TAB 2: KHÁCH HÀNG ==================== -->
     <div class="tab-content" id="tab-customers">
       <div class="card">
         <div class="flex justify-between align-center" style="margin-bottom: 20px;">
@@ -2881,21 +2954,17 @@
           <table class="print-table" style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; border: 1px solid #000;">
             <thead>
               <tr style="border-bottom: 1px solid #000; background: #f0f0f0;">
-                <th style="border-right: 1px solid #000; padding: 6px; text-align: center; width: 8%;">STT</th>
-                <th style="border-right: 1px solid #000; padding: 6px; text-align: left; width: 34%;">Loại Mủ</th>
-                <th style="border-right: 1px solid #000; padding: 6px; text-align: center; width: 22%;">Cân Lần 1 (kg)</th>
-                <th style="border-right: 1px solid #000; padding: 6px; text-align: center; width: 22%;">Cân Lần 2 (kg)</th>
-                <th style="padding: 6px; text-align: right; width: 14%;">TL Thực (kg)</th>
+                <th style="border-right: 1px solid #000; padding: 6px; text-align: center; width: 10%;">STT</th>
+                <th style="border-right: 1px solid #000; padding: 6px; text-align: left; width: 35%;">Thời gian</th>
+                <th style="border-right: 1px solid #000; padding: 6px; text-align: left; width: 35%;">Diễn giải / Sản phẩm</th>
+                <th style="padding: 6px; text-align: right; width: 20%;">Số cân (kg)</th>
               </tr>
             </thead>
             <tbody id="print-weighing-rows" style="font-family: monospace;">
               <!-- JS populated rows -->
             </tbody>
             <tfoot>
-              <tr style="border-top: 1.5px solid #000; font-weight: bold; background: #fafafa;">
-                <td colspan="4" style="border-right: 1px solid #000; padding: 6px; text-align: right; font-family: sans-serif;">TỔNG CỘNG HÀNG THỰC TẾ:</td>
-                <td style="padding: 6px; text-align: right; font-weight: bold;" id="print-total-net">0 kg</td>
-              </tr>
+              <!-- JS populated calculations -->
             </tfoot>
           </table>
           <br>
@@ -3087,34 +3156,71 @@
   </div>
 
   <!-- NEW TICKET MODAL -->
+  
+  <!-- ==================== NEW TICKET MODAL ==================== -->
   <div class="modal-overlay" id="new-ticket-modal-overlay">
-    <div class="modal-content" style="width: 450px;">
+    <div class="modal-content" style="width: 500px;">
       <div class="modal-header">
-        <h3 class="modal-title">Tạo Phiếu Cân Mới</h3>
+        <h3 class="modal-title" id="new-ticket-modal-title">Tạo Phiếu Cân Mới</h3>
         <button class="modal-close" onclick="closeNewTicketModal()">&times;</button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label>Hình Thức Cân</label>
-          <select class="input-control" id="new-ticket-type" onchange="toggleNewTicketTrip()">
-            <option value="Can mu CTY">Cân mủ CTY (Nội bộ)</option>
-            <option value="Nhap hang">Nhập hàng (Mua vào)</option>
-            <option value="Xuat hang">Xuất hàng (Bán ra)</option>
+          <label>Loại Phiếu</label>
+          <select class="input-control" id="new-ticket-type">
+            <option value="Can mu CTY">Nội bộ (Nhập)</option>
+            <option value="Nhap hang">Mua vào (Nhập)</option>
+            <option value="Xuat hang">Bán ra (Xuất)</option>
           </select>
         </div>
-        <div class="form-group" id="new-ticket-trip-group">
-          <label>Chuyến Xe</label>
+        <div class="grid-2" id="new-ticket-veh-cust-group">
+          <div class="form-group">
+            <label>Biển số xe</label>
+            <select class="input-control" id="new-ticket-vehicle-id">
+              <!-- JS populated -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Khách hàng</label>
+            <select class="input-control" id="new-ticket-customer-id">
+              <!-- JS populated -->
+            </select>
+          </div>
+        </div>
+        <div class="form-group" id="new-ticket-trip-group" style="display: none;">
+          <label>Chuyến xe (Nội bộ)</label>
           <select class="input-control" id="new-ticket-trip-id">
-            <!-- Will be populated dynamically -->
+            <!-- JS populated -->
           </select>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Thời gian</label>
+            <input type="datetime-local" class="input-control" id="new-ticket-time">
+          </div>
+          <div class="form-group">
+            <label id="new-ticket-target-label">Khối Lượng Mục Tiêu (kg) - Tùy Chọn</label>
+            <input type="number" class="input-control" id="new-ticket-target" placeholder="VD: 20000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ghi chú</label>
+          <input type="text" class="input-control" id="new-ticket-notes" placeholder="Ghi chú thêm...">
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: normal;">
+            <input type="checkbox" id="new-ticket-driver-offset" checked style="width: 16px; height: 16px; cursor: pointer;">
+            Áp dụng bù trừ tài xế (-140 kg)
+          </label>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn" onclick="closeNewTicketModal()">Hủy</button>
-        <button class="btn btn-primary" onclick="submitNewTicketModal()">Tạo Mới</button>
+        <button class="btn btn-primary" id="btn-submit-new-ticket" onclick="submitNewTicketModal()">Tạo Phiếu</button>
       </div>
     </div>
   </div>
+
 
   <!-- TOAST NOTIFICATION ROOT -->
   <div class="toast-container" id="toast-root"></div>
@@ -5240,77 +5346,112 @@
     }
 
     // ==================== PRINT PREVIEW MODAL ====================
-    function showPrintPreview() {
-      if (!currentTicket || currentTicket.status !== 'Hoàn tất') return;
+    window.showPrintPreviewModal = function(ticketId) {
+      const t = DB.tickets.find(tk => tk.id === ticketId);
+      if (!t) return;
 
       const overlay = document.getElementById('print-preview-modal-overlay');
       overlay.classList.add('active');
 
       document.getElementById('print-co-name').innerText = DB.config.companyName.toUpperCase();
       document.getElementById('print-station-name').innerText = `Trạm cân: ${DB.config.stationName}`;
-      document.getElementById('print-code').innerText = currentTicket.code;
+      document.getElementById('print-code').innerText = t.code;
 
-      const cust = DB.customers.find(c => c.id === currentTicket.customerId);
-      const veh = DB.vehicles.find(v => v.id === currentTicket.vehicleId);
+      const cust = DB.customers.find(c => c.id === t.customerId);
+      const veh = DB.vehicles.find(v => v.id === t.vehicleId);
 
       document.getElementById('print-customer').innerText = cust ? cust.name.toUpperCase() : '---';
 
       let destName = '---';
-      if (currentTicket.destinationType === 'station') {
-        const obj = DB.stations.find(s => s.id === currentTicket.destinationId);
+      if (t.destinationType === 'station') {
+        const obj = DB.stations.find(s => s.id === t.destinationId);
         if (obj) destName = obj.name;
-      } else if (currentTicket.destinationType === 'factory') {
-        const obj = DB.factories.find(f => f.id === currentTicket.destinationId);
+      } else if (t.destinationType === 'factory') {
+        const obj = DB.factories.find(f => f.id === t.destinationId);
         if (obj) destName = obj.name;
       }
       document.getElementById('print-dest-name-val').innerText = destName;
 
-      const sourcePlateText = currentTicket.sourcePlate || '---';
-      const supplierText = currentTicket.sourceSupplier ? ` (${currentTicket.sourceSupplier})` : '';
-      document.getElementById('print-source-plate-val').innerText = sourcePlateText + supplierText;
+      const sourcePlateText = t.sourcePlate || (veh ? veh.plate : '---');
+      document.getElementById('print-source-plate-val').innerText = sourcePlateText;
 
       // Cột phải
-      const dateStr = currentTicket.createdAt.split(' ')[0];
+      const dateStr = t.createdAt ? t.createdAt.split(' ')[0] : '';
       document.getElementById('print-date').innerText = dateStr;
-      document.getElementById('print-vehicle').innerText = veh ? veh.plate : '---';
-      document.getElementById('print-type').innerText = currentTicket.type ? currentTicket.type.toUpperCase() : '---';
-      document.getElementById('print-note-val').innerText = currentTicket.notes || '---';
+      document.getElementById('print-vehicle').innerText = sourcePlateText;
+      document.getElementById('print-type').innerText = t.type === 'Xuat hang' ? 'BÁN RA' : t.type === 'Nhap hang' ? 'MUA VÀO' : 'NỘI BỘ';
+      document.getElementById('print-note-val').innerText = t.notes || '---';
 
-      // Vẽ bảng in chi tiết các loại mủ
+      // Vẽ bảng in chi tiết các lượt cân
       const printRowsContainer = document.getElementById('print-weighing-rows');
       if (printRowsContainer) {
         printRowsContainer.innerHTML = '';
-        let totalNet = 0;
+        let rawTotal = 0;
 
-        currentTicket.weighings.forEach((w, idx) => {
-          const prodObj = DB.products.find(p => p.id === w.productId);
-          const prodName = prodObj ? prodObj.name.toUpperCase() : 'CHƯA RÕ';
+        if (t.weighings && t.weighings.length > 0) {
+          t.weighings.forEach((w, idx) => {
+            const tr = document.createElement('tr');
+            tr.style.borderBottom = '1px solid #000';
+            tr.innerHTML = `
+              <td style="border-right: 1px solid #000; padding: 6px; text-align: center;">${idx + 1}</td>
+              <td style="border-right: 1px solid #000; padding: 6px; text-align: left;">${w.time}</td>
+              <td style="border-right: 1px solid #000; padding: 6px; text-align: left; font-weight: bold;">${w.product}</td>
+              <td style="padding: 6px; text-align: right; font-weight: bold;">${w.weight.toLocaleString()} kg</td>
+            `;
+            printRowsContainer.appendChild(tr);
+          });
 
-          let netWeight = 0;
-          const modeVal = w.weighingMode || '2';
-          if (modeVal === '1_in' && w.weight1 !== null) {
-            netWeight = w.weight1;
-          } else if (modeVal === '1_out' && w.weight2 !== null) {
-            netWeight = w.weight2;
-          } else if (modeVal === '2' && w.weight1 !== null && w.weight2 !== null) {
-            netWeight = Math.abs(w.weight1 - w.weight2);
+          if (t.weighings.length > 1) {
+            for (let i = 1; i < t.weighings.length; i++) {
+              if (t.type === 'Xuat hang') {
+                rawTotal += t.weighings[i].weight - t.weighings[i-1].weight;
+              } else {
+                rawTotal += t.weighings[i-1].weight - t.weighings[i].weight;
+              }
+            }
           }
-          totalNet += netWeight;
+        } else {
+          printRowsContainer.innerHTML = '<tr><td colspan="4" style="padding: 12px; text-align: center;">Chưa có lượt cân nào</td></tr>';
+        }
 
-          const tr = document.createElement('tr');
-          tr.style.borderBottom = '1px solid #000';
-          
-          tr.innerHTML = `
-            <td style="border-right: 1px solid #000; padding: 6px; text-align: center;">${idx + 1}</td>
-            <td style="border-right: 1px solid #000; padding: 6px; text-align: left; font-weight: bold;">${prodName}</td>
-            <td style="border-right: 1px solid #000; padding: 6px; text-align: center;">${modeVal === '1_out' ? '---' : (w.weight1 !== null ? formatWeight(w.weight1) : '---')}</td>
-            <td style="border-right: 1px solid #000; padding: 6px; text-align: center;">${modeVal === '1_in' ? '---' : (w.weight2 !== null ? formatWeight(w.weight2) : '---')}</td>
-            <td style="padding: 6px; text-align: right; font-weight: bold;">${netWeight > 0 ? formatWeight(netWeight) : '---'}</td>
-          `;
-          printRowsContainer.appendChild(tr);
-        });
+        const tfoot = document.querySelector('.print-table tfoot');
+        if (tfoot) {
+          const hasDriverOffset = t.applyDriverOffset !== false;
+          const offsetWeight = hasDriverOffset ? DRIVER_OFFSET_KG : 0;
+          const totalNet = Math.max(0, rawTotal - offsetWeight);
 
-        document.getElementById('print-total-net').innerText = formatWeight(totalNet);
+          let tfootHtml = '';
+          if (t.weighings && t.weighings.length > 1) {
+            tfootHtml = `
+              <tr style="border-top: 1.5px solid #000; background: #fafafa;">
+                <td colspan="3" style="border-right: 1px solid #000; padding: 6px; text-align: right;">TỔNG CHÊNH LỆCH THÔ:</td>
+                <td style="padding: 6px; text-align: right; font-weight: bold;">${rawTotal.toLocaleString()} kg</td>
+              </tr>
+            `;
+            if (hasDriverOffset) {
+              tfootHtml += `
+                <tr style="background: #fafafa;">
+                  <td colspan="3" style="border-right: 1px solid #000; padding: 6px; text-align: right;">BÙ TRỪ TÀI XẾ (-${DRIVER_OFFSET_KG} kg):</td>
+                  <td style="padding: 6px; text-align: right; font-weight: bold; color: red;">-${DRIVER_OFFSET_KG} kg</td>
+                </tr>
+              `;
+            }
+            tfootHtml += `
+              <tr style="border-top: 1.5px solid #000; font-weight: bold; background: #eaeaea;">
+                <td colspan="3" style="border-right: 1px solid #000; padding: 6px; text-align: right; font-size: 13px;">TỔNG THỰC NHẬN / THỰC XUẤT:</td>
+                <td style="padding: 6px; text-align: right; font-weight: bold; font-size: 13px; color: var(--green-dark);">${totalNet.toLocaleString()} kg</td>
+              </tr>
+            `;
+          } else {
+            tfootHtml = `
+              <tr style="border-top: 1.5px solid #000; font-weight: bold; background: #fafafa;">
+                <td colspan="3" style="border-right: 1px solid #000; padding: 6px; text-align: right;">TỔNG THỰC NHẬN / THỰC XUẤT:</td>
+                <td style="padding: 6px; text-align: right; font-weight: bold;">0 kg</td>
+              </tr>
+            `;
+          }
+          tfoot.innerHTML = tfootHtml;
+        }
       }
 
       // Dòng ngày tháng
@@ -5328,12 +5469,12 @@
       }
       document.getElementById('print-date-line').innerText = dateLineText;
 
-      addAuditLog('Xem trước biểu mẫu in phiếu', currentTicket.code);
+      addAuditLog('Xem trước biểu mẫu in phiếu', t.code);
     }
 
     function printTicket() {
       const originalTitle = document.title;
-      const ticketCode = currentTicket ? currentTicket.code : 'PHIẾU CÂN';
+      const ticketCode = currentTicketId ? (DB.tickets.find(tk => tk.id === currentTicketId)?.code || 'PHIẾU CÂN') : 'PHIẾU CÂN';
       document.title = `${ticketCode} - PHIẾU CÂN HÀNG HÓA`;
 
       const restoreTitle = () => {
@@ -5630,7 +5771,8 @@
       }
     }
 
-    document.getElementById('btn-lookup-source').addEventListener('click', () => lookupRubberSource(false));
+    const lookupBtn = document.getElementById('btn-lookup-source');
+    if (lookupBtn) lookupBtn.addEventListener('click', () => lookupRubberSource(false));
 
     function renderDestSettings() {
       const sList = document.getElementById('cfg-station-list');
@@ -5714,7 +5856,8 @@
       btnNewTicket.addEventListener('click', openNewTicketModal);
     }
 
-    document.getElementById('btn-add-weigh-row').addEventListener('click', function() {
+    const addWeighBtn = document.getElementById('btn-add-weigh-row');
+    if (addWeighBtn) addWeighBtn.addEventListener('click', function() {
       if (!currentTicket || currentTicket.status === 'Hoàn tất' || currentTicket.status === 'Đã hủy') return;
       
       const allDone = currentTicket.weighings.every(w => {
@@ -5744,9 +5887,933 @@
       renderWeighingTable(currentTicket);
     });
 
-    initDropdowns();
     renderDestSettings();
-    showMasterView();
-  </script>
+  
+
+// ==================== NEW LOGIC INJECTED ====================
+
+// Overwrite tickets array completely
+DB.tickets = [
+    {
+        id: 'PHC-001',
+        code: 'PHC-001',
+        type: 'Can mu CTY',
+        tripId: 'TRIP001',
+        customerId: 'KH005',
+        vehicleId: 'VEH005',
+        sourcePlate: '70C-99999',
+        targetWeight: null,
+        weighings: [
+            { weight: 8120, time: '2026-06-26 07:15:20', product: 'Xe vào' },
+            { weight: 4500, time: '2026-06-26 08:30:10', product: 'Mủ tạp' }
+        ],
+        status: 'Hoàn thành',
+        createdAt: '2026-06-26 07:10:00',
+        notes: 'Mủ nước nội bộ Đội 1'
+    },
+    {
+        id: 'PHC-005',
+        code: 'PHC-005',
+        type: 'Can mu CTY',
+        tripId: 'TRIP002',
+        customerId: 'KH006',
+        vehicleId: 'VEH006',
+        sourcePlate: '70C-88888',
+        targetWeight: 15000,
+        weighings: [
+            { weight: 18000, time: '2026-06-26 09:10:00', product: 'Xe vào đầy' }
+        ],
+        status: 'Đang thực hiện',
+        createdAt: '2026-06-26 09:05:00',
+        notes: 'Mủ nội bộ Đội 2'
+    },
+    {
+        id: 'PHC-008',
+        code: 'PHC-008',
+        type: 'Xuat hang',
+        customerId: 'KH003',
+        vehicleId: 'VEH003',
+        sourcePlate: '51C-22334',
+        targetWeight: 20000,
+        weighings: [
+            { weight: 3500, time: '2026-06-26 10:10:00', product: 'Xe rỗng' }
+        ],
+        status: 'Đang thực hiện',
+        createdAt: '2026-06-26 10:05:00',
+        notes: 'Bán mủ cho ABC'
+    },
+    {
+        id: 'PHC-010', code: 'PHC-010', type: 'Nhap hang', customerId: 'KH001', vehicleId: 'VEH001', sourcePlate: '70C-19869', targetWeight: null,
+        weighings: [{ weight: 15200, time: '2026-06-26 10:15:00', product: 'Xe vào' }], status: 'Đang thực hiện', createdAt: '2026-06-26 10:10:00', notes: 'Mua mủ'
+    },
+    {
+        id: 'PHC-011', code: 'PHC-011', type: 'Nhap hang', customerId: 'KH002', vehicleId: 'VEH002', sourcePlate: '70C-16318', targetWeight: 25000,
+        weighings: [{ weight: 28000, time: '2026-06-26 10:25:00', product: 'Xe vào đầy' }], status: 'Đang thực hiện', createdAt: '2026-06-26 10:20:00', notes: 'Giao hàng gấp'
+    },
+    {
+        id: 'PHC-012', code: 'PHC-012', type: 'Xuat hang', customerId: 'KH003', vehicleId: 'VEH003', sourcePlate: '51C-22334', targetWeight: 18000,
+        weighings: [{ weight: 4200, time: '2026-06-26 10:45:00', product: 'Xe rỗng' }, { weight: 12500, time: '2026-06-26 11:15:00', product: 'Mủ chén' }], status: 'Đang thực hiện', createdAt: '2026-06-26 10:40:00', notes: 'Bán mủ chén'
+    },
+    {
+        id: 'PHC-013', code: 'PHC-013', type: 'Can mu CTY', customerId: 'KH005', vehicleId: 'VEH005', sourcePlate: '70C-99999', targetWeight: null,
+        weighings: [{ weight: 12500, time: '2026-06-26 11:00:00', product: 'Xe vào' }], status: 'Đang thực hiện', createdAt: '2026-06-26 10:55:00', notes: 'Nội bộ đội 1'
+    },
+    {
+        id: 'PHC-014', code: 'PHC-014', type: 'Nhap hang', customerId: 'KH004', vehicleId: 'VEH004', sourcePlate: '51C-55667', targetWeight: 10000,
+        weighings: [{ weight: 14200, time: '2026-06-26 11:30:00', product: 'Xe vào' }], status: 'Đang thực hiện', createdAt: '2026-06-26 11:20:00', notes: ''
+    },
+    {
+        id: 'PHC-015', code: 'PHC-015', type: 'Xuat hang', customerId: 'KH006', vehicleId: 'VEH006', sourcePlate: '70C-88888', targetWeight: 30000,
+        weighings: [{ weight: 5100, time: '2026-06-26 12:00:00', product: 'Xe rỗng' }, { weight: 20000, time: '2026-06-26 13:00:00', product: 'Mủ tạp' }], status: 'Đang thực hiện', createdAt: '2026-06-26 11:50:00', notes: 'Bán mủ tạp số lượng lớn'
+    },
+    {
+        id: 'PHC-016', code: 'PHC-016', type: 'Can mu CTY', customerId: 'KH005', vehicleId: 'VEH005', sourcePlate: '70C-99999', targetWeight: null,
+        weighings: [{ weight: 9000, time: '2026-06-26 13:20:00', product: 'Xe vào' }, { weight: 4500, time: '2026-06-26 13:40:00', product: 'Mủ nước' }], status: 'Đang thực hiện', createdAt: '2026-06-26 13:10:00', notes: 'Chuyến 2 đội 1'
+    },
+    {
+        id: 'PHC-017', code: 'PHC-017', type: 'Nhap hang', customerId: 'KH001', vehicleId: 'VEH001', sourcePlate: '70C-19869', targetWeight: 12000,
+        weighings: [{ weight: 16500, time: '2026-06-26 14:00:00', product: 'Xe vào đầy' }], status: 'Đang thực hiện', createdAt: '2026-06-26 13:50:00', notes: ''
+    },
+    {
+        id: 'PHC-018', code: 'PHC-018', type: 'Xuat hang', customerId: 'KH003', vehicleId: 'VEH003', sourcePlate: '51C-22334', targetWeight: 15000,
+        weighings: [{ weight: 3500, time: '2026-06-26 14:30:00', product: 'Xe rỗng' }], status: 'Đang thực hiện', createdAt: '2026-06-26 14:20:00', notes: ''
+    },
+    {
+        id: 'PHC-019', code: 'PHC-019', type: 'Nhap hang', customerId: 'KH002', vehicleId: 'VEH002', sourcePlate: '70C-16318', targetWeight: null,
+        weighings: [{ weight: 21000, time: '2026-06-26 15:00:00', product: 'Xe vào' }], status: 'Đang thực hiện', createdAt: '2026-06-26 14:50:00', notes: 'Khách quen'
+    }
+];
+
+let currentTicketId = null;
+const DRIVER_OFFSET_KG = 140; // Hằng số bù trừ tài xế (kg) — áp dụng cho cả phiếu Thu mua và Bán ra
+
+window.renderTicketList = function() {
+    const listContainer = document.getElementById('ticket-list-sidebar');
+    const searchVal = document.getElementById('ticket-search').value.toLowerCase();
+    const filterType = document.getElementById('filter-type-dropdown').value;
+
+    const processingTickets = DB.tickets.filter(t => t.status === 'Đang thực hiện');
+    
+    // Filter
+    let filtered = processingTickets.filter(t => {
+        const customer = DB.customers.find(c => c.id === t.customerId) || {};
+        const matchSearch = t.code.toLowerCase().includes(searchVal) || 
+                            t.sourcePlate.toLowerCase().includes(searchVal) ||
+                            (customer.name || '').toLowerCase().includes(searchVal);
+        const matchType = filterType === 'all' || t.type === filterType;
+        return matchSearch && matchType;
+    });
+
+    listContainer.innerHTML = '';
+    
+    if (filtered.length === 0) {
+        listContainer.innerHTML = '<div style="padding: 12px; text-align: center; color: var(--text-muted);">Không có kết quả</div>';
+        // currentTicketId = null;
+        updateDetailView();
+        return;
+    }
+
+    filtered.forEach((t, index) => {
+        const customer = DB.customers.find(c => c.id === t.customerId) || {};
+        
+        const card = document.createElement('div');
+        card.className = 'ticket-card status-hoantat'; 
+        if (t.id === currentTicketId) {
+            card.classList.add('active');
+        }
+        
+        card.style.cursor = 'pointer';
+        card.style.padding = '12px';
+        card.onclick = () => {
+            currentTicketId = t.id;
+            renderTicketList(); 
+            updateDetailView();
+        };
+
+        card.innerHTML = `
+            <div class="ticket-card-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <div>
+                    <span class="ticket-card-code">${t.code}</span>
+                    <span class="ticket-card-plate">${t.sourcePlate}</span>
+                </div>
+                <button class="btn-edit-ticket-modal" style="background: none; border: none; padding: 4px; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: color 0.2s;" onclick="event.stopPropagation(); window.showEditTicketModal('${t.id}')" title="Sửa thông tin phiếu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+            </div>
+            <div class="ticket-card-body" style="margin-top: 8px; flex-direction: column; align-items: flex-start; gap: 4px;">
+                <div style="font-size: 12px; color: var(--text-secondary);">${customer.name || '---'}</div>
+                <div style="font-size: 11px; color: var(--text-muted);">${t.type === 'Xuat hang' ? 'Bán ra' : t.type === 'Nhap hang' ? 'Mua vào' : 'Nội bộ'} | ${t.createdAt}</div>
+            </div>
+        `;
+        listContainer.appendChild(card);
+    });
+
+    // Auto focus first if nothing is selected or if selected is not in list
+    const isTicketsTabActive = document.getElementById('tab-tickets').classList.contains('active');
+    const currT = DB.tickets.find(t => t.id === currentTicketId);
+    const isCurrentActive = currT && currT.status === 'Đang thực hiện';
+    
+    if (isTicketsTabActive && (!isCurrentActive || !filtered.find(t => t.id === currentTicketId))) {
+        if (filtered.length > 0) {
+            currentTicketId = filtered[0].id;
+            renderTicketList(); 
+            updateDetailView();
+        } else {
+            currentTicketId = null;
+            updateDetailView();
+        }
+    }
+}
+
+window.updateDetailView = function() {
+    if (!currentTicketId) {
+        document.getElementById('no-ticket-selected').style.display = 'flex';
+        document.getElementById('ticket-form-container').style.display = 'none';
+        document.getElementById('no-ticket-selected-right').style.display = 'block';
+        document.getElementById('calc-details-container').style.display = 'none';
+        return;
+    }
+
+    const t = DB.tickets.find(tk => tk.id === currentTicketId);
+    if (!t) return;
+
+    document.getElementById('no-ticket-selected').style.display = 'none';
+    document.getElementById('ticket-form-container').style.display = 'block';
+    
+    document.getElementById('no-ticket-selected-right').style.display = 'none';
+    document.getElementById('calc-details-container').style.display = 'block';
+
+    document.getElementById('form-ticket-code').value = t.code;
+    const typeLabel = t.type === 'Xuat hang' ? 'Bán ra' : t.type === 'Nhap hang' ? 'Mua vào' : 'Nội bộ';
+    document.getElementById('form-ticket-type').value = typeLabel;
+    const customer = DB.customers.find(c => c.id === t.customerId);
+    document.getElementById('form-ticket-customer').value = customer ? customer.name : '';
+    document.getElementById('form-ticket-plate').value = t.sourcePlate;
+
+    document.getElementById('form-ticket-notes').value = t.notes || '';
+    document.getElementById('form-driver-offset').checked = t.applyDriverOffset !== false;
+
+    // Đồng bộ danh sách sản phẩm cho ô tìm kiếm nhanh
+    const datalist = document.getElementById('product-datalist');
+    datalist.innerHTML = DB.products.map(p => `<option value="${p.name}">`).join('');
+
+    // Lượt đầu tiên: khóa tên sản phẩm, mặc định theo loại phiếu. Từ lượt 2 trở đi mới cho chọn.
+    const isFirstWeighing = !t.weighings || t.weighings.length === 0;
+    const prodInput = document.getElementById('current-weighing-product');
+    const firstNote = document.getElementById('first-weighing-note');
+    const defaultFirstLabel = t.type === 'Xuat hang' ? 'Xe vào rỗng' : 'Xe vào đầy';
+    if (isFirstWeighing) {
+        prodInput.value = defaultFirstLabel;
+        prodInput.disabled = true;
+        firstNote.style.display = 'block';
+    } else {
+        if (prodInput.disabled) prodInput.value = '';
+        prodInput.disabled = false;
+        firstNote.style.display = 'none';
+    }
+
+    
+
+    const tripCard = document.getElementById('form-trip-card');
+    if (tripCard) {
+        if (t.type === 'Can mu CTY' && t.tripId) {
+            tripCard.style.display = 'block';
+            const trip = DB.trips.find(tr => tr.id === t.tripId);
+            if (trip) {
+                document.getElementById('form-trip-code').innerText = trip.code;
+                const teams = [...new Set(trip.details.map(d => d.team))];
+                document.getElementById('form-trip-teams').innerText = teams.join(', ');
+                
+                const productIds = [...new Set(trip.details.map(d => d.productId))];
+                const productNames = productIds.map(pid => {
+                  const prod = DB.products.find(p => p.id === pid);
+                  return prod ? prod.name : pid;
+                });
+                
+                const thead = document.getElementById('form-trip-thead');
+                let theadHtml = `<tr style="background: var(--bg-overlay); border-bottom: 2px solid var(--border-color);"><th style="padding: 8px;">ĐỘI</th>`;
+                productNames.forEach(pName => {
+                  theadHtml += `<th style="padding: 8px; text-align: right; text-transform: uppercase;">${pName} (KG)</th>`;
+                });
+                theadHtml += `</tr>`;
+                thead.innerHTML = theadHtml;
+                
+                const tbody = document.getElementById('form-trip-tbody');
+                tbody.innerHTML = '';
+                let columnTotals = new Array(productIds.length).fill(0);
+                
+                teams.forEach(team => {
+                  let rowHtml = `<tr><td style="padding: 8px;">${team}</td>`;
+                  productIds.forEach((pid, idx) => {
+                    const detail = trip.details.find(d => d.team === team && d.productId === pid);
+                    const weight = detail ? detail.expectedWeight : 0;
+                    columnTotals[idx] += weight;
+                    rowHtml += `<td style="padding: 8px; text-align: right; font-weight: bold;">${weight > 0 ? weight.toLocaleString() : '0'}</td>`;
+                  });
+                  rowHtml += `</tr>`;
+                  tbody.innerHTML += rowHtml;
+                });
+                
+                let totalRowHtml = `<tr style="background: var(--bg-sunken); border-top: 2px solid var(--border-color);"><td style="padding: 8px; font-weight: bold;">TỔNG CỘNG</td>`;
+                columnTotals.forEach(total => {
+                  totalRowHtml += `<td style="padding: 8px; text-align: right; font-weight: bold; color: var(--blue);">${total.toLocaleString()}</td>`;
+                });
+                totalRowHtml += `</tr>`;
+                tbody.innerHTML += totalRowHtml;
+            } else {
+                document.getElementById('form-trip-thead').innerHTML = '';
+                document.getElementById('form-trip-tbody').innerHTML = '<tr><td colspan="10" style="padding: 8px; text-align: center;">Không tìm thấy thông tin chuyến xe</td></tr>';
+            }
+        } else {
+            tripCard.style.display = 'none';
+        }
+    }
+
+    updateCalculationsView(t);
+
+    // Disable editing controls if completed or cancelled
+    const weighingCard = document.getElementById('weighing-input-card');
+    const notesInput = document.getElementById('form-ticket-notes');
+    const driverOffset = document.getElementById('form-driver-offset');
+    
+    const cancelBtn = document.querySelector('.ticket-action-row button[onclick="cancelTicket()"]');
+    const completeBtn = document.querySelector('.ticket-action-row button[onclick="completeTicket()"]');
+
+    if (t.status === 'Hoàn thành' || t.status === 'Đã hủy') {
+        if (weighingCard) weighingCard.style.display = 'none';
+        if (notesInput) notesInput.disabled = true;
+        if (driverOffset) driverOffset.disabled = true;
+        if (cancelBtn) cancelBtn.style.display = 'none';
+        if (completeBtn) completeBtn.style.display = 'none';
+    } else {
+        if (weighingCard) weighingCard.style.display = 'block';
+        if (notesInput) notesInput.disabled = false;
+        if (driverOffset) driverOffset.disabled = false;
+        if (cancelBtn) cancelBtn.style.display = 'inline-flex';
+        if (completeBtn) completeBtn.style.display = 'inline-flex';
+    }
+}
+
+window.toggleDriverOffset = function() {
+    if (!currentTicketId) return;
+    const t = DB.tickets.find(tk => tk.id === currentTicketId);
+    if (!t) return;
+    t.applyDriverOffset = document.getElementById('form-driver-offset').checked;
+    updateCalculationsView(t);
+}
+
+window.updateCalculationsView = function(t) {
+    const listEl = document.getElementById('weighings-history-list');
+    listEl.innerHTML = '';
+    
+    let rawTotal = 0;
+    
+    if (t.weighings && t.weighings.length > 0) {
+        t.weighings.forEach((w, i) => {
+            let net = 0;
+            if (i > 0) {
+                if (t.type === 'Xuat hang') {
+                    net = w.weight - t.weighings[i-1].weight;
+                } else {
+                    net = t.weighings[i-1].weight - w.weight;
+                }
+                rawTotal += net;
+            }
+
+            listEl.innerHTML += `
+                <div style="display: flex; justify-content: space-between; padding-bottom: 6px; border-bottom: 1px dashed var(--border-default);">
+                    <div>
+                        <div style="font-weight: bold; color: var(--text-primary); font-size: 14px;">${w.weight.toLocaleString()} kg</div>
+                        <div style="font-size: 11px; color: var(--text-muted);">${w.time} - ${w.product || '---'}</div>
+                    </div>
+                    ${i > 0 ? `<div style="color: ${net >= 0 ? 'var(--green-dark)' : 'var(--red)'}; font-weight: bold; font-size: 13px;">${net >= 0 ? '+' : ''}${net.toLocaleString()} kg</div>` : '<div style="color: var(--text-muted); font-size: 12px; margin-top: 2px;">Lượt đầu</div>'}
+                </div>
+            `;
+        });
+    } else {
+        listEl.innerHTML = '<div style="color: var(--text-muted);">Chưa có lượt cân nào</div>';
+    }
+
+    const applyOffset = t.applyDriverOffset !== false; // áp dụng ngay từ đầu nếu có tick, không cần chờ đủ 2 lượt cân
+    const totalNet = applyOffset ? rawTotal - DRIVER_OFFSET_KG : rawTotal;
+
+    document.getElementById('calc-raw-total').innerText = rawTotal.toLocaleString() + ' kg';
+    const offsetRow = document.getElementById('calc-offset-row');
+    if (applyOffset) {
+        offsetRow.style.display = 'flex';
+        document.getElementById('calc-offset-val').innerText = '-' + DRIVER_OFFSET_KG.toLocaleString() + ' kg';
+    } else {
+        offsetRow.style.display = 'none';
+    }
+    document.getElementById('calc-total-net').innerText = Math.max(0, totalNet).toLocaleString() + ' kg';
+
+    const targetGroup = document.getElementById('target-progress-group');
+    const labelEl = document.getElementById('target-progress-label');
+    const progressTextEl = document.getElementById('target-progress-text');
+    const diffEl = document.getElementById('target-diff-text');
+    const isSell = t.type === 'Xuat hang'; // Bán ra: Target là sản lượng cần ĐẠT ĐẾN (xuất đủ/dư hàng là tốt)
+                                            // Mua vào / Nội bộ: Target là KHỐI LƯỢNG XE KHÔNG TẢI (xe rỗng) — khi cân hiện tại <= mức này nghĩa là đã xuống hết hàng
+    const vehObj = DB.vehicles.find(v => v.id === t.vehicleId);
+    const tareWeight = vehObj ? (vehObj.tareWeight || 0) : 0;
+    const showTarget = isSell ? (t.targetWeight !== null && t.targetWeight > 0) : (tareWeight > 0);
+
+    if (showTarget) {
+        targetGroup.style.display = 'block';
+
+        if (isSell) {
+            const tare = tareWeight;
+            const targetTotal = t.targetWeight + tare;
+            const currentTotal = (t.weighings && t.weighings.length > 0) ? t.weighings[t.weighings.length - 1].weight : tare;
+
+            progressTextEl.innerHTML = `
+                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Hiện tại trên cân: <strong style="font-size: 15px; color: var(--teal);">${currentTotal.toLocaleString()} kg</strong></div>
+                <div style="font-size: 13px; color: var(--text-secondary);">Mục tiêu cần đạt: <strong style="font-size: 15px; color: var(--text-primary);">${targetTotal.toLocaleString()} kg</strong></div>
+            `;
+
+            let diff = targetTotal - currentTotal;
+            if (diff > 0) {
+                diffEl.innerText = `Còn thiếu ${diff.toLocaleString()} kg để đạt mục tiêu`;
+                diffEl.style.color = 'var(--amber)';
+            } else if (diff < 0) {
+                diffEl.innerText = `Đã đạt mục tiêu, dư ${Math.abs(diff).toLocaleString()} kg`;
+                diffEl.style.color = 'var(--green-dark)';
+            } else {
+                diffEl.innerText = `Đã đạt đủ mục tiêu`;
+                diffEl.style.color = 'var(--green-dark)';
+            }
+        } else {
+            labelEl.innerText = 'So Với Khối Lượng Xe Không Tải';
+            const targetWeightVal = t.targetWeight || tareWeight;
+            if (!t.weighings || t.weighings.length === 0) {
+                progressTextEl.innerText = `Chưa có lượt cân nào`;
+                diffEl.innerText = `Xe không tải (target): ${targetWeightVal.toLocaleString()} kg`;
+                diffEl.style.color = 'var(--text-muted)';
+            } else {
+                const currentReading = t.weighings[t.weighings.length - 1].weight;
+                progressTextEl.innerHTML = `
+                    <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Hiện tại trên cân: <strong style="font-size: 15px; color: var(--teal);">${currentReading.toLocaleString()} kg</strong></div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Trọng lượng xe không tải: <strong style="font-size: 15px; color: var(--text-primary);">${targetWeightVal.toLocaleString()} kg</strong></div>
+                `;
+
+                let diff = currentReading - targetWeightVal;
+                if (diff > 0) {
+                    diffEl.innerText = `Còn lại trên xe ~${diff.toLocaleString()} kg, chưa xuống hết hàng`;
+                    diffEl.style.color = 'var(--amber)';
+                } else {
+                    diffEl.innerText = `Đã xuống hết hàng (khối lượng hiện tại ≤ xe không tải)`;
+                    diffEl.style.color = 'var(--green-dark)';
+                }
+            }
+        }
+    } else {
+        targetGroup.style.display = 'none';
+    }
+}
+
+window.saveWeighing = function() {
+    if (!currentTicketId) return;
+    const t = DB.tickets.find(tk => tk.id === currentTicketId);
+    
+    const wVal = document.getElementById('current-scale-weight').value;
+    let prodVal = document.getElementById('current-weighing-product').value.trim();
+    
+    if (!wVal) {
+        alert("Vui lòng nhập khối lượng trên cân!");
+        return;
+    }
+
+    const isFirstWeighing = !t.weighings || t.weighings.length === 0;
+    if (isFirstWeighing) {
+        // Lượt đầu: mặc định theo loại phiếu, không bắt buộc người dùng nhập
+        prodVal = t.type === 'Xuat hang' ? 'Xe vào rỗng' : 'Xe vào đầy';
+    } else if (!prodVal) {
+        alert("Vui lòng chọn hoặc nhập tên sản phẩm cho lượt cân này!");
+        return;
+    }
+
+    const newW = {
+        weight: parseInt(wVal, 10),
+        time: new Date().toISOString().slice(0, 19).replace('T', ' '),
+        product: prodVal
+    };
+
+    if (!t.weighings) t.weighings = [];
+    t.weighings.push(newW);
+
+    t.notes = document.getElementById('form-ticket-notes').value;
+
+    document.getElementById('current-scale-weight').value = '';
+    document.getElementById('current-weighing-product').value = '';
+
+    updateDetailView();
+    showToast('success', 'Đã lưu lượt cân!');
+}
+
+window.completeTicket = function() {
+    if (!currentTicketId) return;
+    const t = DB.tickets.find(tk => tk.id === currentTicketId);
+    t.status = 'Hoàn thành';
+    currentTicketId = null;
+    renderTicketList();
+    renderHistoryList();
+    showToast('success', 'Đã hoàn thành phiếu!');
+}
+
+window.cancelTicket = function() {
+    if (!currentTicketId) return;
+    if (!confirm("Bạn có chắc chắn muốn hủy phiếu này?")) return;
+    const t = DB.tickets.find(tk => tk.id === currentTicketId);
+    t.status = 'Đã hủy';
+    currentTicketId = null;
+    renderTicketList();
+    renderHistoryList();
+    showToast('info', 'Đã hủy phiếu!');
+}
+
+window.renderHistoryList = function() {
+    const container = document.getElementById('history-list-container');
+    const searchVal = document.getElementById('history-search').value.toLowerCase();
+    const statusVal = document.getElementById('history-status-filter').value;
+    const dateVal = document.getElementById('history-date-filter').value;
+
+    const hist = DB.tickets.filter(t => t.status === 'Hoàn thành' || t.status === 'Đã hủy');
+    
+    const filtered = hist.filter(t => {
+        const customer = DB.customers.find(c => c.id === t.customerId) || {};
+        const matchSearch = t.code.toLowerCase().includes(searchVal) || t.sourcePlate.toLowerCase().includes(searchVal) || (customer.name||'').toLowerCase().includes(searchVal);
+        const matchStatus = statusVal === 'all' || t.status === statusVal;
+        
+        let matchDate = true;
+        if (dateVal) {
+            matchDate = t.createdAt && t.createdAt.startsWith(dateVal);
+        }
+        
+        return matchSearch && matchStatus && matchDate;
+    });
+
+    container.innerHTML = '';
+    filtered.forEach(t => {
+        const customer = DB.customers.find(c => c.id === t.customerId) || {};
+        
+        let rawTotal = 0;
+        if (t.weighings && t.weighings.length > 1) {
+            for (let i = 1; i < t.weighings.length; i++) {
+                if (t.type === 'Xuat hang') {
+                    rawTotal += t.weighings[i].weight - t.weighings[i-1].weight;
+                } else {
+                    rawTotal += t.weighings[i-1].weight - t.weighings[i].weight;
+                }
+            }
+        }
+        const totalNet = (t.applyDriverOffset !== false) ? rawTotal - DRIVER_OFFSET_KG : rawTotal;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td style="padding: 12px; font-weight: bold;">${t.code}</td>
+            <td style="padding: 12px;">${t.createdAt}</td>
+            <td style="padding: 12px;">${t.type === 'Xuat hang' ? 'Bán ra' : t.type === 'Nhap hang' ? 'Mua vào' : 'Nội bộ'}</td>
+            <td style="padding: 12px;">${customer.name || ''}</td>
+            <td style="padding: 12px;"><span class="badge badge-grey">${t.sourcePlate}</span></td>
+            <td style="padding: 12px; font-weight: bold; color: var(--green-dark);">${totalNet.toLocaleString()} kg</td>
+            <td style="padding: 12px;">
+                <span class="badge ${t.status === 'Hoàn thành' ? 'badge-green' : 'badge-red'}">${t.status}</span>
+            </td>
+            <td style="padding: 12px;">
+                <button class="btn btn-sm" onclick="window.viewHistoryTicket('${t.id}')">Xem chi tiết</button>
+            </td>
+        `;
+        container.appendChild(tr);
+    });
+}
+
+window.showCreateTicketModal = function() {
+    document.getElementById('new-ticket-modal-title').innerText = 'Tạo Phiếu Cân Mới';
+    const submitBtn = document.getElementById('btn-submit-new-ticket');
+    if (submitBtn) {
+        submitBtn.innerText = 'Tạo Phiếu';
+        submitBtn.onclick = window.submitNewTicketModal;
+    }
+
+    const typeSelect = document.getElementById('new-ticket-type');
+    const vehSelect = document.getElementById('new-ticket-vehicle-id');
+    const custSelect = document.getElementById('new-ticket-customer-id');
+    const tripSelect = document.getElementById('new-ticket-trip-id');
+    const targetInput = document.getElementById('new-ticket-target');
+
+    vehSelect.innerHTML = DB.vehicles.map(v => `<option value="${v.id}" data-tare="${v.tareWeight||0}">${v.plate} (${v.type})</option>`).join('');
+    custSelect.innerHTML = DB.customers.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+    
+    if (DB.trips && DB.trips.length > 0) {
+        tripSelect.innerHTML = DB.trips.map(t => {
+            const veh = DB.vehicles.find(v => v.id === t.vehicleId);
+            const tare = veh ? veh.tareWeight : 0;
+            return `<option value="${t.id}" data-tare="${tare}">${t.code} - ${t.date} (${t.vehicleId})</option>`;
+        }).join('');
+    } else {
+        tripSelect.innerHTML = '<option value="">Không có chuyến xe nào</option>';
+    }
+
+    const updateTargetWeightLogic = () => {
+        const type = typeSelect.value;
+        const tripGroup = document.getElementById('new-ticket-trip-group');
+        const vehGroup = document.getElementById('new-ticket-veh-cust-group');
+
+        if (type === 'Xuat hang') { // Bán ra
+            tripGroup.style.display = 'none';
+            vehGroup.style.display = 'grid';
+            targetInput.disabled = false;
+            if (targetInput.hasAttribute('data-auto')) {
+                targetInput.value = '';
+                targetInput.removeAttribute('data-auto');
+            }
+        } else if (type === 'Can mu CTY') { // Nội bộ
+            tripGroup.style.display = 'block';
+            vehGroup.style.display = 'none';
+            targetInput.disabled = true;
+            targetInput.setAttribute('data-auto', '1');
+            const selectedTrip = tripSelect.options[tripSelect.selectedIndex];
+            targetInput.value = selectedTrip ? (selectedTrip.getAttribute('data-tare') || 0) : 0;
+        } else { // Nhập hàng (Mua vào)
+            tripGroup.style.display = 'none';
+            vehGroup.style.display = 'grid';
+            targetInput.disabled = true;
+            targetInput.setAttribute('data-auto', '1');
+            const selectedVeh = vehSelect.options[vehSelect.selectedIndex];
+            targetInput.value = selectedVeh ? (selectedVeh.getAttribute('data-tare') || 0) : 0;
+        }
+    };
+
+    typeSelect.onchange = updateTargetWeightLogic;
+    vehSelect.onchange = updateTargetWeightLogic;
+    tripSelect.onchange = updateTargetWeightLogic;
+
+    // Reset fields
+    typeSelect.value = 'Can mu CTY';
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('new-ticket-time').value = now.toISOString().slice(0,16);
+    document.getElementById('new-ticket-notes').value = '';
+    document.getElementById('new-ticket-driver-offset').checked = true;
+
+    updateTargetWeightLogic(); // run once to init
+
+    document.getElementById('new-ticket-modal-overlay').classList.add('active');
+}
+
+window.closeNewTicketModal = function() {
+    document.getElementById('new-ticket-modal-overlay').classList.remove('active');
+}
+
+window.submitNewTicketModal = function() {
+    const type = document.getElementById('new-ticket-type').value;
+    const tStr = document.getElementById('new-ticket-time').value.replace('T', ' ');
+    const tgt = document.getElementById('new-ticket-target').value;
+    const notes = document.getElementById('new-ticket-notes').value;
+    const applyOffset = document.getElementById('new-ticket-driver-offset').checked;
+
+    let cId = '';
+    let vId = '';
+    let sourcePlate = '';
+    let teamName = '';
+
+    if (type === 'Can mu CTY') {
+        const tripId = document.getElementById('new-ticket-trip-id').value;
+        if (!tripId) {
+            alert('Vui lòng chọn chuyến xe!');
+            return;
+        }
+        const trip = DB.trips.find(t => t.id === tripId);
+        if (trip) {
+            vId = trip.vehicleId;
+            const veh = DB.vehicles.find(v => v.id === vId);
+            if (veh) {
+                sourcePlate = veh.plate;
+                cId = veh.customerId;
+            }
+            if (trip.details) {
+                const teams = [...new Set(trip.details.map(d => d.team))];
+                teamName = teams.join(', ');
+            }
+        }
+    } else {
+        vId = document.getElementById('new-ticket-vehicle-id').value;
+        cId = document.getElementById('new-ticket-customer-id').value;
+        const v = DB.vehicles.find(vh => vh.id === vId);
+        if (v) sourcePlate = v.plate;
+    }
+
+    const newTicket = {
+        id: 'PHC-NEW-' + Date.now(),
+        code: 'PHC-' + Math.floor(Math.random() * 10000),
+        type: type,
+        customerId: cId,
+        vehicleId: vId,
+        sourcePlate: sourcePlate,
+        team: teamName,
+        targetWeight: tgt ? parseInt(tgt, 10) : null,
+        applyDriverOffset: applyOffset,
+        weighings: [],
+        status: 'Đang thực hiện',
+        createdAt: tStr + ':00',
+        notes: notes
+    };
+
+    DB.tickets.unshift(newTicket);
+    currentTicketId = newTicket.id;
+    closeNewTicketModal();
+    renderTicketList();
+    showToast('success', 'Đã tạo phiếu mới!');
+}
+
+const originalSwitchTab = window.switchTab || function(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+    
+    const tabContent = document.getElementById('tab-' + tabId);
+    if (tabContent) tabContent.classList.add('active');
+    
+    const tabBtn = document.querySelector(`.nav-tab[data-tab="${tabId}"]`);
+    if (tabBtn) tabBtn.classList.add('active');
+};
+
+window.restoreTicketColumns = function() {
+    const originalLayout = document.querySelector('#tab-tickets .ticket-page-layout');
+    const colMiddle = document.querySelector('.col-middle');
+    const colRight = document.querySelector('.col-right');
+    if (originalLayout) {
+        if (colMiddle && colMiddle.parentNode !== originalLayout) {
+            originalLayout.appendChild(colMiddle);
+        }
+        if (colRight && colRight.parentNode !== originalLayout) {
+            originalLayout.appendChild(colRight);
+        }
+    }
+};
+
+window.switchTab = function(tabId) {
+    // Restore columns when leaving history or switching anywhere
+    window.restoreTicketColumns();
+
+    // Reset history view back to table list
+    const histTable = document.getElementById('history-table-card');
+    const histDetails = document.getElementById('history-details-view');
+    if (histTable) histTable.style.display = 'flex';
+    if (histDetails) histDetails.style.display = 'none';
+
+    originalSwitchTab(tabId);
+    if (tabId === 'tickets') renderTicketList();
+    if (tabId === 'history') renderHistoryList();
+};
+
+window.viewHistoryTicket = function(ticketId) {
+    currentTicketId = ticketId;
+    
+    // Update the middle and right sections
+    updateDetailView();
+    
+    // Move col-middle and col-right to history-details-layout
+    const layout = document.getElementById('history-details-layout');
+    const colMiddle = document.querySelector('#tab-tickets .ticket-page-layout .col-middle');
+    const colRight = document.querySelector('#tab-tickets .ticket-page-layout .col-right');
+    
+    if (layout) {
+        if (colMiddle) layout.appendChild(colMiddle);
+        if (colRight) layout.appendChild(colRight);
+    }
+    
+    // Toggle history view elements
+    const histTable = document.getElementById('history-table-card');
+    const histDetails = document.getElementById('history-details-view');
+    if (histTable) histTable.style.display = 'none';
+    if (histDetails) histDetails.style.display = 'flex';
+};
+
+window.backToHistoryList = function() {
+    window.restoreTicketColumns();
+    const histTable = document.getElementById('history-table-card');
+    const histDetails = document.getElementById('history-details-view');
+    if (histTable) histTable.style.display = 'flex';
+    if (histDetails) histDetails.style.display = 'none';
+    renderHistoryList();
+};
+
+window.editHistoryTicket = function(ticketId) {
+    const t = DB.tickets.find(tk => tk.id === ticketId);
+    if (!t) return;
+    
+    t.status = 'Đang thực hiện';
+    currentTicketId = ticketId;
+    
+    window.restoreTicketColumns();
+    renderTicketList();
+    renderHistoryList();
+    updateDetailView();
+    switchTab('tickets');
+    
+    showToast('success', 'Đã chuyển phiếu về Đang thực hiện để chỉnh sửa!');
+};
+
+setTimeout(() => {
+    switchTab('tickets');
+}, 500);
+
+
+let editingTicketId = null;
+
+window.showEditTicketModal = function(ticketId) {
+    editingTicketId = ticketId;
+    const t = DB.tickets.find(tk => tk.id === ticketId);
+    if (!t) return;
+    
+    // Change modal texts
+    document.getElementById('new-ticket-modal-title').innerText = 'Chỉnh Sửa Phiếu Cân';
+    const submitBtn = document.getElementById('btn-submit-new-ticket');
+    if (submitBtn) {
+        submitBtn.innerText = 'Lưu Thay Đổi';
+        submitBtn.onclick = window.submitEditTicketModal;
+    }
+    
+    // Select elements
+    const typeSelect = document.getElementById('new-ticket-type');
+    const vehSelect = document.getElementById('new-ticket-vehicle-id');
+    const custSelect = document.getElementById('new-ticket-customer-id');
+    const tripSelect = document.getElementById('new-ticket-trip-id');
+    const targetInput = document.getElementById('new-ticket-target');
+    const timeInput = document.getElementById('new-ticket-time');
+    const notesInput = document.getElementById('new-ticket-notes');
+    const offsetInput = document.getElementById('new-ticket-driver-offset');
+    
+    // Populate select lists
+    vehSelect.innerHTML = DB.vehicles.map(v => `<option value="${v.id}" data-tare="${v.tareWeight||0}">${v.plate} (${v.type})</option>`).join('');
+    custSelect.innerHTML = DB.customers.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+    
+    if (DB.trips && DB.trips.length > 0) {
+        tripSelect.innerHTML = DB.trips.map(tr => {
+            const veh = DB.vehicles.find(v => v.id === tr.vehicleId);
+            const tare = veh ? veh.tareWeight : 0;
+            return `<option value="${tr.id}" data-tare="${tare}">${tr.code} - ${tr.date} (${tr.vehicleId})</option>`;
+        }).join('');
+    } else {
+        tripSelect.innerHTML = '<option value="">Không có chuyến xe nào</option>';
+    }
+
+    const updateTargetWeightLogic = () => {
+        const type = typeSelect.value;
+        const tripGroup = document.getElementById('new-ticket-trip-group');
+        const vehGroup = document.getElementById('new-ticket-veh-cust-group');
+        const newTargetLabel = document.getElementById('new-ticket-target-label');
+
+        if (type === 'Xuat hang') { // Bán ra
+            if (newTargetLabel) newTargetLabel.innerText = 'Hàng Cần Xuất (kg) - Tùy chọn';
+            tripGroup.style.display = 'none';
+            vehGroup.style.display = 'grid';
+            targetInput.disabled = false;
+        } else if (type === 'Can mu CTY') { // Nội bộ
+            if (newTargetLabel) newTargetLabel.innerText = 'Trọng Lượng Xe Không Tải (kg)';
+            tripGroup.style.display = 'block';
+            vehGroup.style.display = 'none';
+            targetInput.disabled = true;
+            const selectedTrip = tripSelect.options[tripSelect.selectedIndex];
+            targetInput.value = selectedTrip ? (selectedTrip.getAttribute('data-tare') || 0) : 0;
+        } else { // Nhập hàng (Mua vào)
+            if (newTargetLabel) newTargetLabel.innerText = 'Trọng Lượng Xe Không Tải (kg)';
+            tripGroup.style.display = 'none';
+            vehGroup.style.display = 'grid';
+            targetInput.disabled = true;
+            const selectedVeh = vehSelect.options[vehSelect.selectedIndex];
+            targetInput.value = selectedVeh ? (selectedVeh.getAttribute('data-tare') || 0) : 0;
+        }
+    };
+
+    typeSelect.onchange = updateTargetWeightLogic;
+    vehSelect.onchange = updateTargetWeightLogic;
+    tripSelect.onchange = updateTargetWeightLogic;
+
+    // Set values based on ticket
+    typeSelect.value = t.type;
+    vehSelect.value = t.vehicleId;
+    custSelect.value = t.customerId;
+    if (t.tripId) {
+        tripSelect.value = t.tripId;
+    }
+    
+    if (t.createdAt) {
+        const formattedDate = t.createdAt.replace(' ', 'T').substring(0, 16);
+        timeInput.value = formattedDate;
+    } else {
+        timeInput.value = '';
+    }
+    
+    targetInput.value = t.targetWeight !== null ? t.targetWeight : '';
+    notesInput.value = t.notes || '';
+    offsetInput.checked = t.applyDriverOffset !== false;
+
+    updateTargetWeightLogic(); // init fields display
+
+    document.getElementById('new-ticket-modal-overlay').classList.add('active');
+};
+
+window.submitEditTicketModal = function() {
+    if (!editingTicketId) return;
+    const t = DB.tickets.find(tk => tk.id === editingTicketId);
+    if (!t) return;
+    
+    const type = document.getElementById('new-ticket-type').value;
+    const tStr = document.getElementById('new-ticket-time').value.replace('T', ' ');
+    const tgt = document.getElementById('new-ticket-target').value;
+    const notes = document.getElementById('new-ticket-notes').value;
+    const applyOffset = document.getElementById('new-ticket-driver-offset').checked;
+
+    let cId = '';
+    let vId = '';
+    let sourcePlate = '';
+    let teamName = '';
+
+    if (type === 'Can mu CTY') {
+        const tripId = document.getElementById('new-ticket-trip-id').value;
+        if (!tripId) {
+            alert('Vui lòng chọn chuyến xe!');
+            return;
+        }
+        const trip = DB.trips.find(tr => tr.id === tripId);
+        if (trip) {
+            vId = trip.vehicleId;
+            const veh = DB.vehicles.find(v => v.id === vId);
+            if (veh) {
+                sourcePlate = veh.plate;
+                cId = veh.customerId;
+            }
+            if (trip.details) {
+                const teams = [...new Set(trip.details.map(d => d.team))];
+                teamName = teams.join(', ');
+            }
+            t.tripId = tripId;
+        }
+    } else {
+        vId = document.getElementById('new-ticket-vehicle-id').value;
+        cId = document.getElementById('new-ticket-customer-id').value;
+        const v = DB.vehicles.find(vh => vh.id === vId);
+        if (v) sourcePlate = v.plate;
+        t.tripId = null;
+    }
+
+    t.type = type;
+    t.customerId = cId;
+    t.vehicleId = vId;
+    t.sourcePlate = sourcePlate;
+    t.team = teamName;
+    t.targetWeight = tgt ? parseInt(tgt, 10) : null;
+    t.applyDriverOffset = applyOffset;
+    t.createdAt = tStr.length === 16 ? tStr + ':00' : tStr;
+    t.notes = notes;
+
+    closeNewTicketModal();
+    renderTicketList();
+    updateDetailView();
+    showToast('success', 'Đã cập nhật thông tin phiếu cân!');
+    editingTicketId = null;
+};
+
+</script>
 </body>
 </html>
