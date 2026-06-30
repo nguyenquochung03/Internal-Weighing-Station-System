@@ -481,6 +481,32 @@
     .btn-edit-ticket-modal:hover {
       color: var(--blue) !important;
     }
+    .form-group.readonly-group {
+      background: var(--bg-sunken) !important;
+      padding: 12px !important;
+      border-radius: 8px !important;
+      border: 1px solid var(--border-default) !important;
+      margin-bottom: 12px !important;
+    }
+    .form-group.readonly-group input[readonly] {
+      background: transparent !important;
+      border: none !important;
+      padding: 4px 0 !important;
+      font-weight: 700 !important;
+      color: var(--text-primary) !important;
+      font-size: 14px !important;
+      cursor: default !important;
+      box-shadow: none !important;
+      outline: none !important;
+      height: auto !important;
+    }
+    .form-group.readonly-group label {
+      font-size: 11px !important;
+      color: var(--text-muted) !important;
+      text-transform: uppercase !important;
+      margin-bottom: 4px !important;
+      display: block !important;
+    }
 
     /* COLUMN MIDDLE: flex 1 */
     .col-middle {
@@ -2028,80 +2054,58 @@
           </div>
           
           <div id="ticket-form-container" style="display: none;">
-            <div class="card" style="margin-bottom: 16px;">
-              <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="flex align-center gap-8">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  Thông Tin Phiếu
-                </span>
-                <span class="badge badge-grey" id="ticket-status-badge">Đang thực hiện</span>
-              </div>
-              
-              <div class="grid-2">
-                <div class="form-group">
-                  <label>Mã Phiếu</label>
-                  <input type="text" class="input-control" id="form-ticket-code" readonly>
-                </div>
-                <div class="form-group">
-                  <label>Loại Phiếu</label>
-                  <input type="text" class="input-control" id="form-ticket-type" readonly>
-                </div>
-              </div>
-              
-              <div class="grid-2">
-                <div class="form-group">
-                  <label>Khách hàng / Đối tác</label>
-                  <input type="text" class="input-control" id="form-ticket-customer" readonly>
-                </div>
-                <div class="form-group">
-                  <label>Biển số xe</label>
-                  <input type="text" class="input-control" id="form-ticket-plate" readonly style="font-family: var(--font-mono); font-weight: bold; color: var(--green-dark);">
-                </div>
-              </div>
-
-                            <div class="form-group">
-                <label>Ghi chú</label>
-                <input type="text" class="input-control" id="form-ticket-notes">
-              </div>
-
-              <div class="form-group" style="margin-bottom: 0;">
-                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: normal;">
-                  <input type="checkbox" id="form-driver-offset" onchange="toggleDriverOffset()" style="width: 16px; height: 16px; cursor: pointer;">
-                  Áp dụng bù trừ tài xế (-140 kg)
-                </label>
-              </div>
+            <!-- Action Buttons Row (Moved to Top) -->
+            <div class="ticket-action-row" style="display: flex; gap: 12px; justify-content: flex-end; margin-bottom: 16px;">
+              <button class="btn" style="background-color: var(--blue); border-color: var(--blue); color: white; display: flex; align-items: center; gap: 8px;" onclick="window.showPrintPreviewModal(currentTicketId)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+                In Phiếu
+              </button>
+              <button class="btn btn-danger" onclick="cancelTicket()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
+                Hủy Phiếu
+              </button>
+              <button class="btn btn-primary" style="background-color: var(--green); border-color: var(--green);" onclick="completeTicket()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Hoàn Thành Phiếu
+              </button>
             </div>
-
             
-            <div id="weighing-input-card" class="card" style="margin-bottom: 16px; border-left: 4px solid var(--green);">
-              <div class="card-title">
-                <span class="flex align-center gap-8">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2" ry="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-                  Ghi Nhận Khối Lượng
+            <!-- 1. GHI NHẬN KHỐI LƯỢNG (ACTION CARD - AT THE TOP) -->
+            <div id="weighing-input-card" class="card" style="margin-bottom: 16px; border-left: 4px solid var(--green); background: var(--bg-surface); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);">
+              <div class="card-title" style="margin-bottom: 16px;">
+                <span class="flex align-center gap-8" style="color: var(--green-dark); font-weight: 700;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2" ry="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                  Ghi Nhận Khối Lượng (Nhập số cân)
                 </span>
               </div>
               
-              <div class="weighing-input-row" style="display: flex; gap: 16px; align-items: flex-end;">
-                <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                  <label>Khối lượng trên cân (kg)</label>
-                  <input type="number" class="input-control" id="current-scale-weight" style="font-size: 24px; font-weight: bold; font-family: var(--font-mono); color: var(--teal); height: 50px; text-align: center;" placeholder="0">
+              <div class="weighing-input-container" style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: stretch; margin-bottom: 12px;">
+                <!-- Highlighted Scale Input Box -->
+                <div class="form-group" style="margin-bottom: 0; background: var(--bg-sunken); padding: 16px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center;">
+                  <label style="font-weight: 700; color: var(--green-dark); font-size: 12px; text-transform: uppercase; margin-bottom: 8px; display: block; letter-spacing: 0.5px; text-align: center;">1. Khối Lượng Trên Cân (kg) <span style="color: var(--red);">*</span></label>
+                  <input type="number" class="input-control" id="current-scale-weight" style="font-size: 34px; font-weight: bold; font-family: var(--font-mono); color: var(--green-dark); height: 60px; text-align: center; width: 100%; border: 2px solid var(--green); background: #ffffff; border-radius: 6px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);" placeholder="0">
                 </div>
-                <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                  <label>Tên sản phẩm (cho lượt cân này) <span style="color: var(--red);">*</span></label>
-                  <input type="text" class="input-control" id="current-weighing-product" list="product-datalist" style="height: 50px;" placeholder="Chọn hoặc nhập tên sản phẩm...">
-                  <datalist id="product-datalist"></datalist>
+                
+                <!-- Product Selection & Action Button -->
+                <div style="display: flex; flex-direction: column; gap: 12px; justify-content: space-between;">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label style="font-weight: 700; font-size: 11px; text-transform: uppercase; margin-bottom: 8px; display: block; color: var(--text-secondary);">2. Tên Sản Phẩm <span style="color: var(--red);">*</span></label>
+                    <input type="text" class="input-control" id="current-weighing-product" list="product-datalist" style="height: 50px; font-weight: bold; font-size: 14px;" placeholder="Chọn sản phẩm...">
+                    <datalist id="product-datalist"></datalist>
+                  </div>
+                  <button class="btn btn-primary" style="height: 50px; width: 100%; font-size: 15px; font-weight: bold; display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--green); border-color: var(--green); box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);" onclick="saveWeighing()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    Lưu Lượt Cân
+                  </button>
                 </div>
-                <button class="btn btn-primary" style="height: 50px; padding: 0 24px; font-size: 16px;" onclick="saveWeighing()">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                  Lưu
-                </button>
               </div>
-              <div id="first-weighing-note" style="display:none; margin-top: 10px; font-size: 12px; color: var(--text-muted); background: var(--bg-sunken); padding: 8px 10px; border-radius: 6px;">
+              
+              <div id="first-weighing-note" style="display:none; margin-top: 10px; font-size: 12px; color: var(--text-muted); background: var(--bg-sunken); padding: 8px 10px; border-radius: 6px; border-left: 3px solid var(--blue);">
                 ℹ️ Đây là lượt cân đầu tiên (ghi nhận khối lượng tổng của xe) nên tên sản phẩm được mặc định, chưa cần chọn. Từ lượt cân thứ 2 trở đi bạn mới chọn sản phẩm cụ thể.
               </div>
-              
             </div>
-            
+
+            <!-- 2. THÔNG TIN CHUYẾN XE (CONDITIONAL CARD) -->
             <div class="card" id="form-trip-card" style="display: none; margin-bottom: 16px;">
               <div class="card-title">
                 <span class="flex align-center gap-8">
@@ -2120,23 +2124,48 @@
                 </table>
               </div>
             </div>
-            
-            <div class="ticket-action-row" style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
-              <button class="btn" style="background-color: var(--blue); border-color: var(--blue); color: white; display: flex; align-items: center; gap: 8px;" onclick="window.showPrintPreviewModal(currentTicketId)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-                In Phiếu
-              </button>
-              <button class="btn btn-danger" onclick="cancelTicket()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
-                Hủy Phiếu
-              </button>
-              <button class="btn btn-primary" style="background-color: var(--green); border-color: var(--green);" onclick="completeTicket()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                Hoàn Thành Phiếu
-              </button>
+
+            <!-- 3. THÔNG TIN PHIẾU (VIEW REFERENCE & EDIT ADDITIONAL) -->
+            <div class="card" id="ticket-info-card" style="margin-bottom: 16px; border-left: 4px solid var(--border-default);">
+              <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <span class="flex align-center gap-8" style="color: var(--text-secondary); font-weight: bold;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Thông Tin Phiếu Cân
+                </span>
+                <span class="badge badge-grey" id="ticket-status-badge">Đang thực hiện</span>
+              </div>
+              
+              <div class="grid-2">
+                <div class="form-group readonly-group">
+                  <label>Mã Phiếu</label>
+                  <input type="text" class="input-control" id="form-ticket-code" readonly>
+                </div>
+                <div class="form-group readonly-group">
+                  <label>Loại Phiếu</label>
+                  <input type="text" class="input-control" id="form-ticket-type" readonly>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group readonly-group">
+                  <label>Khách hàng / Đối tác</label>
+                  <input type="text" class="input-control" id="form-ticket-customer" readonly>
+                </div>
+                <div class="form-group readonly-group">
+                  <label>Biển số xe</label>
+                  <input type="text" class="input-control" id="form-ticket-plate" readonly style="font-family: var(--font-mono); font-weight: bold; color: var(--green-dark);">
+                </div>
+              </div>
+              <div class="form-group readonly-group">
+                <label>Ghi chú</label>
+                <input type="text" class="input-control" id="form-ticket-notes" readonly style="font-weight: 500;">
+              </div>
+              <div class="form-group readonly-group" style="margin-bottom: 0;">
+                <label>Bù trừ tài xế (-140 kg)</label>
+                <input type="text" class="input-control" id="form-driver-offset-text" readonly style="font-weight: bold;">
+              </div>
             </div>
 
-          </div>
+                      </div>
         </div>
 
         <!-- RIGHT COLUMN: CALCULATION DETAILS -->
@@ -2632,7 +2661,6 @@
                 <th>Sản Phẩm</th>
                 <th>TL Hàng (kg)</th>
                 <th>Nguồn Mủ</th>
-                <th>Đích Đến</th>
                 <th>Trạng Thái</th>
               </tr>
             </thead>
@@ -2648,7 +2676,6 @@
                 <th>Sản Phẩm</th>
                 <th>TL Hàng (kg)</th>
                 <th>Nguồn Mủ</th>
-                <th>Đích Đến</th>
                 <th>Trạng Thái</th>
               </tr>
             </tfoot>
@@ -2913,16 +2940,8 @@
                 <span class="separator">:</span>
                 <span class="value" id="print-customer">THANH BÌNH</span>
               </div>
-              <div class="print-data-row">
-                <span class="label">Đích đến</span>
-                <span class="separator">:</span>
-                <span class="value" id="print-dest-name-val">---</span>
-              </div>
-              <div class="print-data-row">
-                <span class="label">Nguồn mủ</span>
-                <span class="separator">:</span>
-                <span class="value" id="print-source-plate-val" style="font-weight: bold; color: var(--green-dark);">---</span>
-              </div>
+
+
               <div class="print-data-row">
                 <span class="label">Ghi chú</span>
                 <span class="separator">:</span>
@@ -3433,7 +3452,7 @@
         certExpiry: '2026-07-15',
         certBody: 'Chi cục Tiêu chuẩn Đo lường Chất lượng',
         adminPin: '1234',
-        stationName: 'Trạm Cân Số 1 - EcoTech',
+        stationName: 'EcoTech 2A',
         companyName: 'Công ty Cao su EcoTech 2A',
         lastBackup: null
       }
@@ -3606,6 +3625,7 @@
 
     function renderAuditLog() {
       const container = document.getElementById('audit-log-sidebar-container');
+      if (!container) return;
       container.innerHTML = '';
       DB.auditLog.forEach(log => {
         const div = document.createElement('div');
@@ -5036,7 +5056,6 @@
           <td>${prodNames}</td>
           <td>${formatWeight(netWeight)}</td>
           <td style="font-weight: 600; color: var(--green-dark);">${sourceText}</td>
-          <td style="font-weight: 600; color: var(--text-primary);">${destText}</td>
           <td><span class="status-badge-pill">Hoàn tất</span></td>
         `;
         
@@ -5068,7 +5087,7 @@
       let csvContent = '\uFEFF';
       csvContent += 'BÁO CÁO DỮ LIỆU TRẠM CÂN Ecotech 2A (CÂN NỘI BỘ)\n';
       csvContent += `Thời gian lọc: từ ngày ${fromInput} đến ngày ${toInput}\n\n`;
-      csvContent += 'Số Phiếu,Ngày Cân,Khách Hàng,Biển Số Xe,Sản Phẩm,TL Hàng Thực (kg),Nguồn Mủ,Đích Đến,Trạng Thái\n';
+      csvContent += 'Số Phiếu,Ngày Cân,Khách Hàng,Biển Số Xe,Sản Phẩm,TL Hàng Thực (kg),Nguồn Mủ,Trạng Thái\n';
 
       const dateFrom = new Date(fromInput + 'T00:00:00');
       const dateTo = new Date(toInput + 'T23:59:59');
@@ -5112,7 +5131,6 @@
           `"${prodNames}"`,
           netWeight,
           `"${sourceText}"`,
-          `"${destName}"`,
           t.status === 'Hoàn tất' ? 'Hoàn tất' : (t.status === 'Chờ cân 2' ? 'Chờ cân 2' : 'Hủy')
         ].join(',');
         
@@ -5362,18 +5380,9 @@
 
       document.getElementById('print-customer').innerText = cust ? cust.name.toUpperCase() : '---';
 
-      let destName = '---';
-      if (t.destinationType === 'station') {
-        const obj = DB.stations.find(s => s.id === t.destinationId);
-        if (obj) destName = obj.name;
-      } else if (t.destinationType === 'factory') {
-        const obj = DB.factories.find(f => f.id === t.destinationId);
-        if (obj) destName = obj.name;
-      }
-      document.getElementById('print-dest-name-val').innerText = destName;
+
 
       const sourcePlateText = t.sourcePlate || (veh ? veh.plate : '---');
-      document.getElementById('print-source-plate-val').innerText = sourcePlateText;
 
       // Cột phải
       const dateStr = t.createdAt ? t.createdAt.split(' ')[0] : '';
@@ -6091,7 +6100,11 @@ window.updateDetailView = function() {
     document.getElementById('form-ticket-plate').value = t.sourcePlate;
 
     document.getElementById('form-ticket-notes').value = t.notes || '';
-    document.getElementById('form-driver-offset').checked = t.applyDriverOffset !== false;
+    const offsetTextEl = document.getElementById('form-driver-offset-text');
+    if (offsetTextEl) {
+        offsetTextEl.value = t.applyDriverOffset !== false ? 'Đang áp dụng (-140 kg)' : 'Không áp dụng';
+        offsetTextEl.style.color = t.applyDriverOffset !== false ? 'var(--red)' : 'var(--text-secondary)';
+    }
 
     // Đồng bộ danh sách sản phẩm cho ô tìm kiếm nhanh
     const datalist = document.getElementById('product-datalist');
@@ -6174,7 +6187,7 @@ window.updateDetailView = function() {
     // Disable editing controls if completed or cancelled
     const weighingCard = document.getElementById('weighing-input-card');
     const notesInput = document.getElementById('form-ticket-notes');
-    const driverOffset = document.getElementById('form-driver-offset');
+    const driverOffset = document.getElementById('form-driver-offset-text');
     
     const cancelBtn = document.querySelector('.ticket-action-row button[onclick="cancelTicket()"]');
     const completeBtn = document.querySelector('.ticket-action-row button[onclick="completeTicket()"]');
@@ -6300,7 +6313,7 @@ window.updateCalculationsView = function(t) {
                     diffEl.innerText = `Còn lại trên xe ~${diff.toLocaleString()} kg, chưa xuống hết hàng`;
                     diffEl.style.color = 'var(--amber)';
                 } else {
-                    diffEl.innerText = `Đã xuống hết hàng (khối lượng hiện tại ≤ xe không tải)`;
+                    diffEl.innerText = `Đã xuống hết hàng`;
                     diffEl.style.color = 'var(--green-dark)';
                 }
             }
