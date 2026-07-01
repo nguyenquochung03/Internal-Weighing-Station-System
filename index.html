@@ -3361,7 +3361,7 @@
                     </div>
 
                     <div class="form-group offset-field">
-                      <label>Bù trừ tài xế</label>
+                      <label>Bù trừ</label>
                       <div class="input-with-unit">
                         <input type="number" class="input-control" id="driver-offset-kg" min="0" placeholder="140" oninput="updateOffsetInput()">
                         <span>kg</span>
@@ -3413,7 +3413,7 @@
                   <div class="card-title">🧮 Tổng cộng sau bù trừ</div>
                   <div class="result-group">
                     <div class="result-row"><span class="result-key">Tổng trọng lượng hàng</span><span class="result-val" id="raw-total">0 kg</span></div>
-                    <div class="result-row"><span class="result-key">Bù trừ tài xế</span><span class="result-val" id="offset-total" style="color:var(--red);">0 kg</span></div>
+                    <div class="result-row"><span class="result-key">Bù trừ</span><span class="result-val" id="offset-total" style="color:var(--red);">0 kg</span></div>
                     <div class="result-row"><span class="result-key">Trọng lượng còn lại</span><span class="result-val large" id="net-total">0 kg</span></div>
                   </div>
                   <div class="button-group-row" style="flex-direction:column;">
@@ -3439,12 +3439,21 @@
       </div>
       <div class="card">
         <div class="card-title">📊 Nhật ký phiếu cân hàng hóa</div>
-        <div class="report-filters">
-          <div class="form-group" style="margin-bottom:0; flex:1;"><label>Thời gian từ</label><input class="input-control" type="date"></div>
-          <div class="form-group" style="margin-bottom:0; flex:1;"><label>Thời gian đến</label><input class="input-control" type="date"></div>
-          <div class="form-group" style="margin-bottom:0; flex:1;"><label>Loại phiếu</label><select class="input-control" id="report-type-filter" onchange="renderReport()"><option value="All">Tất cả</option><option value="NhapCongTy">Nhập hàng Công ty</option><option value="NhapNgoai">Nhập hàng Mua ngoài</option><option value="XuatHang">Xuất hàng</option></select></div>
-          <div class="form-group" style="margin-bottom:0; flex:1;"><label>Trạng thái</label><select class="input-control" id="report-status-filter" onchange="renderReport()"><option value="All">Tất cả</option><option value="HoanThanh">Hoàn thành</option><option value="DaHuy">Đã hủy</option></select></div>
-          <button class="btn btn-primary" style="height:38px;">Lọc Dữ Liệu</button>
+        <div class="report-filters report-filter-grid-v2">
+          <div class="form-group report-range-group" style="margin-bottom:0;">
+            <label>Khoảng ngày nhanh</label>
+            <div class="report-range-badges" aria-label="Bộ lọc nhanh theo ngày">
+              <button type="button" class="range-badge" data-days="30" onclick="setReportRange(30)">30 ngày</button>
+              <button type="button" class="range-badge" data-days="15" onclick="setReportRange(15)">15 ngày</button>
+              <button type="button" class="range-badge" data-days="10" onclick="setReportRange(10)">10 ngày</button>
+              <button type="button" class="range-badge" data-days="5" onclick="setReportRange(5)">5 ngày</button>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0;"><label>Từ ngày</label><input class="input-control" id="report-date-from" type="date" onchange="clearReportRangeBadge(); renderReport();"></div>
+          <div class="form-group" style="margin-bottom:0;"><label>Đến ngày</label><input class="input-control" id="report-date-to" type="date" onchange="clearReportRangeBadge(); renderReport();"></div>
+          <div class="form-group" style="margin-bottom:0;"><label>Loại phiếu</label><select class="input-control" id="report-type-filter" onchange="renderReport()"><option value="All">Tất cả</option><option value="NhapCongTy">Nhập hàng Công ty</option><option value="NhapNgoai">Nhập hàng Mua ngoài</option><option value="XuatHang">Xuất hàng</option></select></div>
+          <div class="form-group" style="margin-bottom:0;"><label>Trạng thái</label><select class="input-control" id="report-status-filter" onchange="renderReport()"><option value="All">Tất cả</option><option value="HoanThanh">Hoàn thành</option><option value="DaHuy">Đã hủy</option></select></div>
+          <button class="btn btn-primary report-apply-btn" type="button" onclick="renderReport()">Lọc Dữ Liệu</button>
         </div>
         <div class="table-toolbar-container">
           <div class="table-toolbar-left"><div class="show-records-select">Hiển thị <select><option>10</option><option>25</option><option>50</option></select> dữ liệu</div></div>
@@ -4060,6 +4069,28 @@
       document.getElementById('print-rows').innerHTML=rows.length?rows.map(w=>`<tr><td>${w.index}</td><td>${w.time}</td><td>${w.product || (w.index===1?firstWeighLabel(t):'Chưa rõ loại hàng')}</td><td class="num">${fmt(w.total)}</td><td class="num">${w.goods===null?'---':fmt(w.goods)}</td></tr>`).join(''):'<tr><td colspan="5">Chưa có lần cân</td></tr>';
       openModal('print-modal');
     }
+    function reportMaxDate(){
+      const dates = history.map(h => h.dateISO).filter(Boolean).sort();
+      return dates[dates.length - 1] || todayISO();
+    }
+    function shiftDateISO(baseISO, deltaDays){
+      const d = new Date((baseISO || todayISO()) + 'T00:00:00');
+      d.setDate(d.getDate() + deltaDays);
+      return d.toISOString().slice(0,10);
+    }
+    function clearReportRangeBadge(){
+      document.querySelectorAll('.report-range-badges .range-badge').forEach(btn => btn.classList.remove('active'));
+    }
+    function setReportRange(days){
+      const end = reportMaxDate();
+      const start = shiftDateISO(end, -(Number(days) - 1));
+      const fromInput = document.getElementById('report-date-from');
+      const toInput = document.getElementById('report-date-to');
+      if(fromInput) fromInput.value = start;
+      if(toInput) toInput.value = end;
+      document.querySelectorAll('.report-range-badges .range-badge').forEach(btn => btn.classList.toggle('active', btn.dataset.days === String(days)));
+      renderReport();
+    }
     function renderReport(){
       const closedRows = history.filter(h=>h.status==='HoanThanh' || h.status==='DaHuy');
       const completed=closedRows.filter(h=>h.status==='HoanThanh');
@@ -4072,9 +4103,13 @@
       const q=(document.getElementById('report-search')?.value||'').toLowerCase();
       const typeFilter=document.getElementById('report-type-filter')?.value||'All';
       const statusFilter=document.getElementById('report-status-filter')?.value||'All';
+      const fromDate=document.getElementById('report-date-from')?.value||'';
+      const toDate=document.getElementById('report-date-to')?.value||'';
       const reportRows=closedRows
         .filter(r=>typeFilter==='All'||normalizeType(r.type)===typeFilter)
         .filter(r=>statusFilter==='All'||r.status===statusFilter)
+        .filter(r=>!fromDate || (r.dateISO||'')>=fromDate)
+        .filter(r=>!toDate || (r.dateISO||'')<=toDate)
         .filter(r=>!q||JSON.stringify(r).toLowerCase().includes(q));
       reportRowsCache=reportRows;
       document.getElementById('report-body').innerHTML=reportRows.map((r,i)=>`<tr><td><strong>${r.code}</strong></td><td>${r.date}</td><td>${r.customer}</td><td>${r.plate}</td><td>${r.product||'Tổng hợp'}</td><td class="num">${fmt(r.net)}</td><td>${typeLabel(r.type)}</td><td><span class="badge ${r.status==='HoanThanh'?'badge-green':'badge-red'}">${r.status==='HoanThanh'?'Hoàn thành':'Đã hủy'}</span></td><td><button class="btn btn-secondary btn-view-detail" onclick="openReportDetail(${i})">Xem chi tiết</button></td></tr>`).join('') || '<tr><td colspan="9"><div class="empty-state"><div class="empty-title">Không có dữ liệu phù hợp</div><div class="empty-desc">Thử đổi bộ lọc loại phiếu, trạng thái hoặc thời gian.</div></div></td></tr>';
@@ -4100,6 +4135,171 @@
     }
     document.addEventListener('DOMContentLoaded',()=>{ fillDatalists(); renderNumpad(); renderVehicles(true); renderReport(); });
   </script>
+
+<style id="final-medium-responsive-report-badges">
+  /* MEDIUM SCREEN RESPONSIVE — tránh tràn phần phiếu cân ở màn hình vừa */
+  @media (min-width: 1181px) and (max-width: 1850px) {
+    main {
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+    .ticket-page-layout {
+      display: grid !important;
+      grid-template-columns: clamp(300px, 22vw, 360px) minmax(0, 1fr) !important;
+      gap: 12px !important;
+      overflow: visible !important;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+    .col-left {
+      width: auto !important;
+      max-width: none !important;
+      min-width: 0 !important;
+      padding-right: 0 !important;
+      border-right: 0 !important;
+    }
+    .col-middle {
+      min-width: 0 !important;
+      padding: 0 0 20px !important;
+      overflow: visible !important;
+    }
+    .ticket-workspace-v3 {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: auto !important;
+      gap: 12px !important;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+    .ticket-main-flow {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      min-width: 0 !important;
+    }
+    .capture-center-card,
+    #ticket-info-card,
+    .summary-sticky-v3 {
+      grid-column: 1 / -1 !important;
+      grid-row: auto !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      position: static !important;
+    }
+    .summary-sticky-v3 {
+      display: block !important;
+      height: auto !important;
+    }
+    .summary-sticky-v3 .card {
+      margin-bottom: 0 !important;
+    }
+    .ticket-info-compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+    .ticket-control-row {
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 260px) minmax(160px, 190px) !important;
+      gap: 10px !important;
+    }
+    .native-radio-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+    .native-radio-item {
+      min-width: 0 !important;
+    }
+    .native-radio-item label {
+      white-space: normal !important;
+      line-height: 1.25 !important;
+    }
+    .capture-grid-v4 {
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, .75fr) !important;
+      gap: 14px !important;
+    }
+  }
+
+  @media (min-width: 1181px) and (max-width: 1450px) {
+    .ticket-control-row,
+    .ticket-extra-row {
+      grid-template-columns: 1fr !important;
+    }
+    .native-radio-list,
+    .ticket-info-compact,
+    .capture-grid-v4 {
+      grid-template-columns: 1fr !important;
+    }
+    .capture-side-panel-v4 {
+      grid-template-rows: auto auto !important;
+    }
+  }
+
+  /* REPORT DATE BADGES */
+  .report-filter-grid-v2 {
+    display: grid !important;
+    grid-template-columns: minmax(220px, 1.25fr) minmax(150px, .8fr) minmax(150px, .8fr) minmax(190px, 1fr) minmax(160px, .85fr) auto !important;
+    gap: 10px !important;
+    align-items: end !important;
+  }
+  .report-range-badges {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .range-badge {
+    border: 1px solid rgba(16,185,129,.24);
+    background: #FFFFFF;
+    color: var(--green-dark);
+    min-height: 36px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all .18s var(--ease-out);
+    box-shadow: var(--shadow-sm);
+  }
+  .range-badge:hover {
+    background: var(--green-light);
+    border-color: rgba(16,185,129,.45);
+    transform: translateY(-1px);
+  }
+  .range-badge.active {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(16,185,129,.22);
+  }
+  .report-apply-btn {
+    height: 38px !important;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1400px) {
+    .report-filter-grid-v2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    .report-range-group,
+    .report-apply-btn {
+      grid-column: 1 / -1 !important;
+    }
+    .report-apply-btn {
+      width: 100% !important;
+    }
+  }
+  @media (max-width: 760px) {
+    .report-filter-grid-v2 {
+      grid-template-columns: 1fr !important;
+    }
+    .report-range-badges {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .range-badge {
+      width: 100%;
+    }
+  }
+</style>
+
 </body>
 </html>
 
@@ -4227,4 +4427,829 @@
   .capture-action-row { grid-template-columns: 1fr; }
   .capture-title-row { align-items: flex-start; flex-direction: column; }
 }
+
+
+/* FINAL RESPONSIVE PATCH — tối ưu màn hình nhỏ / tablet */
+@media (max-width: 1180px) {
+  html, body {
+    min-height: 100%;
+    overflow-x: hidden !important;
+  }
+  body {
+    overflow-y: auto !important;
+  }
+  header {
+    height: auto !important;
+    min-height: 58px !important;
+    padding: 10px 14px !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+  .logo-container {
+    flex: 1 1 auto !important;
+    min-width: 190px !important;
+  }
+  .nav-tabs {
+    order: 3 !important;
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .nav-tab {
+    flex: 1 0 auto !important;
+    white-space: nowrap !important;
+  }
+  .header-right {
+    margin-left: auto !important;
+  }
+  main {
+    height: auto !important;
+    min-height: calc(100vh - 58px) !important;
+    padding: 12px !important;
+    overflow: visible !important;
+  }
+  .info-banner-blue {
+    align-items: flex-start !important;
+    padding: 10px 12px !important;
+    margin-bottom: 12px !important;
+  }
+  .info-banner-desc {
+    line-height: 1.35 !important;
+  }
+  #tab-tickets.tab-content.active,
+  .tab-content.active {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .ticket-page-layout {
+    display: grid !important;
+    grid-template-columns: 320px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    margin-top: 0 !important;
+  }
+  .col-left {
+    width: auto !important;
+    min-width: 0 !important;
+    max-height: none !important;
+    height: auto !important;
+    padding: 0 !important;
+    border-right: 0 !important;
+    border-radius: 14px !important;
+    overflow: visible !important;
+  }
+  .vehicle-search-panel {
+    position: sticky !important;
+    top: 10px !important;
+    z-index: 20 !important;
+  }
+  .vehicle-filter-tabs {
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .vehicle-filter-tabs .btn-filter {
+    flex: 0 0 auto !important;
+    min-width: 92px !important;
+  }
+  #vehicle-list.ticket-list {
+    max-height: calc(100vh - 230px) !important;
+    overflow-y: auto !important;
+  }
+  .col-middle {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .ticket-workspace-v3,
+  .ticket-main-flow {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    min-height: 0 !important;
+  }
+  .capture-center-card,
+  #ticket-info-card,
+  .summary-sticky-v3,
+  .summary-sticky-v3 .card {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  .summary-sticky-v3 {
+    position: static !important;
+    order: 3 !important;
+  }
+  .capture-grid-v4 {
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, .9fr) !important;
+    gap: 12px !important;
+  }
+  .capture-card-v4 {
+    padding: 14px !important;
+  }
+  .capture-weight-panel-v4 {
+    min-height: 120px !important;
+    padding: 16px !important;
+  }
+  .capture-card-v4 .scale-big-input {
+    height: 58px !important;
+    font-size: 28px !important;
+  }
+  .product-input-v4 {
+    height: 52px !important;
+  }
+  .capture-side-panel-v4 {
+    grid-template-rows: auto auto !important;
+  }
+  .ticket-info-compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .ticket-control-row {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .native-radio-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .ticket-extra-row,
+  .grid-2,
+  .grid-3,
+  .config-grid,
+  .report-filters {
+    grid-template-columns: 1fr !important;
+  }
+  .stat-cards-grid,
+  .report-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .table-toolbar-container,
+  .table-toolbar-left,
+  .table-toolbar-right {
+    align-items: stretch !important;
+  }
+  .table-toolbar-container {
+    flex-direction: column !important;
+  }
+  .table-toolbar-left,
+  .table-toolbar-right,
+  .search-table-input-group {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+  }
+  .search-table-input-group input {
+    flex: 1 1 180px !important;
+    width: auto !important;
+  }
+  .table-container,
+  .live-detail-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .data-table {
+    min-width: 760px !important;
+  }
+  .modal-content,
+  .modal-content.modal-xl,
+  .live-detail-modal-content {
+    width: min(96vw, 1100px) !important;
+    max-height: 90vh !important;
+    padding: 18px !important;
+  }
+}
+
+@media (max-width: 820px) {
+  header {
+    position: sticky !important;
+    top: 0 !important;
+  }
+  main {
+    padding: 10px !important;
+  }
+  .info-banner-blue {
+    display: none !important;
+  }
+  .ticket-page-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .vehicle-search-panel {
+    position: static !important;
+  }
+  #vehicle-list.ticket-list {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    padding: 10px !important;
+  }
+  .vehicle-card,
+  .ticket-card {
+    margin: 0 !important;
+  }
+  .capture-grid-v4,
+  .capture-action-row,
+  .ticket-info-compact,
+  .native-radio-list,
+  .stat-cards-grid,
+  .report-stat-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .capture-title-row {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+  .weigh-count-pill {
+    width: 100% !important;
+  }
+  .capture-action-row .btn,
+  .button-group-row .btn {
+    width: 100% !important;
+  }
+  .team-picker {
+    grid-template-columns: 1fr !important;
+  }
+  .modal-content,
+  .modal-content.modal-xl,
+  .live-detail-modal-content {
+    width: calc(100vw - 20px) !important;
+    max-height: calc(100vh - 20px) !important;
+    padding: 14px !important;
+    border-radius: 14px !important;
+  }
+  .modal-footer {
+    flex-direction: column-reverse !important;
+  }
+  .modal-footer .btn {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --text-base: 13px;
+  }
+  header {
+    padding: 8px 10px !important;
+  }
+  .logo-text {
+    font-size: 14px !important;
+  }
+  .logo-subtext {
+    font-size: 9px !important;
+  }
+  .scale-status {
+    padding: 5px 9px !important;
+  }
+  .nav-tab {
+    padding: 7px 10px !important;
+    font-size: 12px !important;
+  }
+  .card {
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+  .capture-card-v4 .scale-big-input {
+    height: 54px !important;
+    font-size: 24px !important;
+  }
+  .capture-weight-panel-v4 {
+    padding: 12px !important;
+  }
+  .capture-field-title,
+  .form-group label,
+  .field-label {
+    font-size: 10px !important;
+  }
+  .input-control,
+  .field-input {
+    padding: 8px 11px !important;
+    font-size: 13px !important;
+  }
+  .button-group-row {
+    flex-direction: column !important;
+  }
+  .quick-filters {
+    gap: 6px !important;
+  }
+  .btn-filter {
+    min-width: 86px !important;
+  }
+  #vehicle-list.ticket-list {
+    grid-template-columns: 1fr !important;
+    max-height: 260px !important;
+  }
+  .report-filters {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .table-pagination-container {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+  }
+  .pagination-buttons {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+}
+</style>
+
+<!-- FINAL PATCH V2 — fix responsive cho màn hình vừa 1181px-1500px -->
+<style id="final-medium-responsive-fix-v2">
+  @media (min-width: 1181px) and (max-width: 1500px) {
+    html, body {
+      overflow-x: hidden !important;
+    }
+
+    main {
+      height: auto !important;
+      min-height: calc(100vh - 58px) !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      padding: 12px 16px !important;
+    }
+
+    #tab-tickets.tab-content.active {
+      overflow: visible !important;
+      height: auto !important;
+    }
+
+    .ticket-page-layout {
+      width: 100% !important;
+      display: grid !important;
+      grid-template-columns: minmax(290px, 330px) minmax(0, 1fr) !important;
+      gap: 12px !important;
+      align-items: start !important;
+      overflow: visible !important;
+      height: auto !important;
+    }
+
+    .col-left {
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      height: calc(100vh - 160px) !important;
+      min-height: 520px !important;
+      overflow: hidden !important;
+      border-radius: 14px !important;
+      border-right: 0 !important;
+      padding: 0 !important;
+    }
+
+    .vehicle-search-panel {
+      position: static !important;
+      padding: 14px !important;
+    }
+
+    #vehicle-list.ticket-list {
+      height: calc(100% - 158px) !important;
+      max-height: none !important;
+      overflow-y: auto !important;
+      padding: 10px !important;
+    }
+
+    .col-middle {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+
+    #ticket-workspace {
+      width: 100% !important;
+      min-width: 0 !important;
+      height: auto !important;
+    }
+
+    .ticket-workspace-v3 {
+      width: 100% !important;
+      min-width: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      height: auto !important;
+    }
+
+    .ticket-main-flow {
+      width: 100% !important;
+      min-width: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+
+    .capture-center-card,
+    #ticket-info-card,
+    .summary-sticky-v3,
+    .summary-sticky-v3 .card {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      margin: 0 !important;
+      grid-column: auto !important;
+      grid-row: auto !important;
+      position: static !important;
+    }
+
+    .capture-card-v4 {
+      padding: 14px 16px !important;
+    }
+
+    .capture-card-header-v4 {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 12px !important;
+      padding-bottom: 10px !important;
+      margin-bottom: 12px !important;
+    }
+
+    .capture-title-row {
+      width: auto !important;
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
+      flex-direction: row !important;
+      align-items: center !important;
+    }
+
+    .capture-title-row .card-title {
+      white-space: normal !important;
+      line-height: 1.35 !important;
+    }
+
+    .capture-grid-v4 {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, .75fr) !important;
+      gap: 14px !important;
+      align-items: stretch !important;
+    }
+
+    .capture-weight-panel-v4 {
+      min-height: 124px !important;
+      padding: 16px !important;
+    }
+
+    .capture-side-panel-v4 {
+      grid-template-rows: auto auto !important;
+    }
+
+    .capture-card-v4 .scale-big-input {
+      height: 58px !important;
+      font-size: 30px !important;
+    }
+
+    .capture-action-row {
+      grid-template-columns: .9fr 1.1fr !important;
+    }
+
+    .ticket-info-compact {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      gap: 10px !important;
+    }
+
+    .ticket-control-row,
+    .ticket-extra-row {
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+    }
+
+    .native-radio-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .summary-sticky-v3 {
+      display: block !important;
+      height: auto !important;
+      order: 3 !important;
+    }
+
+    .summary-sticky-v3 .card {
+      padding: 14px 16px !important;
+    }
+
+    .summary-sticky-v3 .result-group {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 8px !important;
+      padding: 0 !important;
+      border-bottom: 0 !important;
+    }
+
+    .summary-sticky-v3 .result-row {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
+      padding: 10px 12px !important;
+      border: 1px solid var(--border-subtle) !important;
+      border-radius: 10px !important;
+      background: var(--bg-overlay) !important;
+    }
+
+    .summary-sticky-v3 .result-val.large {
+      font-size: 22px !important;
+    }
+
+    .summary-sticky-v3 .button-group-row {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 8px !important;
+      margin-top: 10px !important;
+    }
+
+    .summary-sticky-v3 .button-group-row .btn {
+      width: 100% !important;
+      min-height: 40px !important;
+    }
+  }
+
+  @media (min-width: 1181px) and (max-width: 1280px) {
+    .ticket-page-layout {
+      grid-template-columns: 300px minmax(0, 1fr) !important;
+    }
+
+    .capture-grid-v4,
+    .ticket-info-compact,
+    .native-radio-list,
+    .summary-sticky-v3 .result-group,
+    .summary-sticky-v3 .button-group-row {
+      grid-template-columns: 1fr !important;
+    }
+
+    .capture-action-row {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+</style>
+
+<!-- FINAL PATCH V3 — fix layout cho màn hình vừa/rộng 1501px-1850px, đặc biệt 1600px -->
+<style id="final-1600-responsive-fix-v3">
+  @media (min-width: 1501px) and (max-width: 1850px) {
+    html, body {
+      overflow-x: hidden !important;
+    }
+
+    body {
+      min-width: 0 !important;
+    }
+
+    main {
+      height: auto !important;
+      min-height: calc(100vh - 58px) !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      padding: 12px 18px !important;
+    }
+
+    #tab-tickets.tab-content.active {
+      height: auto !important;
+      overflow: visible !important;
+    }
+
+    .ticket-page-layout {
+      width: 100% !important;
+      max-width: none !important;
+      display: grid !important;
+      grid-template-columns: 365px minmax(0, 1fr) !important;
+      gap: 14px !important;
+      align-items: start !important;
+      height: auto !important;
+      overflow: visible !important;
+      margin-top: 0 !important;
+    }
+
+    .col-left {
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      height: calc(100vh - 164px) !important;
+      min-height: 560px !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      border-right: 0 !important;
+      border-radius: 14px !important;
+    }
+
+    .vehicle-search-panel {
+      padding: 14px !important;
+    }
+
+    #vehicle-list.ticket-list {
+      height: calc(100% - 160px) !important;
+      max-height: none !important;
+      overflow-y: auto !important;
+      padding: 10px !important;
+    }
+
+    .col-middle {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+
+    #ticket-workspace,
+    .ticket-workspace-v3,
+    .ticket-main-flow {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+
+    .ticket-workspace-v3 {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      align-items: stretch !important;
+      grid-template-columns: none !important;
+      grid-template-rows: none !important;
+    }
+
+    .ticket-main-flow {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+
+    .capture-center-card,
+    #ticket-info-card,
+    .ticket-detail-card,
+    .summary-sticky-v3 {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      margin: 0 !important;
+      grid-column: auto !important;
+      grid-row: auto !important;
+      position: static !important;
+    }
+
+    .capture-center-card {
+      order: 1 !important;
+    }
+
+    #ticket-info-card {
+      order: 2 !important;
+    }
+
+    .summary-sticky-v3 {
+      order: 3 !important;
+      display: block !important;
+      height: auto !important;
+    }
+
+    .ticket-detail-card {
+      order: 4 !important;
+    }
+
+    .capture-card-v4 {
+      padding: 16px 18px !important;
+    }
+
+    .capture-card-header-v4 {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 16px !important;
+      margin-bottom: 12px !important;
+      padding-bottom: 10px !important;
+    }
+
+    .capture-title-row {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 14px !important;
+      min-width: 0 !important;
+    }
+
+    .capture-title-row .card-title {
+      margin-bottom: 0 !important;
+      white-space: normal !important;
+      line-height: 1.35 !important;
+    }
+
+    .capture-grid-v4 {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1.55fr) minmax(320px, .75fr) !important;
+      gap: 16px !important;
+      align-items: stretch !important;
+    }
+
+    .capture-weight-panel-v4 {
+      min-height: 128px !important;
+      padding: 18px !important;
+    }
+
+    .capture-card-v4 .scale-big-input {
+      height: 64px !important;
+      font-size: 32px !important;
+    }
+
+    .capture-side-panel-v4 {
+      display: grid !important;
+      grid-template-rows: auto auto !important;
+      gap: 12px !important;
+    }
+
+    .capture-action-row {
+      display: grid !important;
+      grid-template-columns: minmax(140px, .8fr) minmax(190px, 1.2fr) !important;
+      gap: 10px !important;
+    }
+
+    .capture-action-row .btn {
+      width: 100% !important;
+      min-height: 50px !important;
+    }
+
+    .ticket-info-compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 10px !important;
+    }
+
+    .ticket-control-row,
+    .ticket-extra-row {
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+    }
+
+    .native-radio-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 10px !important;
+    }
+
+    .native-radio-item label {
+      white-space: normal !important;
+      line-height: 1.25 !important;
+    }
+
+    .summary-sticky-v3 .card {
+      width: 100% !important;
+      padding: 14px 16px !important;
+      margin: 0 !important;
+    }
+
+    .summary-sticky-v3 .result-group {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 8px !important;
+      padding: 0 !important;
+      border-bottom: 0 !important;
+    }
+
+    .summary-sticky-v3 .result-row {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      gap: 4px !important;
+      min-height: 66px !important;
+      padding: 10px 12px !important;
+      border: 1px solid var(--border-subtle) !important;
+      border-radius: 10px !important;
+      background: var(--bg-overlay) !important;
+    }
+
+    .summary-sticky-v3 .button-group-row {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 8px !important;
+      margin-top: 10px !important;
+      flex-direction: unset !important;
+    }
+
+    .summary-sticky-v3 .button-group-row .btn {
+      width: 100% !important;
+      min-height: 40px !important;
+    }
+  }
+
+  @media (min-width: 1501px) and (max-width: 1850px) and (max-height: 850px) {
+    .col-left {
+      height: calc(100vh - 148px) !important;
+      min-height: 500px !important;
+    }
+
+    .info-banner-blue {
+      padding: 10px 16px !important;
+      margin-bottom: 10px !important;
+    }
+
+    .capture-weight-panel-v4 {
+      min-height: 112px !important;
+      padding: 14px !important;
+    }
+
+    .capture-card-v4 .scale-big-input {
+      height: 56px !important;
+      font-size: 28px !important;
+    }
+  }
 </style>
