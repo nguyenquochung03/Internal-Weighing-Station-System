@@ -2871,41 +2871,6 @@
     }
 
 
-    .trip-card.trip-blocked {
-      opacity:.68;
-      border-style:dashed;
-      cursor:not-allowed;
-    }
-    .locked-weighing-preview {
-      border: 1px solid var(--border-default);
-      border-radius: 14px;
-      background: var(--bg-overlay);
-      overflow: hidden;
-    }
-    .locked-weighing-preview .locked-preview-header {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:12px 14px;
-      border-bottom:1px solid var(--border-default);
-      background:#FFFFFF;
-    }
-    .locked-weighing-preview .locked-preview-title {
-      font-size:13px;
-      font-weight:800;
-      color:var(--green-dark);
-      text-transform:uppercase;
-      letter-spacing:.06em;
-    }
-    .locked-weighing-preview .table-container {
-      margin:0;
-      border:none;
-      border-radius:0;
-      box-shadow:none;
-    }
-
-
     /* FINAL CLEANUP — selected vehicle + 3-way ticket type + team multi-select */
     .vehicle-card.active,
     .vehicle-card.active.has-open {
@@ -3239,257 +3204,6 @@
       .weighing-table-wrapper { max-height: 420px; }
     }
 
-  
-
-    /* ═══════════════════════════════════════════════════════════════
-       UPDATE 2026-07 — NGHIỆP VỤ MỚI: PHIẾU CÂN THEO CHUYẾN XE Có sẵn
-    ═══════════════════════════════════════════════════════════════ */
-    .date-first-panel {
-      background: linear-gradient(180deg, rgba(16,185,129,.06), #fff 72%);
-      border-bottom: 1px solid var(--border-default);
-    }
-    .date-first-panel .date-picker-main {
-      border: 1px solid rgba(16,185,129,.28) !important;
-      background: #fff !important;
-      font-weight: 800;
-      color: var(--green-dark);
-    }
-    .flow-stepper {
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap:8px;
-      margin-top:12px;
-    }
-    .flow-step {
-      background: var(--bg-overlay);
-      border: 1px solid var(--border-default);
-      border-radius: 10px;
-      padding: 8px 10px;
-      font-size: 11px;
-      color: var(--text-secondary);
-      font-weight: 700;
-      display:flex;
-      align-items:center;
-      gap:7px;
-      min-width:0;
-    }
-    .flow-step b {
-      width:20px; height:20px; border-radius:50%;
-      background: var(--green-light); color: var(--green-dark);
-      display:inline-flex; align-items:center; justify-content:center;
-      flex:0 0 auto;
-      font-family: var(--font-mono);
-    }
-    .trip-select-card {
-      border: 1px dashed rgba(16,185,129,.45);
-      background: rgba(16,185,129,.045);
-      border-radius: 14px;
-      padding: 14px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:12px;
-    }
-    .trip-select-card .trip-title {
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-    }
-    .trip-select-card .trip-desc {
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-    .trip-select-card.selected {
-      border-style: solid;
-      background: #fff;
-      box-shadow: 0 2px 10px rgba(16,185,129,.1);
-    }
-    .trip-meta-grid {
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap:10px;
-      margin-top:12px;
-    }
-    .trip-meta-item {
-      background: var(--bg-overlay);
-      border:1px solid var(--border-default);
-      border-radius:10px;
-      padding:10px 12px;
-      min-width:0;
-    }
-    .trip-meta-label {
-      display:block;
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      font-weight:800;
-      color:var(--text-muted);
-      margin-bottom:4px;
-    }
-    .trip-meta-value {
-      display:block;
-      font-size:13px;
-      font-weight:800;
-      color:var(--text-primary);
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .trip-meta-value.muted { color: var(--text-muted); }
-    .readonly-source-box {
-      background: var(--bg-sunken);
-      border:1px solid var(--border-default);
-      border-radius:10px;
-      padding:10px 12px;
-      color:var(--text-secondary);
-      font-size:13px;
-      font-weight:700;
-      min-height:40px;
-    }
-    .trip-list-toolbar {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:10px 12px;
-      background:var(--bg-overlay);
-      border:1px solid var(--border-default);
-      border-radius:12px;
-      margin-bottom:12px;
-      font-size:13px;
-    }
-    .trip-list {
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      max-height: 430px;
-      overflow-y:auto;
-    }
-    .trip-card {
-      background:#fff;
-      border:1px solid var(--border-default);
-      border-left:5px solid var(--border-strong);
-      border-radius:12px;
-      padding:13px 14px;
-      cursor:pointer;
-      transition: all .18s var(--ease-out);
-      box-shadow: var(--shadow-sm);
-    }
-    .trip-card:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-strong);
-    }
-    .trip-card.active {
-      border-color: rgba(16,185,129,.35);
-      border-left-color: var(--green);
-      background: rgba(16,185,129,.045);
-    }
-    .trip-card.import { border-left-color: var(--blue); }
-    .trip-card.export { border-left-color: var(--purple); }
-    .trip-card.manual { border-left-style: dashed; }
-    .trip-card-head {
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-      margin-bottom:8px;
-    }
-    .trip-code {
-      font-size:14px;
-      font-family:var(--font-mono);
-      font-weight:900;
-      color:var(--text-primary);
-    }
-    .trip-subline {
-      font-size:12px;
-      color:var(--text-secondary);
-      margin-top:2px;
-    }
-    .trip-card-grid {
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap:8px;
-      font-size:12px;
-      color:var(--text-secondary);
-    }
-    .trip-card-grid span {
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .ticket-disabled-cover {
-      opacity:.55;
-      filter: grayscale(.2);
-    }
-    .manual-trip-type-list {
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:8px;
-    }
-    .manual-trip-type-item {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:11px 12px;
-      border:1px solid var(--border-default);
-      border-radius:10px;
-      cursor:pointer;
-      background:#fff;
-      font-weight:700;
-    }
-    .manual-trip-type-item:has(input:checked) {
-      border-color: rgba(16,185,129,.45);
-      background: var(--green-light);
-      color: var(--green-dark);
-    }
-    .vehicle-card.no-trip-today { border-left-color: var(--text-muted) !important; opacity:.92; }
-    .vehicle-card .trip-count-chip {
-      font-family: var(--font-mono);
-      padding:2px 7px;
-      border-radius:999px;
-      background: var(--bg-sunken);
-      color: var(--text-secondary);
-      font-size:11px;
-      font-weight:800;
-      border:1px solid var(--border-default);
-    }
-    .vehicle-summary {
-      display:flex;
-      flex-wrap:wrap;
-      gap:5px;
-      margin-top:2px;
-    }
-    .vehicle-summary-chip {
-      display:inline-flex;
-      align-items:center;
-      gap:4px;
-      padding:2px 7px;
-      border-radius:999px;
-      background:var(--bg-overlay);
-      border:1px solid var(--border-default);
-      color:var(--text-secondary);
-      font-size:10px;
-      font-weight:800;
-      white-space:nowrap;
-    }
-    .vehicle-summary-chip.strong {
-      background:var(--green-light);
-      color:var(--green-dark);
-      border-color:rgba(16,185,129,.2);
-    }
-
-    @media (max-width:1180px){
-      .trip-meta-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .trip-card-grid { grid-template-columns:1fr; }
-      .flow-stepper { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    @media (max-width:680px){
-      .trip-select-card { flex-direction:column; align-items:stretch; }
-      .trip-meta-grid, .flow-stepper { grid-template-columns:1fr; }
-    }
-
   </style>
 </head>
 
@@ -3523,8 +3237,8 @@
       <div class="info-banner-left">
         <span style="font-size:20px;">⚖️</span>
         <div>
-          <span class="info-banner-title">Quy trình cân theo chuyến xe</span>
-          <span class="info-banner-desc">Chọn ngày → chọn xe → hệ thống mở phiếu gần nhất để cân. Khi cần đổi chuyến, bấm “Chọn chuyến” ngay trên khu vực nhập số cân.</span>
+          <span class="info-banner-title">Quy trình cân theo biển số xe</span>
+          <span class="info-banner-desc">Chọn loại phiếu, chọn xe, nhập số cân, lưu từng lần cân rồi hoàn thành phiếu.</span>
         </div>
       </div>
     </div>
@@ -3532,19 +3246,17 @@
     <div class="tab-content active" id="tab-tickets">
       <div class="ticket-page-layout">
         <aside class="col-left" style="width:330px; background:#fff; padding:0;">
-          <div class="vehicle-search-panel date-first-panel">
-            <div class="form-section-title" style="margin-top:0;">📅 1. Chọn ngày cân</div>
-            <div class="form-group" style="margin-bottom:12px;">
-              <input class="input-control date-picker-main" id="operation-date" type="date" onchange="changeOperationDate()">
-            </div>
-            <div class="form-section-title">🚛 2. Tìm / chọn xe</div>
+          <div class="vehicle-search-panel">
+            <div class="form-section-title" style="margin-top:0;">🚛 Tìm / chọn xe</div>
             <div class="search-box-container">
               <svg class="search-icon-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               <input class="input-control" id="vehicle-search" placeholder="Nhập biển số hoặc tên tài xế..." autocomplete="off" oninput="renderVehicles(true)" onkeydown="vehicleSearchEnter(event)">
             </div>
             <div class="quick-filters vehicle-filter-tabs" style="border-bottom:0; padding-bottom:0; margin-bottom:0;">
-              <button class="btn-filter active" data-filter="HasTrip" onclick="setVehicleFilter('HasTrip')">Đã có chuyến</button>
-              <button class="btn-filter" data-filter="NoTrip" onclick="setVehicleFilter('NoTrip')">Trống</button>
+              <button class="btn-filter active" data-filter="NhapXuat" onclick="setVehicleFilter('NhapXuat')">Nhập/Xuất</button>
+              <button class="btn-filter" data-filter="NhapHang" onclick="setVehicleFilter('NhapHang')">Nhập hàng</button>
+              <button class="btn-filter" data-filter="XuatHang" onclick="setVehicleFilter('XuatHang')">Xuất hàng</button>
+              <button class="btn-filter" data-filter="PhieuMoi" onclick="setVehicleFilter('PhieuMoi')">Đang trống</button>
             </div>
             <div class="quick-create-row" id="no-vehicle-quick" style="display:none;">
               <span>Không tìm thấy xe/tài xế này.</span>
@@ -3569,23 +3281,12 @@
                 <div class="card capture-center-card capture-card-v4">
                   <div class="capture-card-header-v4">
                     <div class="capture-title-row">
-                      <div class="capture-title-left">
-                        <div class="card-title">▰ Ghi nhận khối lượng (nhập số cân)</div>
-                        <span class="weigh-count-pill" id="current-weigh-index">Lần cân thứ 1</span>
-                      </div>
-                      <div class="capture-trip-header">
-                        <div class="trip-select-card capture-trip-card" id="trip-select-card">
-                          <div>
-                            <div class="trip-title" id="trip-card-title">Chưa chọn chuyến xe</div>
-                            <div class="trip-desc" id="trip-card-desc">Bấm “Chọn chuyến” nếu muốn đổi sang chuyến khác.</div>
-                          </div>
-                        </div>
-                        <button class="btn btn-secondary btn-sm" onclick="openTripModal()">🚚 Chọn chuyến</button>
-                      </div>
+                      <div class="card-title">▰ Ghi nhận khối lượng (nhập số cân)</div>
+                      <span class="weigh-count-pill" id="current-weigh-index">Lần cân thứ 1</span>
                     </div>
                     <div id="first-weigh-note" class="capture-help-text" style="display:none;"></div>
                   </div>
-                  <div class="capture-grid-v4" id="capture-input-grid">
+                  <div class="capture-grid-v4">
                     <div class="capture-weight-panel-v4">
                       <label class="capture-field-title">1. Khối lượng trên cân (kg) <span>*</span></label>
                       <input type="number" class="input-control scale-big-input" id="weight-input" placeholder="0" onkeydown="saveWeightEnter(event)">
@@ -3603,29 +3304,22 @@
                       </div>
                     </div>
                   </div>
-                  <div class="locked-weighing-preview" id="locked-weighing-preview" style="display:none;"></div>
                 </div>
 
                 <div class="card" id="ticket-info-card">
                   <div class="flex justify-between align-center gap-12">
                     <div>
-                      <div class="card-title" style="margin-bottom:4px; border-bottom:0; padding-bottom:0;">🧾 Thông tin phiếu cân</div>
-                      <div class="info-banner-desc">Kiểm tra thông tin xe, khách/ghi chú và bù trừ trước khi lưu.</div>
+                      <div class="card-title" style="margin-bottom:4px; border-bottom:0; padding-bottom:0;">🧾 Phiếu cân theo xe</div>
                     </div>
                     <div class="flex gap-8 align-center">
                       <button class="btn btn-primary btn-sm" onclick="saveTicketInfo()">Lưu thông tin</button>
-                      <span class="badge badge-grey" id="ticket-state-badge">Chưa chọn chuyến</span>
+                      <span class="badge badge-grey" id="ticket-state-badge">Phiếu mới</span>
                       <span class="chip-note" id="ticket-code-text">Chưa sinh mã</span>
                     </div>
                   </div>
 
                   <div class="soft-divider"></div>
-
                   <div class="ticket-info-compact">
-                    <div class="info-pill-card">
-                      <span class="info-pill-label">Ngày cân</span>
-                      <span class="info-pill-value" id="selected-date-display">--</span>
-                    </div>
                     <div class="info-pill-card">
                       <span class="info-pill-label">Biển số xe</span>
                       <span class="info-pill-value plate" id="selected-plate">--</span>
@@ -3633,27 +3327,40 @@
                     <div class="info-pill-card">
                       <span class="info-pill-label">Tên tài xế</span>
                       <span class="info-pill-value" id="selected-driver">--</span>
+                      
                     </div>
+                    <div class="info-pill-card">
+                      <span class="info-pill-label">Chuyến xe</span>
+                      <span class="info-pill-value" id="trip-display">Chuyến 1 trong ngày</span>
+                    </div>
+
                   </div>
 
-                  <div class="ticket-extra-row" style="margin-top:12px;">
-                    <div class="form-group" id="party-form-group">
-                      <label id="party-label">Khách hàng / Đối tác</label>
-                      <div class="dropdown-wrapper" id="customer-input-wrap">
-                        <input class="input-control" id="ticket-customer" list="customer-list" placeholder="Chọn chuyến trước..." oninput="checkQuickCreate('customer')">
-                        <datalist id="customer-list"></datalist>
-                        <div class="quick-create-row" id="quick-customer" style="display:none;"><span>Không có khách hàng khớp.</span><button class="btn btn-primary btn-sm" onclick="openQuickCreateCustomer()">+ Tạo nhanh</button></div>
-                      </div>
-                      <div id="team-select-wrap" style="display:none;">
-                        <div class="readonly-source-box" id="ticket-teams-readonly">Không có</div>
-                        <span class="field-help-text">Đội lấy từ thông tin chuyến, chỉ hiển thị và không cho sửa tại trạm cân.</span>
+                  <div class="ticket-control-row">
+                    <div class="flow-control-card ticket-type-radio-card">
+                      <label>Loại phiếu</label>
+                      <div class="native-radio-list" role="radiogroup" aria-label="Loại phiếu">
+                        <div class="native-radio-item">
+                          <input type="radio" id="ticket-type-company" name="ticket-type-radio" value="NhapCongTy" onchange="setTicketType(this.value)" checked>
+                          <label for="ticket-type-company">Nhập hàng Công ty</label>
+                        </div>
+                        <div class="native-radio-item">
+                          <input type="radio" id="ticket-type-outside" name="ticket-type-radio" value="NhapNgoai" onchange="setTicketType(this.value)">
+                          <label for="ticket-type-outside">Nhập hàng Mua ngoài</label>
+                        </div>
+                        <div class="native-radio-item">
+                          <input type="radio" id="ticket-type-export" name="ticket-type-radio" value="XuatHang" onchange="setTicketType(this.value)">
+                          <label for="ticket-type-export">Xuất hàng</label>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-group"><label>Ghi chú phiếu cân</label><input class="input-control" id="ticket-note" placeholder="Ghi chú phiếu cân..."></div>
-                  </div>
 
-                  <div class="ticket-control-row" style="margin-top:12px; grid-template-columns:190px; justify-content:end;">
-                    <div class="form-group offset-field" style="margin-bottom:0;">
+                    <div class="form-group date-field ticket-date-field">
+                      <label>Ngày tạo phiếu</label>
+                      <input type="datetime-local" class="input-control" id="ticket-date" onchange="changeTicketDate()">
+                    </div>
+
+                    <div class="form-group offset-field">
                       <label>Bù trừ</label>
                       <div class="input-with-unit">
                         <input type="number" class="input-control" id="driver-offset-kg" min="0" placeholder="140" oninput="updateOffsetInput()">
@@ -3661,7 +3368,25 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="ticket-extra-row">
+                    <div class="form-group">
+                      <label id="party-label">Khách hàng / Đối tác</label>
+                      <div class="dropdown-wrapper" id="customer-input-wrap">
+                        <input class="input-control" id="ticket-customer" list="customer-list" placeholder="Gõ tên/mã khách hàng..." oninput="checkQuickCreate('customer')">
+                        <datalist id="customer-list"></datalist>
+                        <div class="quick-create-row" id="quick-customer" style="display:none;"><span>Không có khách hàng khớp.</span><button class="btn btn-primary btn-sm" onclick="openQuickCreateCustomer()">+ Tạo nhanh</button></div>
+                      </div>
+                      <div id="team-select-wrap" style="display:none;">
+                        <div class="team-picker" id="ticket-teams"></div>
+                        <span class="field-help-text">Chọn một hoặc nhiều đội cho cùng một phiếu.</span>
+                      </div>
+                    </div>
+                    <div class="form-group"><label>Ghi chú</label><input class="input-control" id="ticket-note" placeholder="Ghi chú phiếu cân..."></div>
+                  </div>
                 </div>
+
+                
 
                 <div class="card ticket-detail-card">
                   <div class="card-title">📌 Chi tiết cân</div>
@@ -3728,7 +3453,6 @@
           <div class="form-group" style="margin-bottom:0;"><label>Đến ngày</label><input class="input-control" id="report-date-to" type="date" onchange="clearReportRangeBadge(); renderReport();"></div>
           <div class="form-group" style="margin-bottom:0;"><label>Loại phiếu</label><select class="input-control" id="report-type-filter" onchange="renderReport()"><option value="All">Tất cả</option><option value="NhapCongTy">Nhập hàng Công ty</option><option value="NhapNgoai">Nhập hàng Mua ngoài</option><option value="XuatHang">Xuất hàng</option></select></div>
           <div class="form-group" style="margin-bottom:0;"><label>Trạng thái</label><select class="input-control" id="report-status-filter" onchange="renderReport()"><option value="All">Tất cả</option><option value="HoanThanh">Hoàn thành</option><option value="DaHuy">Đã hủy</option></select></div>
-          <div class="form-group" style="margin-bottom:0;"><label>Xe</label><select class="input-control" id="report-vehicle-filter" onchange="renderReport()"><option value="All">Tất cả xe</option></select></div>
           <button class="btn btn-primary report-apply-btn" type="button" onclick="renderReport()">Lọc Dữ Liệu</button>
         </div>
         <div class="table-toolbar-container">
@@ -3736,74 +3460,12 @@
           <div class="export-buttons-group"><button class="btn-export-pill">Copy</button><button class="btn-export-pill">Excel</button><button class="btn-export-pill">PDF</button><button class="btn-export-pill" onclick="window.print()">Print</button><button class="btn-export-pill">CSV</button></div>
           <div class="search-table-input-group">Tìm kiếm:<input id="report-search" placeholder="Nhập tìm kiếm..." oninput="renderReport()"></div>
         </div>
-        <div class="table-container"><table class="data-table"><thead><tr><th>Số Phiếu</th><th>Chuyến</th><th>Ngày Cân</th><th>Đội / Khách hàng / Đối tác</th><th>Biển Số Xe</th><th>Loại hàng</th><th>Trọng Lượng Hàng</th><th>Loại phiếu</th><th>Trạng thái</th><th>Hành động</th></tr></thead><tbody id="report-body"></tbody><tfoot><tr><th>Số Phiếu</th><th>Chuyến</th><th>Ngày Cân</th><th>Đội / Khách hàng / Đối tác</th><th>Biển Số Xe</th><th>Loại hàng</th><th>Trọng Lượng Hàng</th><th>Loại phiếu</th><th>Trạng thái</th><th>Hành động</th></tr></tfoot></table></div>
+        <div class="table-container"><table class="data-table"><thead><tr><th>Số Phiếu</th><th>Ngày Cân</th><th>Đội / Khách hàng / Đối tác</th><th>Biển Số Xe</th><th>Loại hàng</th><th>Trọng Lượng Hàng</th><th>Loại phiếu</th><th>Trạng thái</th><th>Hành động</th></tr></thead><tbody id="report-body"></tbody><tfoot><tr><th>Số Phiếu</th><th>Ngày Cân</th><th>Đội / Khách hàng / Đối tác</th><th>Biển Số Xe</th><th>Loại hàng</th><th>Trọng Lượng Hàng</th><th>Loại phiếu</th><th>Trạng thái</th><th>Hành động</th></tr></tfoot></table></div>
         <div class="table-pagination-container"><span>Hiển thị 1 tới 10 của 10 dữ liệu</span><div class="pagination-buttons"><button class="btn-pagination" disabled>Trước</button><button class="btn-pagination active">1</button><button class="btn-pagination" disabled>Sau</button></div></div>
       </div>
     </div>
 
   </main>
-
-
-  <div class="modal-overlay" id="trip-modal">
-    <div class="modal-content modal-xl">
-      <div class="modal-header">
-        <div>
-          <h3 class="modal-title">🚚 Chọn chuyến xe trong ngày</h3>
-          <div class="modal-subtitle" id="trip-modal-subtitle">Danh sách chuyến có sẵn hoặc phiếu tạo mới tại trạm cân</div>
-        </div>
-        <button class="modal-close" onclick="closeModal('trip-modal')">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="trip-list-toolbar">
-          <div><b id="trip-modal-plate">--</b> · <span id="trip-modal-date">--</span></div>
-          <button class="btn btn-primary btn-sm" onclick="openManualTripModal()">+ Tạo phiếu mới</button>
-        </div>
-        <div class="trip-list" id="trip-list"></div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" onclick="closeModal('trip-modal')">Đóng</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="manual-trip-modal">
-    <div class="modal-content modal-lg">
-      <div class="modal-header">
-        <div>
-          <h3 class="modal-title">➕ Tạo phiếu mới</h3>
-          <div class="modal-subtitle">Dùng khi xe đã tới nhưng chưa có chuyến trong danh sách.</div>
-        </div>
-        <button class="modal-close" onclick="closeModal('manual-trip-modal')">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="alert-banner alert-banner-warning" style="margin-bottom:14px;">⚠️ Phiếu mới sẽ được dùng để cân ngay cho xe đang chọn.</div>
-        <div class="grid-2">
-          <div class="form-group">
-            <label>Loại phiếu</label>
-            <div class="manual-trip-type-list" role="radiogroup">
-              <label class="manual-trip-type-item"><input type="radio" name="manual-trip-type" value="NhapCongTy" checked onchange="renderManualTripFields()"> Nhập Công ty</label>
-              <label class="manual-trip-type-item"><input type="radio" name="manual-trip-type" value="NhapNgoai" onchange="renderManualTripFields()"> Mua ngoài</label>
-              <label class="manual-trip-type-item"><input type="radio" name="manual-trip-type" value="XuatHang" onchange="renderManualTripFields()"> Xuất hàng</label>
-            </div>
-          </div>
-          <div>
-            <div class="form-group" id="manual-customer-wrap">
-              <label>Khách hàng</label>
-              <input class="input-control" id="manual-customer" list="customer-list" placeholder="Chọn khách nếu là mua ngoài/xuất">
-            </div>
-            <div class="form-group">
-              <label>Ghi chú</label>
-              <input class="input-control" id="manual-note" placeholder="VD: Xe đã tới nhưng chưa có chuyến trong danh sách">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" onclick="closeModal('manual-trip-modal')">Đóng</button>
-        <button class="btn btn-primary" onclick="createManualTrip()">Tạo phiếu và chọn</button>
-      </div>
-    </div>
-  </div>
 
   <div class="modal-overlay" id="quick-modal">
     <div class="modal-content modal-sm">
@@ -3877,7 +3539,6 @@
       <div class="modal-body">
         <div class="grid-2" style="font-size:13px; margin-bottom:14px;">
           <div><b>Số phiếu:</b> <span id="detail-code">--</span></div>
-          <div><b>Chuyến:</b> <span id="detail-trip">--</span></div>
           <div><b>Ngày cân:</b> <span id="detail-date">--</span></div>
           <div><b>Đội / Khách hàng / Đối tác:</b> <span id="detail-customer">--</span></div>
           <div><b>Biển số xe:</b> <span id="detail-plate">--</span></div>
@@ -3897,81 +3558,26 @@
     const todayISO = () => new Date().toISOString().slice(0,10);
     const nowDateTimeLocal = () => { const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16); };
     const dateOnly = val => (val || todayISO()).slice(0,10);
+    const toDateTimeLocal = val => { if(!val) return nowDateTimeLocal(); val=String(val); return val.includes('T') ? val.slice(0,16) : val + 'T' + nowDateTimeLocal().slice(11,16); };
     const dateVN = iso => iso ? dateOnly(iso).split('-').reverse().join('/') : '--';
-    const dateTimeVN = val => {
-      if(!val) return '--';
-      const s = String(val).includes('T') ? String(val) : String(val) + 'T00:00';
-      const dt = new Date(s);
-      return dt.toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit',year:'numeric'});
-    };
+    const dateTimeVN = val => { if(!val) return '--'; const dt = new Date(toDateTimeLocal(val)); return dt.toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit',year:'numeric'}); };
+    let vehicleFilter = 'NhapXuat', selectedVehicleId = null, selectedType = 'NhapCongTy', pinValue = '', pinAction = '', reportRowsCache = [];
 
-    const customers = ['KH001 - Công ty Cổ phần EcoTech', 'KH002 - Hộ thu mua Thanh Bình', 'KH003 - Nhà máy chế biến mủ 1', 'KH004 - Cao su Hưng Thịnh'];
-    const products = ['Mủ nước', 'Mủ đông', 'Mủ chén', 'Mủ dây', 'Mủ tạp', 'Cao su thành phẩm'];
-
-    let selectedDate = todayISO();
-    let vehicleFilter = 'HasTrip';
-    let selectedVehicleId = null;
-    let selectedTripId = null;
-    let pinValue = '', pinAction = '', reportRowsCache = [];
-
-    function buildTicketFromTrip(trip){
-      return {
-        code: null,
-        date: trip.date,
-        dateTime: nowDateTimeLocal(),
-        type: trip.type,
-        customer: trip.customer || '',
-        teams: [...(trip.teams || [])],
-        note: trip.note || '',
-        offsetKg: 140,
-        status: 'Draft',
-        weighings: [],
-        tripId: trip.id
-      };
-    }
-
+    const customers = ['KH001 - Công ty Cổ phần EcoTech', 'KH002 - Hộ thu mua Thanh Bình', 'KH003 - Nhà máy chế biến mủ 1'];
+    const teams = ['Đội 1', 'Đội 2', 'Đội 3', 'Đội Khai thác A', 'Đội Vận chuyển'];
+    const products = ['Mủ nước', 'Mủ đông', 'Mủ tạp', 'Cao su thành phẩm'];
     const vehicles = [
-      {
-        id: 1, plate:'70C-198.69', driver:'Nguyễn Văn Lợi', tare:4170,
-        trips:[
-          {id:'TM-501', entity:'TransportMaterial', entityId:501, source:'Có sẵn', isEudr:true, code:'TM-260702-001', codeCustom:'NK-001', number:1, date:todayISO(), timeStart:'07:20', type:'NhapCongTy', materialType:0, teams:['Đội 1','Đội 3'], customer:'', factory:'Nhà máy 1', status:'DangCan', isCustomerEditable:false, note:'Thu gom mủ nước nội bộ'},
-          {id:'TM-502', entity:'TransportMaterial', entityId:502, source:'Có sẵn', isEudr:true, code:'TM-260702-002', codeCustom:'NK-002', number:2, date:todayISO(), timeStart:'10:10', type:'NhapNgoai', materialType:1, teams:[], customer:'KH002 - Hộ thu mua Thanh Bình', factory:'Nhà máy 1', status:'ChuaCan', isCustomerEditable:true, note:'Mua ngoài từ farmer'}
-        ]
-      },
-      {
-        id: 2, plate:'70H-456.12', driver:'Trần Minh Tâm', tare:4120,
-        trips:[
-          {id:'TO-701', entity:'TransportOrder', entityId:701, source:'Có sẵn', isEudr:true, code:'TO-260702-001', codeCustom:'XK-001', number:1, date:todayISO(), timeStart:'09:00', type:'XuatHang', product:'Cao su thành phẩm', teams:[], customer:'KH003 - Nhà máy chế biến mủ 1', factory:'Nhà máy 1', status:'ChuaCan', isCustomerEditable:true, note:'Xuất hàng theo đơn'}
-        ]
-      },
-      {
-        id: 3, plate:'61C-909.88', driver:'Lê Quốc Bảo', tare:3500,
-        trips:[
-          {id:'TM-503', entity:'TransportMaterial', entityId:503, source:'Có sẵn', isEudr:true, code:'TM-260702-003', codeCustom:'NK-003', number:1, date:todayISO(), timeStart:'08:05', type:'NhapNgoai', materialType:1, teams:[], customer:'KH004 - Cao su Hưng Thịnh', factory:'Nhà máy 2', status:'DangCan', isCustomerEditable:true, note:'Mủ mua ngoài', ticket:{code:'PHC-203', date:todayISO(), dateTime:todayISO()+'T08:08', type:'NhapNgoai', customer:'KH004 - Cao su Hưng Thịnh', teams:[], note:'Mủ mua ngoài', offsetKg:140, status:'DangThucHien', tripId:'TM-503', weighings:[{product:'Xe vào đầy', weight:9200, time:'08:08'}]}}
-        ]
-      },
-      {
-        id: 4, plate:'51D-777.01', driver:'Phạm Hữu Khang', tare:0,
-        trips:[]
-      },
-      {
-        id: 5, plate:'60C-222.36', driver:'Võ Minh Tín', tare:4050,
-        trips:[
-          {id:'TO-702', entity:'TransportOrder', entityId:702, source:'Có sẵn', isEudr:true, code:'TO-260702-002', codeCustom:'XK-002', number:2, date:todayISO(), timeStart:'11:30', type:'XuatHang', product:'Cao su thành phẩm', teams:[], customer:'KH001 - Công ty Cổ phần EcoTech', factory:'Nhà máy 1', status:'DangCan', isCustomerEditable:true, note:'Xuất hàng nội bộ', ticket:{code:'PHC-204', date:todayISO(), dateTime:todayISO()+'T11:35', type:'XuatHang', customer:'KH001 - Công ty Cổ phần EcoTech', teams:[], note:'Xuất hàng nội bộ', offsetKg:140, status:'DangThucHien', tripId:'TO-702', weighings:[{product:'Xe vào rỗng', weight:4050, time:'11:35'},{product:'Cao su thành phẩm', weight:11840, time:'11:48'}]}}
-        ]
-      },
-      {
-        id: 6, plate:'72C-888.55', driver:'Đặng Quốc Hải', tare:3980,
-        trips:[
-          {id:'TM-504', entity:'TransportMaterial', entityId:504, source:'Có sẵn', isEudr:true, code:'TM-260701-004', codeCustom:'NK-004', number:1, date:'2026-07-01', timeStart:'15:10', type:'NhapCongTy', materialType:0, teams:['Đội 2'], customer:'', factory:'Nhà máy 1', status:'HoanThanh', isCustomerEditable:false, note:'Chuyến hôm qua'}
-        ]
-      }
+      {id:1, plate:'70C-198.69', driver:'Nguyễn Văn Lợi', tare:4170, openTicket:{code:'PHC-001', customer:'Đội 1, Đội 3', type:'NhapCongTy', date:'2026-07-01', tripNo:2, note:'Cân mủ nội bộ', offsetKg:140, status:'DangThucHien', weighings:[{product:null, weight:12860, time:'08:15'}]}},
+      {id:2, plate:'70H-456.12', driver:'Trần Minh Tâm', tare:4120, openTicket:null},
+      {id:3, plate:'61C-909.88', driver:'Lê Quốc Bảo', tare:3500, openTicket:{code:'PHC-002', customer:'KH002 - Hộ thu mua Thanh Bình', type:'NhapNgoai', date:'2026-07-01', tripNo:1, note:'Mua mủ từ đối tác', offsetKg:140, status:'DangThucHien', weighings:[{product:null, weight:7800, time:'09:05'},{product:'Mủ nước', weight:3200, time:'09:18'}]}},
+      {id:4, plate:'51D-777.01', driver:'Phạm Hữu Khang', tare:0, openTicket:null},
+      {id:5, plate:'60C-222.36', driver:'Võ Minh Tín', tare:4050, openTicket:{code:'PHC-003', customer:'KH003 - Nhà máy chế biến mủ 1', type:'XuatHang', date:'2026-07-01', tripNo:1, note:'Xuất hàng thành phẩm', offsetKg:140, status:'DangThucHien', weighings:[{product:null, weight:4050, time:'10:10'}]}},
+      {id:6, plate:'72C-888.55', driver:'Đặng Quốc Hải', tare:3980, openTicket:{code:'PHC-004', customer:'KH003 - Nhà máy chế biến mủ 1', type:'XuatHang', date:'2026-07-01', tripNo:2, note:'Xuất hàng cho đại lý', offsetKg:140, status:'DangThucHien', weighings:[{product:null, weight:3980, time:'10:35'},{product:'Cao su thành phẩm', weight:11280, time:'10:48'}]}}
     ];
-
     const history = [
-      {code:'PHC-0007', tripNumber:2, tripCode:'TO-260630-002', source:'Có sẵn', date:'30/06/2026 16:20', dateISO:'2026-06-30', type:'XuatHang', customer:'KH003 - Nhà máy chế biến mủ 1', teams:[], plate:'61C-909.88', net:18240, status:'HoanThanh', product:'Cao su thành phẩm'},
-      {code:'PHC-0006', tripNumber:1, tripCode:'TM-260701-001', source:'Có sẵn', date:'01/07/2026 07:45', dateISO:'2026-07-01', type:'NhapCongTy', customer:'Đội 1, Đội 2', teams:['Đội 1','Đội 2'], plate:'70C-198.69', net:21660, status:'HoanThanh', product:'Mủ nước'},
-      {code:'PHC-0005', tripNumber:1, tripCode:'MAN-260629-001', source:'Tạo mới tại trạm cân', date:'29/06/2026 15:01', dateISO:'2026-06-29', type:'NhapNgoai', customer:'KH002 - Hộ thu mua Thanh Bình', teams:[], plate:'70H-456.12', net:0, status:'DaHuy', product:'--'}
+      {code:'PHC-0007', date:'30/06/2026 16:20', dateISO:'2026-06-30', type:'Xuất hàng', customer:'KH003 - Nhà máy chế biến mủ 1', plate:'61C-909.88', net:18240, status:'HoanThanh', product:'Cao su thành phẩm'},
+      {code:'PHC-0006', date:'01/07/2026 07:45', dateISO:'2026-07-01', type:'Nhập hàng Công ty', customer:'Đội 1, Đội 2', plate:'70C-198.69', net:21660, status:'HoanThanh', product:'Mủ nước'},
+      {code:'PHC-0005', date:'29/06/2026 15:01', dateISO:'2026-06-29', type:'Nhập hàng Mua ngoài', customer:'KH002 - Hộ thu mua Thanh Bình', plate:'70H-456.12', net:0, status:'DaHuy', product:'--'}
     ];
 
     function switchTab(tab){
@@ -3982,82 +3588,37 @@
       if(tab==='reports') renderReport();
     }
     function showToast(type, msg){
-      const root=document.getElementById('toast-root');
-      const el=document.createElement('div');
-      el.className='toast toast-'+(type==='error'?'danger':type);
-      el.innerHTML='<span class="toast-icon">'+(type==='success'?'✅':type==='warning'?'⚠️':'ℹ️')+'</span><span>'+msg+'</span>';
+      const root=document.getElementById('toast-root'); const el=document.createElement('div');
+      el.className='toast toast-'+(type==='error'?'danger':type); el.innerHTML='<span class="toast-icon">'+(type==='success'?'✅':type==='warning'?'⚠️':'ℹ️')+'</span><span>'+msg+'</span>';
       root.appendChild(el); setTimeout(()=>el.remove(),3200);
     }
     function normalizeType(t){
-      if(t==='NoiBo' || t==='Can mu CTY' || t==='Nhập hàng Công ty' || t==='Công ty') return 'NhapCongTy';
-      if(t==='MuaVao' || t==='Nhập hàng Mua ngoài' || t==='Mua ngoài') return 'NhapNgoai';
+      if(t==='NoiBo' || t==='Can mu CTY' || t==='Nhập hàng Công ty' || t==='Nhập hàng Công ty' || t==='Công ty') return 'NhapCongTy';
+      if(t==='MuaVao' || t==='Nhập hàng Mua ngoài' || t==='Nhập hàng Mua ngoài' || t==='Mua ngoài') return 'NhapNgoai';
       if(t==='BanRa' || t==='Xuat hang' || t==='Xuất hàng') return 'XuatHang';
       return t || 'NhapCongTy';
     }
     function flowOf(t){ return normalizeType(t)==='XuatHang' ? 'XuatHang' : 'NhapHang'; }
     function typeLabel(t){
-      t=normalizeType(t);
+      t = normalizeType(t);
       return t==='XuatHang' ? 'Xuất hàng' : (t==='NhapNgoai' ? 'Nhập hàng Mua ngoài' : 'Nhập hàng Công ty');
     }
-    function sourceLabel(t){ t=normalizeType(t); return t==='NhapNgoai' ? 'Mua ngoài' : (t==='NhapCongTy' ? 'Công ty' : 'Xuất hàng'); }
+    function flowLabel(t){ return flowOf(t)==='XuatHang' ? 'Xuất hàng' : 'Nhập hàng'; }
+    function sourceLabel(t){ t=normalizeType(t); return t==='NhapNgoai'?'Mua ngoài':t==='NhapCongTy'?'Công ty':'Xuất hàng'; }
     function firstWeighLabel(t){ return flowOf(t?.type)==='XuatHang' ? 'Xe vào rỗng' : 'Xe vào đầy'; }
-    function entityLabel(trip){ return trip?.entity==='TransportOrder' ? 'Phiếu xuất' : 'Phiếu nhập'; }
-    function tripStatusLabel(trip){
-      const ticket=trip?.ticket;
-      if(ticket?.status==='HoanThanh') return 'Đã hoàn thành';
-      if(ticket?.status==='DaHuy') return 'Đã hủy';
-      if(ticket && (ticket.status==='DangThucHien' || ticket.weighings?.length)) return 'Đang cân';
-      return 'Chưa cân';
-    }
-    function tripBadgeClass(trip){
-      const s=tripStatusLabel(trip);
-      return s==='Đã hoàn thành' ? 'badge-green' : s==='Đã hủy' ? 'badge-red' : s==='Đang cân' ? 'badge-yellow' : 'badge-blue';
-    }
+    function isStartedTicket(t){ return !!(t && (t.code || (t.weighings||[]).length || t.status==='DangThucHien' || t.status==='HoanThanh' || t.status==='DaHuy')); }
     function getVehicle(){ return vehicles.find(v=>v.id===selectedVehicleId); }
-    function getTrip(){ return getVehicle()?.trips?.find(t=>t.id===selectedTripId) || null; }
-    function getTicket(){ const trip=getTrip(); return trip?.ticket || null; }
-    function isClosedStatus(status){ return ['HoanThanh','DaHuy'].includes(status); }
-    function isReadonlyTrip(trip, ticket){ return isClosedStatus(ticket?.status) || isClosedStatus(trip?.status); }
-    function tripSortValue(t, fallbackIndex=0){
-      const n=Number(t?.number||0);
-      if(n) return n;
-      return 100000 + fallbackIndex;
-    }
-    function isTripClosed(trip){ return isClosedStatus(trip?.ticket?.status) || isClosedStatus(trip?.status); }
-    function previousBlockingTrip(v, currentTrip){
-      if(!v || !currentTrip || isReadonlyTrip(currentTrip,currentTrip.ticket)) return null;
-      const dated=tripsOfDate(v).map((trip,index)=>({trip,index})).sort((a,b)=>tripSortValue(a.trip,a.index)-tripSortValue(b.trip,b.index));
-      const currentIndex=dated.findIndex(x=>x.trip.id===currentTrip.id);
-      if(currentIndex<=0) return null;
-      const previous=dated.slice(0,currentIndex).find(x=>!isTripClosed(x.trip));
-      return previous?.trip || null;
-    }
-    function hasUnfinishedTripInDate(v){ return tripsOfDate(v).some(trip=>!isTripClosed(trip)); }
-    function makeReadonlyTicketFromTrip(trip){
-      const t=buildTicketFromTrip(trip);
-      t.status=trip.status==='DaHuy'?'DaHuy':'HoanThanh';
-      t.code=trip.codeCustom || trip.code || 'Phiếu đã hoàn thành';
-      t.note=trip.note || '';
-      return t;
-    }
-    function tripsOfDate(v){ return (v?.trips||[]).filter(t=>t.date===selectedDate); }
-    function selectedPartyValue(trip,ticket){
-      if(normalizeType(trip?.type)==='NhapCongTy') return (trip?.teams||[]).join(', ') || 'Không có';
-      return (ticket?.customer || trip?.customer || '').trim();
-    }
+    function getTicket(){ return getVehicle()?.openTicket; }
     function offsetKg(t){
       if(!t) return 140;
-      if(t.offsetKg !== undefined && t.offsetKg !== null && t.offsetKg !== '') return Math.max(0, Number(t.offsetKg)||0);
+      if(t.offsetKg !== undefined && t.offsetKg !== null && t.offsetKg !== '') return Math.max(0, Number(t.offsetKg) || 0);
       return 140;
     }
     function updateOffsetInput(){
-      const trip=getTrip(), t=getTicket(); if(!t) return;
-      if(isReadonlyTrip(trip,t)) return;
+      const t=getTicket(); if(!t) return;
       t.offsetKg = Math.max(0, Number(document.getElementById('driver-offset-kg')?.value || 0));
       renderTotals(t);
     }
-    function grossGoods(t){ return weightRows(t).reduce((s,w)=>s+Math.max(0,w.goods||0),0); }
-    function netGoods(t){ return Math.max(0, grossGoods(t) - offsetKg(t)); }
     function renderTotals(t){
       const gross=grossGoods(t);
       const offset=offsetKg(t);
@@ -4066,65 +3627,42 @@
       document.getElementById('net-total').textContent=fmt(Math.max(0,gross-offset));
     }
     function weightRows(t){
-      const rows=[];
-      const isExport=flowOf(t?.type)==='XuatHang';
+      const rows = [];
+      const isExport = flowOf(t?.type)==='XuatHang';
       (t?.weighings||[]).forEach((w,i,arr)=>{
-        const total=Number(w.weight||0);
-        const prev=i===0 ? null : Number(arr[i-1].weight||0);
-        const rawGoods=i===0 ? 0 : (isExport ? total-prev : prev-total);
-        rows.push({...w,index:i+1,total,goods:i===0?0:Math.abs(rawGoods),rawGoods});
+        const total = Number(w.weight||0);
+        const prev = i===0 ? null : Number(arr[i-1].weight||0);
+        const rawGoods = i===0 ? 0 : (isExport ? total - prev : prev - total);
+        const goods = i===0 ? 0 : Math.abs(rawGoods);
+        rows.push({...w, index:i+1, total, goods});
       });
       return rows;
     }
-
-    function changeOperationDate(){
-      selectedDate=document.getElementById('operation-date')?.value || todayISO();
-      selectedTripId=null;
-      renderVehicles(true);
-      renderTicket();
+    function grossGoods(t){ return weightRows(t).reduce((s,w)=>s+Math.max(0, w.goods||0),0); }
+    function netGoods(t){ return Math.max(0, grossGoods(t) - offsetKg(t)); }
+    function countTicketsInDay(plate, iso, currentTicket){
+      const fromHistory = plate ? history.filter(h=>h.plate===plate && h.dateISO===iso).length : 0;
+      const fromOpen = plate ? vehicles.filter(v=>v.plate===plate && v.openTicket && v.openTicket!==currentTicket && v.openTicket.date===iso && v.openTicket.code).length : 0;
+      return fromHistory + fromOpen;
     }
+    function ensureTripNo(v,t){
+      if(!t.date) t.date=todayISO();
+      if(!t.tripNo) t.tripNo = countTicketsInDay(v.plate, t.date, t) + 1;
+      return t.tripNo;
+    }
+    function tripText(v,t){ return 'Chuyến '+ensureTripNo(v,t)+' trong ngày'; }
+
     function setVehicleFilter(f){
       vehicleFilter=f;
       document.querySelectorAll('.vehicle-filter-tabs .btn-filter').forEach(b=>b.classList.toggle('active',b.dataset.filter===f));
       renderVehicles(true);
     }
     function clearSelectedVehicleView(){
-      selectedVehicleId=null; selectedTripId=null;
-      document.getElementById('empty-ticket-state').style.display='flex';
-      document.getElementById('ticket-workspace').style.display='none';
-    }
-    function vehicleTripSummaryHtml(trips){
-      if(!trips.length) return '<span class="vehicle-summary-chip">Chưa có chuyến hôm nay</span>';
-      const typeCounts={NhapCongTy:0,NhapNgoai:0,XuatHang:0};
-      const statusCounts={ChuaCan:0,DangCan:0,HoanThanh:0,DaHuy:0};
-      trips.forEach(t=>{
-        const type=normalizeType(t.type);
-        typeCounts[type]=(typeCounts[type]||0)+1;
-        const st=t.ticket?.status==='DangThucHien'?'DangCan':(t.status||'ChuaCan');
-        const key=st==='DangThucHien'?'DangCan':st;
-        statusCounts[key]=(statusCounts[key]||0)+1;
-      });
-      const typeLabels=[];
-      if(typeCounts.NhapCongTy) typeLabels.push(['Nhập CTY',typeCounts.NhapCongTy]);
-      if(typeCounts.NhapNgoai) typeLabels.push(['Mua ngoài',typeCounts.NhapNgoai]);
-      if(typeCounts.XuatHang) typeLabels.push(['Xuất',typeCounts.XuatHang]);
-      const statusLabels=[];
-      if(statusCounts.DangCan) statusLabels.push(['Đang cân',statusCounts.DangCan]);
-      if(statusCounts.ChuaCan) statusLabels.push(['Chưa cân',statusCounts.ChuaCan]);
-      if(statusCounts.HoanThanh) statusLabels.push(['Xong',statusCounts.HoanThanh]);
-      if(statusCounts.DaHuy) statusLabels.push(['Hủy',statusCounts.DaHuy]);
-      return `<div class="vehicle-summary">${typeLabels.map(x=>`<span class="vehicle-summary-chip strong">${x[0]}: ${x[1]}</span>`).join('')}${statusLabels.map(x=>`<span class="vehicle-summary-chip">${x[0]}: ${x[1]}</span>`).join('')}</div>`;
-    }
-    function pickDefaultTrip(v){
-      const trips=tripsOfDate(v);
-      if(!trips.length) return null;
-      const reversed=[...trips].reverse();
-      const ongoing=reversed.find(t=>t.ticket?.status==='DangThucHien' || t.status==='DangCan');
-      const open=reversed.find(t=>{
-        const ticketStatus=t.ticket?.status;
-        return !['HoanThanh','DaHuy'].includes(t.status) && !['HoanThanh','DaHuy'].includes(ticketStatus);
-      });
-      return ongoing || open || trips[trips.length-1];
+      selectedVehicleId=null;
+      const empty=document.getElementById('empty-ticket-state');
+      const workspace=document.getElementById('ticket-workspace');
+      if(empty) empty.style.display='flex';
+      if(workspace) workspace.style.display='none';
     }
     function renderVehicles(autoSelectFirst=false){
       const input=document.getElementById('vehicle-search');
@@ -4134,307 +3672,219 @@
         const driver=(v.driver||'').toUpperCase();
         return !q || plate.includes(q) || plate.replace(/\D/g,'').endsWith(q) || driver.includes(q);
       });
+      // Khi có nhập tìm kiếm thì tìm trên toàn bộ danh sách xe, không bị giới hạn bởi tab lọc hiện tại.
+      // Chỉ khi ô tìm kiếm trống mới áp dụng bộ lọc Nhập/Xuất, Nhập hàng, Xuất hàng, Đang trống.
       if(!q && vehicleFilter){
-        if(vehicleFilter==='NoTrip') list=list.filter(v=>tripsOfDate(v).length===0);
-        if(vehicleFilter==='HasTrip') list=list.filter(v=>tripsOfDate(v).length>0);
+        if(vehicleFilter==='PhieuMoi'){
+          list=list.filter(v=>!isStartedTicket(v.openTicket));
+        } else if(vehicleFilter==='NhapXuat'){
+          list=list.filter(v=>isStartedTicket(v.openTicket));
+        } else {
+          list=list.filter(v=>isStartedTicket(v.openTicket) && flowOf(v.openTicket.type)===vehicleFilter);
+        }
+      }
+      if(autoSelectFirst){
+        if(list.length){
+          if(selectedVehicleId!==list[0].id){
+            selectVehicle(list[0].id);
+            return;
+          }
+          document.getElementById('empty-ticket-state').style.display='none';
+          document.getElementById('ticket-workspace').style.display='block';
+          renderTicket();
+        } else {
+          clearSelectedVehicleView();
+        }
       }
       document.getElementById('no-vehicle-quick').style.display=q && list.length===0 ? 'flex':'none';
       const html=list.map(v=>{
-        const trips=tripsOfDate(v);
-        const active=v.id===selectedVehicleId;
-        const hasImport=trips.some(t=>flowOf(t.type)==='NhapHang');
-        const hasExport=trips.some(t=>flowOf(t.type)==='XuatHang');
-        const flowClass=hasExport&&!hasImport?'flow-export':hasImport?'flow-import':'flow-empty no-trip-today';
-        const statusCounts = trips.length ? `${trips.length} chuyến` : 'Chưa có chuyến';
-        const summaryHtml = vehicleTripSummaryHtml(trips);
-        const badge = trips.length ? `<span class="trip-count-chip">${statusCounts}</span>` : `<span class="badge badge-grey">Trống</span>`;
-        return `<div class="vehicle-card ${active?'active':''} ${flowClass}" onclick="selectVehicle(${v.id})"><div class="ticket-card-header"><span class="vehicle-plate">${v.plate || 'Chưa có biển số'}</span>${badge}</div><div class="vehicle-meta">${v.driver || 'Chưa cập nhật tài xế'}</div><div class="ticket-card-body" style="margin-top:8px;"><span>${summaryHtml}</span></div></div>`;
-      }).join('') || '<div class="empty-state"><div class="empty-title">Không có xe phù hợp</div><div class="empty-desc">Bấm tạo nhanh để thêm xe, sau đó tạo phiếu mới nếu xe chưa có chuyến.</div></div>';
+        const hasTicket=isStartedTicket(v.openTicket);
+        const flow=hasTicket ? flowOf(v.openTicket.type) : '';
+        const flowClass=hasTicket ? (flow==='XuatHang' ? 'flow-export' : 'flow-import') : 'flow-empty';
+        const badgeHtml=hasTicket ? `<span class="badge status-badge-flow">${flowLabel(v.openTicket.type)}</span>` : '';
+        const line=hasTicket ? `${v.openTicket.code || 'Chưa sinh mã'} · ${tripText(v,v.openTicket)} · ${typeLabel(v.openTicket.type)}` : '';
+        const statusHtml='';
+        return `<div class="vehicle-card ${v.id===selectedVehicleId?'active':''} ${hasTicket?'has-open':''} ${flowClass}" onclick="selectVehicle(${v.id})"><div class="ticket-card-header"><span class="vehicle-plate">${v.plate || 'Chưa có biển số'}</span>${badgeHtml}</div><div class="vehicle-meta">${v.driver || 'Chưa cập nhật tài xế'}</div><div class="ticket-card-body" style="margin-top:8px;"><span>${line}</span>${statusHtml}</div></div>`;
+      }).join('') || '<div class="empty-state"><div class="empty-title">Không có xe phù hợp</div><div class="empty-desc">Bấm tạo nhanh để thêm xe hoặc tài xế.</div></div>';
       document.getElementById('vehicle-list').innerHTML=html;
-      if(autoSelectFirst && list.length) selectVehicle(list[0].id);
     }
     function vehicleSearchEnter(e){
-      if(e.key!=='Enter') return;
-      const q=e.target.value.trim().toUpperCase();
-      const found=vehicles.find(v=>{
-        const plate=(v.plate||'').toUpperCase();
-        const driver=(v.driver||'').toUpperCase();
-        return plate.includes(q) || plate.replace(/\D/g,'').endsWith(q) || driver.includes(q);
-      });
-      found ? selectVehicle(found.id) : openQuickCreateVehicle();
+      if(e.key==='Enter'){
+        const q=e.target.value.trim().toUpperCase();
+        const found=vehicles.find(v=>{
+          const plate=(v.plate||'').toUpperCase();
+          const driver=(v.driver||'').toUpperCase();
+          return plate.includes(q) || plate.replace(/\D/g,'').endsWith(q) || driver.includes(q);
+        });
+        found?selectVehicle(found.id):openQuickCreateVehicle();
+      }
     }
     function selectVehicle(id){
       selectedVehicleId=id;
-      const defaultTrip=pickDefaultTrip(getVehicle());
-      selectedTripId=defaultTrip?.id || null;
-      if(defaultTrip && !defaultTrip.ticket){
-        defaultTrip.ticket=isClosedStatus(defaultTrip.status) ? makeReadonlyTicketFromTrip(defaultTrip) : buildTicketFromTrip(defaultTrip);
-      }
+      const v=getVehicle();
       document.getElementById('empty-ticket-state').style.display='none';
       document.getElementById('ticket-workspace').style.display='block';
-      renderVehicles(false);
+      if(!v.openTicket){
+        v.openTicket={code:null, customer:'', type:vehicleFilter==='XuatHang'?'XuatHang':'NhapCongTy', date:todayISO(), dateTime:nowDateTimeLocal(), tripNo:null, note:'', offsetKg:140, status:'Draft', weighings:[]};
+      }
+      selectedType=normalizeType(v.openTicket.type||selectedType||'NhapCongTy');
+      renderVehicles(); renderTicket();
+    }
+    function currentTypeFromUI(){
+      return normalizeType(document.querySelector('input[name="ticket-type-radio"]:checked')?.value || selectedType || 'NhapCongTy');
+    }
+    function rememberPartyField(){
+      const t=getTicket();
+      if(!t) return;
+      const current=normalizeType(t.type || selectedType || 'NhapCongTy');
+      if(current==='NhapCongTy'){
+        t.companyTeams=getSelectedTeams().join(', ');
+        t.customer=t.companyTeams;
+      } else {
+        t.partyCustomer=(document.getElementById('ticket-customer')?.value || '').trim();
+        t.customer=t.partyCustomer;
+      }
+    }
+    function setTicketType(type){
+      const ticket=getTicket();
+      if(ticket) rememberPartyField();
+      selectedType=normalizeType(type);
+      if(ticket){
+        ticket.type=selectedType;
+        ticket.customer = selectedType==='NhapCongTy' ? (ticket.companyTeams || '') : (ticket.partyCustomer || '');
+      }
       renderTicket();
     }
-
-    function openTripModal(){
-      const v=getVehicle();
-      if(!v){ showToast('warning','Chọn xe trước đã.'); return; }
-      document.getElementById('trip-modal-plate').textContent=v.plate || 'Chưa có biển số';
-      document.getElementById('trip-modal-date').textContent=dateVN(selectedDate);
-      document.getElementById('trip-modal-subtitle').textContent=`${tripsOfDate(v).length} chuyến trong ngày ${dateVN(selectedDate)} của xe ${v.plate || ''}`;
-      renderTripList();
-      openModal('trip-modal');
+    function setTicketTypeSilent(t){
+      t=normalizeType(t);
+      const radio=document.querySelector(`input[name="ticket-type-radio"][value="${t}"]`);
+      if(radio) radio.checked=true;
     }
-    function renderTripList(){
-      const v=getVehicle();
-      const trips=tripsOfDate(v);
-      const root=document.getElementById('trip-list');
-      if(!root) return;
-      if(!trips.length){
-        root.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">Xe này chưa có chuyến trong ngày đã chọn</div><div class="empty-desc">Nếu xe đã tới trạm cân nhưng chưa có chuyến trong danh sách, hãy tạo phiếu mới để cân ngay.</div></div>';
-        return;
-      }
-      root.innerHTML=trips.map(trip=>{
-        const active=trip.id===selectedTripId;
-        const flowClass=flowOf(trip.type)==='XuatHang'?'export':'import';
-        const teams=(trip.teams||[]).length ? trip.teams.join(', ') : 'Không có';
-        const party=normalizeType(trip.type)==='NhapCongTy' ? teams : (trip.customer || 'Chưa có khách');
-        const blocker=previousBlockingTrip(v, trip);
-        const blockHint=blocker ? `Cần hoàn thành Chuyến ${blocker.number || '--'} trước` : tripStatusLabel(trip);
-        return `<div class="trip-card ${active?'active':''} ${flowClass} ${trip.isEudr?'':'manual'} ${blocker?'trip-blocked':''}" onclick="selectTrip('${trip.id}')">
-          <div class="trip-card-head">
-            <div><div class="trip-code">Chuyến ${trip.number || '--'} · ${typeLabel(trip.type)}</div><div class="trip-subline">${blockHint}</div></div>
-            <div class="flex gap-8 align-center"><span class="badge ${blocker?'badge-yellow':tripBadgeClass(trip)}">${blocker?'Chưa được cân':tripStatusLabel(trip)}</span><span class="badge ${flowClass==='export'?'badge-blue':'badge-green'}">${typeLabel(trip.type)}</span></div>
-          </div>
-          <div class="trip-card-grid">
-            <span>🚚 Số chuyến: <b>${trip.number || '--'}</b></span>
-            <span>🕒 Giờ đi/vào: <b>${trip.timeStart || '--'}</b></span>
-            <span>🏭 Nhà máy: <b>${trip.factory || '--'}</b></span>
-            <span style="grid-column:1/-1;">👥 Đội/Khách: <b>${party}</b></span>
-          </div>
-        </div>`;
-      }).join('');
+    function selectedFlowFromUI(){ return flowOf(currentTypeFromUI()); }
+    function selectedImportSourceFromUI(){
+      const t=currentTypeFromUI();
+      return t==='NhapNgoai' ? 'NhapNgoai' : 'NhapCongTy';
     }
-    function selectTrip(tripId){
-      const trip=getVehicle()?.trips.find(t=>t.id===tripId);
-      if(!trip) return;
-      const blocker=previousBlockingTrip(getVehicle(), trip);
-      if(blocker){
-        showToast('warning',`Chuyến ${trip.number || '--'} chưa được cân vì Chuyến ${blocker.number || '--'} chưa hoàn thành.`);
-        return;
-      }
-      selectedTripId=tripId;
-      if(!trip.ticket){
-        trip.ticket=isClosedStatus(trip.status) ? makeReadonlyTicketFromTrip(trip) : buildTicketFromTrip(trip);
-      }
-      closeModal('trip-modal');
-      renderVehicles(false);
-      renderTicket();
-      showToast(isReadonlyTrip(trip,trip.ticket)?'warning':'success', isReadonlyTrip(trip,trip.ticket) ? 'Phiếu của chuyến này đã khóa, chỉ xem lại.' : `Đã chọn chuyến ${trip.number || '--'}.`);
+    function setTicketFlow(flow){ setTicketType(flow==='XuatHang' ? 'XuatHang' : selectedImportSourceFromUI()); }
+    function setImportSource(src){ setTicketType(src); }
+    function isCompanyImport(){ return normalizeType(currentTypeFromUI())==='NhapCongTy'; }
+    function getSelectedTeams(){
+      return [...document.querySelectorAll('#ticket-teams input.team-checkbox:checked')].map(i=>i.value);
     }
-    function openManualTripModal(){
-      const v=getVehicle();
-      if(!v){ showToast('warning','Chọn xe trước đã.'); return; }
-      document.getElementById('manual-customer').value='';
-      document.getElementById('manual-note').value='';
-      document.querySelector('input[name="manual-trip-type"][value="NhapCongTy"]').checked=true;
-      renderManualTripFields();
-      openModal('manual-trip-modal');
-    }
-    function renderManualTripFields(){
-      const type=document.querySelector('input[name="manual-trip-type"]:checked')?.value || 'NhapCongTy';
-      const customerWrap=document.getElementById('manual-customer-wrap');
-      const needsCustomer=type!=='NhapCongTy';
-      customerWrap.style.display=needsCustomer?'block':'none';
-    }
-    function createManualTrip(){
-      const v=getVehicle(); if(!v) return;
-      const blocker=hasUnfinishedTripInDate(v) ? tripsOfDate(v).find(trip=>!isTripClosed(trip)) : null;
-      if(blocker){ showToast('warning',`Cần hoàn thành Chuyến ${blocker.number || '--'} trước khi tạo phiếu mới.`); return; }
-      const type=normalizeType(document.querySelector('input[name="manual-trip-type"]:checked')?.value || 'NhapCongTy');
-      const customer=(document.getElementById('manual-customer')?.value || '').trim();
-      if(type!=='NhapCongTy' && !customer){ showToast('warning','Mua ngoài/Xuất hàng cần chọn khách hàng.'); return; }
-      const number=tripsOfDate(v).length + 1;
-      const stamp=Date.now();
-      const isExport=type==='XuatHang';
-      const trip={
-        id:'MAN-'+stamp,
-        entity:isExport?'TransportOrder':'TransportMaterial',
-        entityId:null,
-        source:'Tạo mới tại trạm cân',
-        isEudr:false,
-        code:(isExport?'TO-MAN-':'TM-MAN-') + String(stamp).slice(-6),
-        codeCustom:'MAN-'+number,
-        number,
-        date:selectedDate,
-        timeStart:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}),
-        type,
-        materialType:type==='NhapNgoai'?1:0,
-        teams:[],
-        customer:type==='NhapCongTy'?'':customer,
-        factory:'Trạm cân',
-        status:'DangCan',
-        isCustomerEditable:type!=='NhapCongTy',
-        note:document.getElementById('manual-note')?.value || 'Phiếu mới tại trạm cân'
-      };
-      trip.ticket=buildTicketFromTrip(trip);
-      v.trips.unshift(trip);
-      selectedTripId=trip.id;
-      closeModal('manual-trip-modal');
-      closeModal('trip-modal');
-      renderVehicles(false);
-      renderTicket();
-      showToast('success','Đã tạo phiếu mới và chọn để cân.');
-    }
-
-    function applyTicketReadonlyMode(readonly, label){
-      const ids=['weight-input','product-input','ticket-customer','ticket-note','driver-offset-kg'];
-      ids.forEach(id=>{
-        const el=document.getElementById(id);
-        if(!el) return;
-        if(id==='ticket-note' || id==='ticket-customer'){
-          el.readOnly=readonly;
-        }else if(readonly){
-          el.disabled=true;
-        }else if(id==='weight-input' || id==='driver-offset-kg'){
-          el.disabled=false;
-        }
+    function setSelectedTeams(value){
+      const selected=(value||'').split(',').map(x=>x.trim()).filter(Boolean);
+      document.querySelectorAll('#ticket-teams input.team-checkbox').forEach(input=>{
+        input.checked=selected.includes(input.value);
       });
-      const saveInfoBtn=document.querySelector('button[onclick="saveTicketInfo()"]');
-      const saveWeighBtn=document.querySelector('.save-weigh-btn');
-      const cancelBtn=document.querySelector("button[onclick=\"openPinModal('cancel')\"]");
-      const completeBtn=document.querySelector('button[onclick="completeTicket()"]');
-      [saveInfoBtn,saveWeighBtn,cancelBtn,completeBtn].forEach(btn=>{ if(btn) btn.disabled=readonly; });
-      const currentWeighIndex=document.getElementById('current-weigh-index');
-      if(readonly && currentWeighIndex) currentWeighIndex.textContent=label || 'Chỉ xem lại';
+      syncTeamSelectAllState();
     }
-
-    function renderPartyField(trip,ticket){
-      const type=normalizeType(trip?.type);
+    function partyValueFromUI(){
+      return isCompanyImport() ? getSelectedTeams().join(', ') : (document.getElementById('ticket-customer')?.value || '').trim();
+    }
+    function updateTeamSelection(){
+      const t=getTicket();
+      if(t && isCompanyImport()){
+        t.companyTeams=partyValueFromUI();
+        t.customer=t.companyTeams;
+      }
+      updateTeamPreview();
+    }
+    function toggleAllTeams(){
+      const all=document.getElementById('team-all');
+      const checked=!!all?.checked;
+      document.querySelectorAll('#ticket-teams input.team-checkbox').forEach(input=>input.checked=checked);
+      updateTeamSelection();
+    }
+    function syncTeamSelectAllState(){
+      const all=document.getElementById('team-all');
+      if(!all) return;
+      const boxes=[...document.querySelectorAll('#ticket-teams input.team-checkbox')];
+      const checked=boxes.filter(x=>x.checked).length;
+      all.checked=boxes.length>0 && checked===boxes.length;
+      all.indeterminate=checked>0 && checked<boxes.length;
+    }
+    function updateTeamPreview(){
+      const preview=document.getElementById('team-selected-preview');
+      if(!preview) return;
+      const selected=getSelectedTeams();
+      preview.textContent=selected.length ? `Đã chọn: ${selected.join(', ')}` : 'Chưa chọn đội nào';
+      preview.classList.toggle('empty', selected.length===0);
+      syncTeamSelectAllState();
+    }
+    function renderPartyField(t){
+      const type=normalizeType(t?.type || selectedType || 'NhapCongTy');
       const company=type==='NhapCongTy';
-      const formGroup=document.getElementById('party-form-group');
       const label=document.getElementById('party-label');
       const customerWrap=document.getElementById('customer-input-wrap');
       const teamWrap=document.getElementById('team-select-wrap');
       const quick=document.getElementById('quick-customer');
-      const input=document.getElementById('ticket-customer');
+      if(label) label.textContent=company ? 'Đội' : 'Khách hàng / Đối tác';
+      if(customerWrap) customerWrap.style.display=company ? 'none' : 'block';
+      if(teamWrap) teamWrap.style.display=company ? 'block' : 'none';
       if(quick) quick.style.display='none';
-
-      // Nhập Công ty: đội/nông trường đã hiển thị ngay trên thẻ chuyến, không cần lặp lại.
       if(company){
-        if(formGroup) formGroup.style.display='none';
-        if(customerWrap) customerWrap.style.display='none';
-        if(teamWrap) teamWrap.style.display='none';
-        return;
-      }
-
-      // Mua ngoài / Xuất hàng: vẫn cho đổi khách hàng khi cần.
-      if(formGroup) formGroup.style.display='block';
-      if(label) label.textContent='Khách hàng / Đối tác';
-      if(customerWrap) customerWrap.style.display='block';
-      if(teamWrap) teamWrap.style.display='none';
-      if(input){
-        input.value=ticket?.customer || trip?.customer || '';
-        input.readOnly=false;
-        input.placeholder='Có thể đổi khách hàng cho chuyến này';
+        if(t && t.companyTeams===undefined && t.customer) t.companyTeams=t.customer;
+        setSelectedTeams(t?.companyTeams || '');
+        updateTeamPreview();
+      } else {
+        if(t && t.partyCustomer===undefined && t.customer && normalizeType(t.type)!=='NhapCongTy') t.partyCustomer=t.customer;
+        const input=document.getElementById('ticket-customer');
+        if(input) input.value=t?.partyCustomer || '';
       }
     }
+    function changeTicketDate(){
+      const v=getVehicle(), t=getTicket(); if(!v||!t) return;
+      t.dateTime=document.getElementById('ticket-date').value || nowDateTimeLocal();
+      t.date=dateOnly(t.dateTime);
+      t.tripNo=countTicketsInDay(v.plate,t.date,t)+1;
+      renderTicket(); renderVehicles();
+    }
     function renderTicket(){
-      const v=getVehicle();
-      const trip=getTrip();
-      const ticket=getTicket();
-      document.getElementById('selected-date-display').textContent=dateVN(selectedDate);
-      document.getElementById('selected-plate').textContent=v?.plate || '--';
-      document.getElementById('selected-driver').textContent=v?.driver || '--';
+      const v=getVehicle(), t=getTicket(); if(!v||!t) return;
+      ensureTripNo(v,t);
+      document.getElementById('ticket-state-badge').className='badge '+(t.status==='DangThucHien'?'badge-yellow':t.status==='HoanThanh'?'badge-green':t.status==='DaHuy'?'badge-red':'badge-grey');
+      document.getElementById('ticket-state-badge').textContent=t.status==='Draft'?'Phiếu mới':t.status==='DangThucHien'?'Đang thực hiện':t.status==='HoanThanh'?'Hoàn thành':'Đã hủy';
+      document.getElementById('ticket-code-text').textContent=t.code || 'Chưa sinh mã';
+      document.getElementById('selected-plate').textContent=v.plate || 'Chưa có biển số';
+      document.getElementById('selected-driver').textContent=v.driver || 'Chưa cập nhật';
+      document.getElementById('ticket-date').value=toDateTimeLocal(t.dateTime || t.date || todayISO());
+      document.getElementById('trip-display').textContent=tripText(v,t);
+      document.getElementById('ticket-note').value=t.note||'';
+      selectedType=normalizeType(t.type||selectedType||'NhapCongTy');
+      const offsetInput=document.getElementById('driver-offset-kg');
+      if(offsetInput) offsetInput.value=offsetKg(t);
+      setTicketTypeSilent(selectedType);
+      renderPartyField(t);
 
-      const weightInput=document.getElementById('weight-input');
-      const productInput=document.getElementById('product-input');
-      const saveBtn=document.querySelector('.save-weigh-btn');
-      const detailBtn=document.querySelector('.detail-popup-btn');
+      renderTotals(t);
 
-      if(!v){
-        const tripDisplay=document.getElementById('trip-display'); if(tripDisplay) tripDisplay.textContent='Chưa chọn chuyến';
-        return;
-      }
-      if(!trip || !ticket){
-        document.getElementById('ticket-state-badge').className='badge badge-grey';
-        document.getElementById('ticket-state-badge').textContent='Chưa chọn chuyến';
-        document.getElementById('ticket-code-text').textContent='Chưa sinh mã';
-        const tripDisplay=document.getElementById('trip-display'); if(tripDisplay) tripDisplay.textContent='Chưa chọn chuyến';
-        document.getElementById('trip-card-title').textContent='Chưa chọn chuyến xe';
-        document.getElementById('trip-card-desc').textContent=`Xe ${v.plate || ''} có ${tripsOfDate(v).length} chuyến trong ngày ${dateVN(selectedDate)}. Bấm chọn chuyến để tiếp tục.`;
-        document.getElementById('trip-select-card').classList.remove('selected');
-        const typeDisplay=document.getElementById('ticket-type-display'); if(typeDisplay) typeDisplay.textContent='--';
-        const numDisplay=document.getElementById('trip-number-display'); if(numDisplay) numDisplay.textContent='--';
-        document.getElementById('ticket-note').value='';
-        document.getElementById('driver-offset-kg').value=140;
-        document.getElementById('weighing-list').innerHTML='<tr><td colspan="5"><div class="empty-state"><div class="empty-title">Chưa chọn chuyến</div><div class="empty-desc">Phiếu cân chỉ được ghi nhận sau khi chọn chuyến xe.</div></div></td></tr>';
-        renderTotals({weighings:[],offsetKg:140,type:'NhapCongTy'});
-        if(weightInput) { weightInput.disabled=true; weightInput.placeholder='Chọn chuyến trước'; }
-        if(productInput) { productInput.disabled=true; productInput.value=''; productInput.placeholder='Chọn chuyến trước'; }
-        if(saveBtn) saveBtn.disabled=true;
-        if(detailBtn) detailBtn.disabled=true;
-        return;
-      }
-
-      const blocker=previousBlockingTrip(v, trip);
-      const readonly=isReadonlyTrip(trip,ticket);
-      const blockedByPrevious=!!blocker && !readonly;
-      const captureGrid=document.getElementById('capture-input-grid');
-      const lockedPreview=document.getElementById('locked-weighing-preview');
-      if(weightInput) { weightInput.disabled=false; weightInput.placeholder='0'; }
-      if(saveBtn) saveBtn.disabled=false;
-      if(detailBtn) detailBtn.disabled=false;
-      if(captureGrid) captureGrid.style.display='grid';
-      if(lockedPreview) { lockedPreview.style.display='none'; lockedPreview.innerHTML=''; }
-
-      document.getElementById('ticket-state-badge').className='badge '+(ticket.status==='DangThucHien'?'badge-yellow':ticket.status==='HoanThanh'?'badge-green':ticket.status==='DaHuy'?'badge-red':'badge-blue');
-      document.getElementById('ticket-state-badge').textContent=ticket.status==='Draft'?'Phiếu mới':ticket.status==='DangThucHien'?'Đang thực hiện':ticket.status==='HoanThanh'?'Hoàn thành':ticket.status==='DaHuy'?'Đã hủy':'Chỉ xem';
-      document.getElementById('ticket-code-text').textContent=ticket.code || 'Chưa sinh mã';
-      const tripDisplay=document.getElementById('trip-display'); if(tripDisplay) tripDisplay.textContent=`Chuyến ${trip.number || '--'}`;
-      document.getElementById('trip-card-title').textContent=`Chuyến ${trip.number || '--'} · ${typeLabel(trip.type)}`;
-      document.getElementById('trip-card-desc').textContent=blockedByPrevious ? `${selectedPartyValue(trip,ticket)} · Cần hoàn thành Chuyến ${blocker.number || '--'} trước` : `${selectedPartyValue(trip,ticket)} · ${tripStatusLabel(trip)}${readonly ? ' · Chỉ xem lại' : ''}`;
-      document.getElementById('trip-select-card').classList.add('selected');
-      const typeDisplay=document.getElementById('ticket-type-display'); if(typeDisplay) typeDisplay.textContent=typeLabel(trip.type);
-      const numDisplay=document.getElementById('trip-number-display'); if(numDisplay) numDisplay.textContent=trip.number || '--';
-      document.getElementById('ticket-note').value=ticket.note || trip.note || '';
-      document.getElementById('driver-offset-kg').value=offsetKg(ticket);
-      renderPartyField(trip,ticket);
-
-
-      const nextWeighIndex=(ticket.weighings||[]).length+1;
-      const currentWeighIndex=document.getElementById('current-weigh-index');
-      if(currentWeighIndex) currentWeighIndex.textContent='Lần cân thứ '+nextWeighIndex;
+      document.getElementById('product-label').innerHTML='2. Loại hàng <span>*</span>';
       const firstNote=document.getElementById('first-weigh-note'); if(firstNote) firstNote.style.display='none';
+      const productInput=document.getElementById('product-input');
       if(productInput){
-        if(ticket.weighings.length===0){
-          productInput.value=firstWeighLabel(ticket);
+        if(t.weighings.length===0){
+          productInput.value=firstWeighLabel(t);
           productInput.disabled=true;
-          productInput.placeholder=firstWeighLabel(ticket);
+          productInput.placeholder=firstWeighLabel(t);
           document.getElementById('quick-product').style.display='none';
-        }else{
-          if(productInput.disabled || productInput.value===firstWeighLabel(ticket)) productInput.value='';
+        } else {
+          if(productInput.disabled || productInput.value===firstWeighLabel(t)) productInput.value='';
           productInput.disabled=false;
           productInput.placeholder='Chọn loại hàng';
         }
       }
-      const rows=weightRows(ticket);
-      renderLoadHint(v,ticket,rows);
-      document.getElementById('weighing-list').innerHTML=detailRowsHtml(ticket, rows);
-      renderTotals(ticket);
-      applyTicketReadonlyMode(readonly || blockedByPrevious, blockedByPrevious ? `Chờ Chuyến ${blocker.number || '--'} hoàn thành` : (ticket.status==='DaHuy' ? 'Phiếu đã hủy' : 'Phiếu đã hoàn thành'));
-      if(readonly){
-        if(captureGrid) captureGrid.style.display='none';
-        if(lockedPreview){
-          lockedPreview.style.display='block';
-          lockedPreview.innerHTML=`<div class="locked-preview-header"><div><div class="locked-preview-title">Chi tiết cân</div><div class="info-banner-desc">Phiếu đã hoàn thành, chỉ xem lại thông tin đã cân.</div></div><button class="btn btn-secondary btn-sm" onclick="openCurrentDetail()">Mở rộng</button></div><div class="table-container"><table class="data-table"><thead><tr><th style="width:70px;text-align:center;">Lần</th><th>Thời gian</th><th>Loại hàng</th><th style="text-align:right;">Tổng trọng lượng (kg)</th><th style="text-align:right;">Trọng lượng hàng (kg)</th></tr></thead><tbody>${detailRowsHtml(ticket, rows)}</tbody></table></div>`;
-        }
-        if(productInput) productInput.placeholder='Chỉ xem lại';
-      }else if(blockedByPrevious){
-        if(weightInput) weightInput.placeholder=`Chờ Chuyến ${blocker.number || '--'} hoàn thành`;
-        if(productInput) productInput.placeholder='Chưa được cân chuyến này';
+      const nextWeighIndex = (t.weighings || []).length + 1;
+      const currentWeighIndex=document.getElementById('current-weigh-index');
+      if(currentWeighIndex) currentWeighIndex.textContent='Lần cân thứ ' + nextWeighIndex;
+      const rows=weightRows(t);
+      renderLoadHint(v,t,rows);
+      const tableBody=document.getElementById('weighing-list');
+      if(tableBody){
+        tableBody.innerHTML=detailRowsHtml(t, rows);
       }
-      if(document.getElementById('live-detail-modal')?.classList.contains('active')) renderCurrentDetailRows();
+      if(document.getElementById('live-detail-modal')?.classList.contains('active')){
+        renderCurrentDetailRows();
+      }
     }
 
     function detailRowsHtml(t, rows){
@@ -4443,8 +3893,27 @@
         return `<tr><td style="text-align:center;font-weight:800;">${w.index}</td><td>${w.time}</td><td><strong>${w.index===1?(w.product || firstWeighLabel(t)):(w.product||'Chưa rõ loại hàng')}</strong></td><td class="num">${fmt(w.total)}</td><td class="num">${goodsHtml}</td></tr>`;
       }).join('') : '<tr><td colspan="5"><div class="empty-state"><div class="empty-title">Chưa có lần cân nào</div><div class="empty-desc">Nhập khối lượng rồi bấm Lưu lần cân.</div></div></td></tr>';
     }
-    function renderLoadHint(v,t,rows){
-      const el=document.getElementById('vehicle-load-hint'); if(!el) return;
+
+    function openCurrentDetail(){
+      renderCurrentDetailRows();
+      openModal('live-detail-modal');
+    }
+
+    function renderCurrentDetailRows(){
+      const v=getVehicle(), t=getTicket();
+      const rows=weightRows(t);
+      const subtitle=document.getElementById('live-detail-subtitle');
+      if(subtitle){
+        subtitle.textContent=v&&t ? `${v.plate || 'Chưa có biển số'} · ${t.code || 'Chưa sinh mã'} · ${tripText(v,t)}` : 'Danh sách các lần cân của phiếu hiện tại';
+      }
+      const body=document.getElementById('live-detail-rows');
+      if(body) body.innerHTML=detailRowsHtml(t, rows);
+      renderLiveLoadHint(v,t,rows);
+    }
+
+    function renderLiveLoadHint(v,t,rows){
+      const el=document.getElementById('live-vehicle-load-hint');
+      if(!el) return;
       const tare=Number(v?.tare||0);
       if(!tare || !rows.length){ el.style.display='none'; return; }
       const current=Number(rows[rows.length-1].total||0);
@@ -4453,124 +3922,103 @@
       if(diff>0){
         el.className='load-hint warning';
         el.textContent=`Hiện tại trên cân ${fmt(current)}. So với xe không tải ${fmt(tare)}, xe còn khoảng ${fmt(diff)} hàng.`;
-      }else{
+      } else {
         el.className='load-hint success';
         el.textContent=`Hiện tại trên cân ${fmt(current)}. Xe đã về mức không tải.`;
       }
     }
-    function renderLiveLoadHint(v,t,rows){
-      const el=document.getElementById('live-vehicle-load-hint'); if(!el) return;
+    function renderLoadHint(v,t,rows){
+      const el=document.getElementById('vehicle-load-hint');
+      if(!el) return;
       const tare=Number(v?.tare||0);
       if(!tare || !rows.length){ el.style.display='none'; return; }
       const current=Number(rows[rows.length-1].total||0);
       const diff=current-tare;
       el.style.display='block';
-      if(diff>0){ el.className='load-hint warning'; el.textContent=`Hiện tại trên cân ${fmt(current)}. So với xe không tải ${fmt(tare)}, xe còn khoảng ${fmt(diff)} hàng.`; }
-      else { el.className='load-hint success'; el.textContent=`Hiện tại trên cân ${fmt(current)}. Xe đã về mức không tải.`; }
-    }
-    function openCurrentDetail(){
-      if(!getTrip()){ showToast('warning','Chọn chuyến trước đã.'); return; }
-      renderCurrentDetailRows(); openModal('live-detail-modal');
-    }
-    function renderCurrentDetailRows(){
-      const v=getVehicle(), trip=getTrip(), t=getTicket();
-      const rows=weightRows(t);
-      const subtitle=document.getElementById('live-detail-subtitle');
-      if(subtitle) subtitle.textContent=v&&trip&&t ? `${v.plate || 'Chưa có biển số'} · Chuyến ${trip.number || '--'} · ${t.code || 'Chưa sinh mã'}` : 'Danh sách các lần cân của phiếu hiện tại';
-      const body=document.getElementById('live-detail-rows');
-      if(body) body.innerHTML=detailRowsHtml(t, rows);
-      renderLiveLoadHint(v,t,rows);
-    }
-
-    function saveTicketInfo(){
-      const trip=getTrip(), t=getTicket();
-      if(!trip || !t){ showToast('warning','Chọn chuyến xe trước khi lưu thông tin.'); return; }
-      const blocker=previousBlockingTrip(getVehicle(), trip);
-      if(blocker){ showToast('warning',`Cần hoàn thành Chuyến ${blocker.number || '--'} trước khi lưu chuyến này.`); return; }
-      if(isReadonlyTrip(trip,t)){ showToast('warning','Phiếu của chuyến này đã khóa, chỉ xem lại.'); return; }
-      if(normalizeType(trip.type)!=='NhapCongTy'){
-        t.customer=(document.getElementById('ticket-customer')?.value || '').trim();
-        trip.customer=t.customer;
-      }else{
-        t.customer=(trip.teams||[]).join(', ') || 'Không có';
+      if(diff>0){
+        el.className='load-hint warning';
+        el.textContent=`Hiện tại trên cân ${fmt(current)}. So với xe không tải ${fmt(tare)}, xe còn khoảng ${fmt(diff)} hàng.`;
+      } else {
+        el.className='load-hint success';
+        el.textContent=`Hiện tại trên cân ${fmt(current)}. Xe đã về mức không tải.`;
       }
+    }
+    function saveTicketInfo(){
+      const v=getVehicle(), t=getTicket();
+      if(!v||!t) return;
+      t.customer=partyValueFromUI();
+      if(isCompanyImport()) t.companyTeams=t.customer; else t.partyCustomer=t.customer;
       t.note=document.getElementById('ticket-note').value;
       t.offsetKg=Math.max(0, Number(document.getElementById('driver-offset-kg')?.value || 0));
-      if(!t.code){ t.code='PHC-'+String(Math.floor(Math.random()*900)+100); t.status='DangThucHien'; }
-      trip.status='DangCan';
-      renderVehicles(false); renderTicket(); showToast('success','Đã lưu thông tin phiếu theo chuyến.');
+      t.dateTime=document.getElementById('ticket-date').value || nowDateTimeLocal();
+      t.date=dateOnly(t.dateTime);
+      t.type=currentTypeFromUI();
+      selectedType=t.type;
+      if(!t.tripNo) t.tripNo=countTicketsInDay(v.plate,t.date,t)+1;
+      if(!t.code){
+        t.code='PHC-'+String(Math.floor(Math.random()*900)+100);
+        t.status='DangThucHien';
+      }
+      renderTicket(); renderVehicles();
+      showToast('success','Đã lưu thông tin phiếu.');
     }
     function saveWeightEnter(e){ if(e.key==='Enter') saveWeighing(); }
     function saveWeighing(){
-      const v=getVehicle(), trip=getTrip(), t=getTicket();
-      if(!v || !trip || !t){ showToast('warning','Chọn chuyến xe trước khi lưu lần cân.'); return; }
-      const blocker=previousBlockingTrip(v, trip);
-      if(blocker){ showToast('warning',`Không thể cân chuyến này khi Chuyến ${blocker.number || '--'} chưa hoàn thành.`); return; }
-      if(t.status==='HoanThanh' || t.status==='DaHuy'){ showToast('warning','Phiếu này đã khóa, không thể cân thêm.'); return; }
+      const v=getVehicle(), t=getTicket(); if(!t||!v) return;
+      t.customer=partyValueFromUI();
+      if(isCompanyImport()) t.companyTeams=t.customer; else t.partyCustomer=t.customer;
+      t.note=document.getElementById('ticket-note').value;
+      t.offsetKg=Math.max(0, Number(document.getElementById('driver-offset-kg')?.value || 0));
+      t.type=currentTypeFromUI();
+      selectedType=t.type;
+      t.dateTime=document.getElementById('ticket-date').value || nowDateTimeLocal();
+      t.date=dateOnly(t.dateTime);
+      if(!t.tripNo) t.tripNo=countTicketsInDay(v.plate,t.date,t)+1;
       const weight=Number(document.getElementById('weight-input').value);
       const productInput=document.getElementById('product-input');
       const product=productInput?.disabled ? '' : (productInput?.value || '').trim();
       if(!weight){ showToast('warning','Nhập khối lượng trên cân trước đã.'); return; }
       if(t.weighings.length>=1 && !product){ showToast('warning','Từ lần cân thứ 2 trở đi bắt buộc chọn loại hàng.'); return; }
-      const prev=t.weighings.length ? Number(t.weighings[t.weighings.length-1].weight||0) : null;
-      if(prev!==null){
-        if(flowOf(t.type)==='NhapHang' && weight>prev){ showToast('warning','Phiếu nhập phải giảm cân dần sau mỗi lần dỡ hàng. Kiểm tra lại số cân.'); return; }
-        if(flowOf(t.type)==='XuatHang' && weight<prev){ showToast('warning','Phiếu xuất phải tăng cân dần sau mỗi lần chất hàng. Kiểm tra lại số cân.'); return; }
-      }
-      if(normalizeType(trip.type)!=='NhapCongTy'){
-        t.customer=(document.getElementById('ticket-customer')?.value || '').trim();
-        trip.customer=t.customer;
-      }else{
-        t.customer=(trip.teams||[]).join(', ') || 'Không có';
-      }
-      t.note=document.getElementById('ticket-note').value;
-      t.offsetKg=Math.max(0, Number(document.getElementById('driver-offset-kg')?.value || 0));
-      if(!t.code) t.code='PHC-'+String(Math.floor(Math.random()*900)+100);
-      t.status='DangThucHien'; trip.status='DangCan';
-      t.weighings.push({product:t.weighings.length===0?firstWeighLabel(t):product, weight, time:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})});
-      document.getElementById('weight-input').value='';
-      document.getElementById('product-input').value='';
-      renderVehicles(false); renderTicket(); showToast('success','Đã lưu lần cân.');
+      if(!t.code){ t.code='PHC-'+String(Math.floor(Math.random()*900)+100); t.status='DangThucHien'; }
+      t.weighings.push({product: t.weighings.length===0?firstWeighLabel(t):product, weight, time:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})});
+      document.getElementById('weight-input').value=''; document.getElementById('product-input').value='';
+      renderVehicles(); renderTicket(); showToast('success','Đã lưu lần cân.');
     }
     function completeTicket(){
-      const v=getVehicle(), trip=getTrip(), t=getTicket();
-      if(!v || !trip || !t || !t.weighings.length){ showToast('warning','Phiếu chưa có lần cân nào.'); return; }
-      if(isReadonlyTrip(trip,t)){ showToast('warning','Phiếu của chuyến này đã khóa, chỉ xem lại.'); return; }
-      t.status='HoanThanh'; trip.status='HoanThanh';
+      const v=getVehicle(), t=getTicket(); if(!v||!t||!t.weighings.length){ showToast('warning','Phiếu chưa có lần cân nào.'); return; }
+      t.status='HoanThanh';
       const rows=weightRows(t);
-      const product=rows.filter(w=>w.index>1).map(w=>w.product).filter(Boolean).join(', ') || 'Tổng hợp';
-      history.unshift({code:t.code, tripNumber:trip.number || null, tripCode:trip.code || trip.id, source:trip.isEudr?'Có sẵn':'Tạo mới tại trạm cân', date:dateTimeVN(t.dateTime || t.date), dateISO:t.date, type:t.type, customer:selectedPartyValue(trip,t), teams:trip.teams||[], plate:v.plate||'Chưa có biển số', net:netGoods(t), status:'HoanThanh', product, rows});
-      renderVehicles(false); renderTicket(); showToast('success','Đã hoàn thành phiếu. Có thể xem trong Nhật ký hàng hóa.');
+      const product=rows.filter(w=>w.index>1).map(w=>w.product).filter(Boolean).join(', ')||'Tổng hợp';
+      history.unshift({code:t.code,date:dateTimeVN(t.dateTime || t.date),dateISO:t.date,type:typeLabel(t.type),customer:t.customer||'--',plate:v.plate||'Chưa có biển số',net:netGoods(t),status:'HoanThanh',product,rows});
+      v.openTicket=null;
+      renderVehicles(); selectVehicle(selectedVehicleId); showToast('success','Đã hoàn thành phiếu. Có thể in hoặc xem trong nhật ký hàng hóa.');
     }
     function checkQuickCreate(kind){
-      if(kind==='customer' && normalizeType(getTrip()?.type)==='NhapCongTy'){
-        document.getElementById('quick-customer').style.display='none'; return;
+      if(kind==='customer' && isCompanyImport()){
+        document.getElementById('quick-customer').style.display='none';
+        return;
       }
       const el=document.getElementById(kind==='customer'?'ticket-customer':'product-input');
       const val=(el?.value||'').trim().toLowerCase();
       const source=kind==='customer'?customers:products;
-      const q=document.getElementById('quick-'+kind);
-      if(q) q.style.display=val && !source.some(x=>x.toLowerCase().includes(val)) ? 'flex':'none';
+      document.getElementById('quick-'+kind).style.display=val && !source.some(x=>x.toLowerCase().includes(val))?'flex':'none';
     }
 
     function openQuickCreateVehicle(){
-      openQuick('Tạo nhanh Xe', `<div class="grid-2"><div class="form-group"><label>Biển số xe</label><input class="input-control" id="quick-plate" style="text-transform:uppercase;" placeholder="VD: 70C-123.45" autofocus></div><div class="form-group"><label>Tên tài xế</label><input class="input-control" id="quick-driver" placeholder="Nhập tên tài xế"></div></div><div class="alert-banner alert-banner-warning" style="margin-bottom:0;">Sau khi tạo xe, nếu chưa có chuyến thì bấm “Tạo phiếu mới”.</div>`, ()=>{
+      openQuick('Tạo nhanh Xe', `<div class="grid-2"><div class="form-group"><label>Biển số xe</label><input class="input-control" id="quick-plate" style="text-transform:uppercase;" placeholder="VD: 70C-123.45" autofocus></div><div class="form-group"><label>Tên tài xế</label><input class="input-control" id="quick-driver" placeholder="Nhập tên tài xế"></div></div>`, ()=>{
         const plate=document.getElementById('quick-plate').value.toUpperCase().trim();
         const driver=document.getElementById('quick-driver').value.trim();
         if(!plate && !driver) return showToast('warning','Cần nhập biển số xe hoặc tên tài xế.');
         if(plate && vehicles.some(v=>(v.plate||'').toUpperCase()===plate)) return showToast('error','Biển số đã tồn tại.');
-        const id=Date.now(); vehicles.unshift({id,plate,driver,tare:0,trips:[]});
-        closeModal('quick-modal'); renderVehicles(false); selectVehicle(id); showToast('success','Đã tạo xe mới. Xe chưa có chuyến trong ngày này.');
+        const id=Date.now(); vehicles.unshift({id,plate,driver,tare:0,openTicket:null});
+        closeModal('quick-modal'); renderVehicles(); selectVehicle(id); showToast('success','Đã tạo xe mới.');
       });
     }
     function openQuickCreateCustomer(){
-      const current=document.getElementById('ticket-customer')?.value || document.getElementById('manual-customer')?.value || '';
+      const current=document.getElementById('ticket-customer')?.value || '';
       openQuick('Tạo nhanh Khách hàng', `<div class="form-group"><label>Tên/Mã khách hàng</label><input class="input-control" id="quick-value" value="${current}"></div><div class="form-group"><label>Phân loại</label><select class="input-control"><option>Nhà cung cấp</option><option>Khách mua</option><option>Công ty</option></select></div>`, ()=>{
         const value=document.getElementById('quick-value').value.trim(); if(!value) return;
-        customers.push(value); fillDatalists();
-        const input=document.getElementById('ticket-customer'); if(input) input.value=value;
-        const manual=document.getElementById('manual-customer'); if(manual) manual.value=value;
-        closeModal('quick-modal'); showToast('success','Đã tạo khách hàng mới.');
+        customers.push(value); fillDatalists(); const input=document.getElementById('ticket-customer'); if(input) input.value=value; closeModal('quick-modal'); showToast('success','Đã tạo khách hàng mới.');
       });
     }
     function openQuickCreateProduct(){
@@ -4592,104 +4040,100 @@
         inputs.forEach(el=>{ el.onkeydown=e=>{ if(e.key==='Enter') submit(); }; });
       },60);
     }
-    function openModal(id){ document.getElementById(id)?.classList.add('active'); }
-    function closeModal(id){ document.getElementById(id)?.classList.remove('active'); }
-    function openPinModal(action){
-      const trip=getTrip(), t=getTicket();
-      if(action==='cancel' && isReadonlyTrip(trip,t)){ showToast('warning','Phiếu của chuyến này đã khóa, chỉ xem lại.'); return; }
-      pinAction=action; pinValue=''; document.getElementById('pin-display').textContent=''; document.getElementById('pin-reason').value=''; openModal('pin-modal');
-    }
+    function openModal(id){ document.getElementById(id).classList.add('active'); }
+    function closeModal(id){ document.getElementById(id).classList.remove('active'); }
+    function openPinModal(action){ pinAction=action; pinValue=''; document.getElementById('pin-display').textContent=''; document.getElementById('pin-reason').value=''; openModal('pin-modal'); }
     function renderNumpad(){ const keys=[1,2,3,4,5,6,7,8,9,'C',0,'⌫']; document.getElementById('numpad').innerHTML=keys.map(k=>`<div class="numpad-btn" onclick="pinPress('${k}')">${k}</div>`).join(''); }
     function pinPress(k){ if(k==='C') pinValue=''; else if(k==='⌫') pinValue=pinValue.slice(0,-1); else if(pinValue.length<6) pinValue+=k; document.getElementById('pin-display').textContent='•'.repeat(pinValue.length); }
     function confirmPinAction(){
-      if(pinValue!=='1234'){ showToast('error','PIN không đúng.'); return; }
-      if(!document.getElementById('pin-reason').value.trim()){ showToast('warning','Cần nhập lý do thực hiện.'); return; }
-      const trip=getTrip(), t=getTicket();
-      if(pinAction==='cancel'&&trip&&t){
-        t.status='DaHuy'; trip.status='DaHuy';
-        history.unshift({code:t.code||'PHC-DRAFT',tripNumber:trip.number||null,tripCode:trip.code||trip.id,source:trip.isEudr?'Có sẵn':'Tạo mới tại trạm cân',date:dateTimeVN(t.dateTime || t.date),dateISO:t.date||selectedDate,type:t.type,customer:selectedPartyValue(trip,t),teams:trip.teams||[],plate:getVehicle()?.plate||'Chưa có biển số',net:0,status:'DaHuy',product:'--'});
+      const reason=document.getElementById('pin-reason').value.trim();
+      if(pinValue.length<4 || !reason){ showToast('warning','Cần nhập PIN và lý do thực hiện.'); return; }
+      const v=getVehicle(), t=getTicket();
+      if(pinAction==='cancel'&&v&&t){
+        t.status='DaHuy';
+        history.unshift({code:t.code||'PHC-DRAFT',date:dateTimeVN(t.dateTime || t.date),dateISO:t.date||todayISO(),type:typeLabel(t.type),customer:t.customer||'--',plate:v.plate||'Chưa có biển số',net:0,status:'DaHuy',product:'--'});
+        v.openTicket=null;
       }
-      closeModal('pin-modal'); renderVehicles(false); renderTicket(); showToast('success','Đã xác nhận thao tác.');
+      closeModal('pin-modal'); renderVehicles(); selectVehicle(selectedVehicleId); showToast('success','Đã xác nhận thao tác.');
     }
     function openPrintPreview(){
-      const v=getVehicle(), trip=getTrip(), t=getTicket(); if(!v||!trip||!t){ showToast('warning','Chọn chuyến trước khi in.'); return; }
+      const v=getVehicle(), t=getTicket(); if(!v||!t) return;
       document.getElementById('print-code').textContent=t.code||'PHC-DRAFT';
-      document.getElementById('print-customer').textContent=selectedPartyValue(trip,t);
+      document.getElementById('print-customer').textContent=t.customer||'--';
       document.getElementById('print-plate').textContent=v.plate || 'Chưa có biển số';
       document.getElementById('print-date').textContent=dateTimeVN(t.dateTime || t.date);
       document.getElementById('print-type').textContent=typeLabel(t.type);
-      document.getElementById('print-trip').textContent=`Chuyến ${trip.number || '--'}`;
+      document.getElementById('print-trip').textContent=tripText(v,t);
       document.getElementById('print-note').textContent=t.note||'---';
       const rows=weightRows(t);
-      document.getElementById('print-rows').innerHTML=rows.length?rows.map(w=>`<tr><td>${w.index}</td><td>${w.time}</td><td>${w.product || (w.index===1?firstWeighLabel(t):'Chưa rõ loại hàng')}</td><td class="num">${fmt(w.total)}</td><td class="num">${fmt(w.goods)}</td></tr>`).join(''):'<tr><td colspan="5">Chưa có lần cân</td></tr>';
+      document.getElementById('print-rows').innerHTML=rows.length?rows.map(w=>`<tr><td>${w.index}</td><td>${w.time}</td><td>${w.product || (w.index===1?firstWeighLabel(t):'Chưa rõ loại hàng')}</td><td class="num">${fmt(w.total)}</td><td class="num">${w.goods===null?'---':fmt(w.goods)}</td></tr>`).join(''):'<tr><td colspan="5">Chưa có lần cân</td></tr>';
       openModal('print-modal');
     }
-
-    function reportMaxDate(){ const dates=history.map(h=>h.dateISO).filter(Boolean).sort(); return dates[dates.length-1] || todayISO(); }
-    function shiftDateISO(baseISO, deltaDays){ const d=new Date((baseISO||todayISO())+'T00:00:00'); d.setDate(d.getDate()+deltaDays); return d.toISOString().slice(0,10); }
-    function clearReportRangeBadge(){ document.querySelectorAll('.report-range-badges .range-badge').forEach(btn=>btn.classList.remove('active')); }
+    function reportMaxDate(){
+      const dates = history.map(h => h.dateISO).filter(Boolean).sort();
+      return dates[dates.length - 1] || todayISO();
+    }
+    function shiftDateISO(baseISO, deltaDays){
+      const d = new Date((baseISO || todayISO()) + 'T00:00:00');
+      d.setDate(d.getDate() + deltaDays);
+      return d.toISOString().slice(0,10);
+    }
+    function clearReportRangeBadge(){
+      document.querySelectorAll('.report-range-badges .range-badge').forEach(btn => btn.classList.remove('active'));
+    }
     function setReportRange(days){
-      const end=reportMaxDate(); const start=shiftDateISO(end,-(Number(days)-1));
-      document.getElementById('report-date-from').value=start; document.getElementById('report-date-to').value=end;
-      document.querySelectorAll('.report-range-badges .range-badge').forEach(btn=>btn.classList.toggle('active',btn.dataset.days===String(days)));
+      const end = reportMaxDate();
+      const start = shiftDateISO(end, -(Number(days) - 1));
+      const fromInput = document.getElementById('report-date-from');
+      const toInput = document.getElementById('report-date-to');
+      if(fromInput) fromInput.value = start;
+      if(toInput) toInput.value = end;
+      document.querySelectorAll('.report-range-badges .range-badge').forEach(btn => btn.classList.toggle('active', btn.dataset.days === String(days)));
       renderReport();
     }
-    function reportTripLabel(r){ return r?.tripNumber ? 'Chuyến ' + r.tripNumber : 'Phiếu mới'; }
-    function syncReportVehicleFilterOptions(rows){
-      const select=document.getElementById('report-vehicle-filter');
-      if(!select) return;
-      const current=select.value||'All';
-      const plates=[...new Set((rows||[]).map(r=>r.plate).filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b),'vi'));
-      select.innerHTML='<option value="All">Tất cả xe</option>'+plates.map(plate=>`<option value="${plate}">${plate}</option>`).join('');
-      select.value=plates.includes(current)?current:'All';
-    }
     function renderReport(){
-      const closedRows=history.filter(h=>h.status==='HoanThanh'||h.status==='DaHuy');
-      syncReportVehicleFilterOptions(closedRows);
+      const closedRows = history.filter(h=>h.status==='HoanThanh' || h.status==='DaHuy');
       const completed=closedRows.filter(h=>h.status==='HoanThanh');
       document.getElementById('r-completed').textContent=completed.length;
       document.getElementById('r-weight').textContent=fmt(completed.reduce((sum,h)=>sum+h.net,0));
       document.getElementById('r-import-company').textContent=completed.filter(h=>normalizeType(h.type)==='NhapCongTy').length;
       document.getElementById('r-import-outside').textContent=completed.filter(h=>normalizeType(h.type)==='NhapNgoai').length;
       document.getElementById('r-export').textContent=completed.filter(h=>normalizeType(h.type)==='XuatHang').length;
+
       const q=(document.getElementById('report-search')?.value||'').toLowerCase();
       const typeFilter=document.getElementById('report-type-filter')?.value||'All';
       const statusFilter=document.getElementById('report-status-filter')?.value||'All';
-      const vehicleFilter=document.getElementById('report-vehicle-filter')?.value||'All';
       const fromDate=document.getElementById('report-date-from')?.value||'';
       const toDate=document.getElementById('report-date-to')?.value||'';
       const reportRows=closedRows
         .filter(r=>typeFilter==='All'||normalizeType(r.type)===typeFilter)
         .filter(r=>statusFilter==='All'||r.status===statusFilter)
-        .filter(r=>vehicleFilter==='All'||(r.plate||'')===vehicleFilter)
-        .filter(r=>!fromDate||(r.dateISO||'')>=fromDate)
-        .filter(r=>!toDate||(r.dateISO||'')<=toDate)
+        .filter(r=>!fromDate || (r.dateISO||'')>=fromDate)
+        .filter(r=>!toDate || (r.dateISO||'')<=toDate)
         .filter(r=>!q||JSON.stringify(r).toLowerCase().includes(q));
       reportRowsCache=reportRows;
-      document.getElementById('report-body').innerHTML=reportRows.map((r,i)=>`<tr><td><strong>${r.code}</strong></td><td>${reportTripLabel(r)}</td><td>${r.date}</td><td>${r.customer}</td><td>${r.plate}</td><td>${r.product||'Tổng hợp'}</td><td class="num">${fmt(r.net)}</td><td>${typeLabel(r.type)}</td><td><span class="badge ${r.status==='HoanThanh'?'badge-green':'badge-red'}">${r.status==='HoanThanh'?'Hoàn thành':'Đã hủy'}</span></td><td><button class="btn btn-secondary btn-view-detail" onclick="openReportDetail(${i})">Xem chi tiết</button></td></tr>`).join('') || '<tr><td colspan="10"><div class="empty-state"><div class="empty-title">Không có dữ liệu phù hợp</div><div class="empty-desc">Thử đổi bộ lọc loại phiếu, trạng thái hoặc thời gian.</div></div></td></tr>';
+      document.getElementById('report-body').innerHTML=reportRows.map((r,i)=>`<tr><td><strong>${r.code}</strong></td><td>${r.date}</td><td>${r.customer}</td><td>${r.plate}</td><td>${r.product||'Tổng hợp'}</td><td class="num">${fmt(r.net)}</td><td>${typeLabel(r.type)}</td><td><span class="badge ${r.status==='HoanThanh'?'badge-green':'badge-red'}">${r.status==='HoanThanh'?'Hoàn thành':'Đã hủy'}</span></td><td><button class="btn btn-secondary btn-view-detail" onclick="openReportDetail(${i})">Xem chi tiết</button></td></tr>`).join('') || '<tr><td colspan="9"><div class="empty-state"><div class="empty-title">Không có dữ liệu phù hợp</div><div class="empty-desc">Thử đổi bộ lọc loại phiếu, trạng thái hoặc thời gian.</div></div></td></tr>';
     }
     function openReportDetail(index){
-      const r=reportRowsCache[index]; if(!r) return;
+      const r=reportRowsCache[index];
+      if(!r) return;
       document.getElementById('detail-code').textContent=r.code||'--';
-      document.getElementById('detail-trip').textContent=reportTripLabel(r);
       document.getElementById('detail-date').textContent=r.date||'--';
       document.getElementById('detail-customer').textContent=r.customer||'--';
       document.getElementById('detail-plate').textContent=r.plate||'--';
       document.getElementById('detail-type').textContent=typeLabel(r.type);
       document.getElementById('detail-net').textContent=fmt(r.net);
       const rows=(r.rows&&r.rows.length)?r.rows:[{index:1,time:'--',product:r.product||'Tổng hợp',total:r.net,goods:r.net}];
-      document.getElementById('detail-rows').innerHTML=rows.map(w=>`<tr><td style="text-align:center;font-weight:800;">${w.index||1}</td><td>${w.time||'--'}</td><td><strong>${w.product||'Tổng hợp'}</strong></td><td class="num">${fmt(w.total ?? r.net)}</td><td class="num">${fmt(w.goods ?? r.net)}</td></tr>`).join('');
+      document.getElementById('detail-rows').innerHTML=rows.map(w=>`<tr><td style="text-align:center;font-weight:800;">${w.index||1}</td><td>${w.time||'--'}</td><td><strong>${w.product||'Tổng hợp'}</strong></td><td class="num">${fmt(w.total ?? r.net)}</td><td class="num">${w.goods===null?'---':fmt(w.goods ?? r.net)}</td></tr>`).join('');
       openModal('report-detail-modal');
     }
     function fillDatalists(){
       document.getElementById('customer-list').innerHTML=customers.map(x=>`<option value="${x}"></option>`).join('');
       document.getElementById('product-list').innerHTML=products.map(x=>`<option value="${x}"></option>`).join('');
+      const teamSelect=document.getElementById('ticket-teams');
+      if(teamSelect) teamSelect.innerHTML=`<label class="team-option team-select-all" for="team-all"><input type="checkbox" id="team-all" onchange="toggleAllTeams()"><span>Chọn tất cả đội</span></label>` + teams.map((x,i)=>`<label class="team-option" for="team-${i}"><input class="team-checkbox" type="checkbox" id="team-${i}" value="${x}" onchange="updateTeamSelection()"><span>${x}</span></label>`).join('') + '<div class="team-selected-preview empty" id="team-selected-preview">Chưa chọn đội nào</div>';
     }
-    document.addEventListener('DOMContentLoaded',()=>{
-      selectedDate=todayISO();
-      const op=document.getElementById('operation-date'); if(op) op.value=selectedDate;
-      fillDatalists(); renderNumpad(); renderVehicles(true); renderReport(); renderTicket();
-    });
+    document.addEventListener('DOMContentLoaded',()=>{ fillDatalists(); renderNumpad(); renderVehicles(true); renderReport(); });
   </script>
 
 <style id="final-medium-responsive-report-badges">
@@ -4791,7 +4235,7 @@
   /* REPORT DATE BADGES */
   .report-filter-grid-v2 {
     display: grid !important;
-    grid-template-columns: minmax(220px, 1.25fr) minmax(150px, .8fr) minmax(150px, .8fr) minmax(190px, 1fr) minmax(160px, .85fr) minmax(150px, .85fr) auto !important;
+    grid-template-columns: minmax(220px, 1.25fr) minmax(150px, .8fr) minmax(150px, .8fr) minmax(190px, 1fr) minmax(160px, .85fr) auto !important;
     gap: 10px !important;
     align-items: end !important;
   }
@@ -4852,90 +4296,6 @@
     }
     .range-badge {
       width: 100%;
-    }
-  }
-</style>
-
-  <style id="ui-user-facing-trip-cleanup">
-    .trip-meta-grid-compact { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-    .trip-select-card { grid-template-columns: 1fr !important; }
-  </style>
-
-
-
-<!-- 0802 MOVE TRIP SUMMARY TO CAPTURE HEADER -->
-<style>
-  .capture-card-header-v4 {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-  }
-  .capture-title-row {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 14px !important;
-    width: 100% !important;
-  }
-  .capture-title-left {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    flex: 0 0 auto !important;
-    min-width: 270px !important;
-  }
-  .capture-trip-header {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    gap: 10px !important;
-    min-width: 0 !important;
-    flex: 1 1 auto !important;
-  }
-  .capture-trip-card {
-    margin: 0 !important;
-    padding: 8px 12px !important;
-    min-height: 0 !important;
-    min-width: 260px !important;
-    max-width: 560px !important;
-    flex: 1 1 360px !important;
-    align-items: center !important;
-  }
-  .capture-trip-card .trip-title {
-    font-size: 13px !important;
-    line-height: 1.25 !important;
-    margin-bottom: 1px !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-  .capture-trip-card .trip-desc {
-    font-size: 11px !important;
-    line-height: 1.25 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-  .capture-trip-header > .btn {
-    flex: 0 0 auto !important;
-    min-height: 38px !important;
-  }
-  @media (max-width: 1180px) {
-    .capture-title-row,
-    .capture-title-left,
-    .capture-trip-header {
-      align-items: stretch !important;
-      flex-direction: column !important;
-    }
-    .capture-title-left {
-      min-width: 0 !important;
-    }
-    .capture-trip-card {
-      width: 100% !important;
-      max-width: none !important;
-      min-width: 0 !important;
-    }
-    .capture-trip-header > .btn {
-      width: 100% !important;
     }
   }
 </style>
@@ -5892,14 +5252,4 @@
       font-size: 28px !important;
     }
   }
-</style>
-
-
-<!-- 0723 CLEANUP — bỏ thông tin lặp trong phiếu cân -->
-<style>
-  #ticket-info-card .ticket-info-compact { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
-  #ticket-info-card .trip-meta-grid-compact { display: none !important; }
-  #ticket-info-card #team-select-wrap { display: none !important; }
-  #ticket-info-card #party-form-group[style*="display: none"] + .form-group { grid-column: 1 / -1; }
-  #ticket-info-card .trip-select-card { margin-top: 12px; }
 </style>
