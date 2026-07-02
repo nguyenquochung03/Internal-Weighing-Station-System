@@ -4025,14 +4025,9 @@
     }
     function isTripClosed(trip){ return isClosedStatus(trip?.ticket?.status) || isClosedStatus(trip?.status); }
     function previousBlockingTrip(v, currentTrip){
-      if(!v || !currentTrip || isReadonlyTrip(currentTrip,currentTrip.ticket)) return null;
-      const dated=tripsOfDate(v).map((trip,index)=>({trip,index})).sort((a,b)=>tripSortValue(a.trip,a.index)-tripSortValue(b.trip,b.index));
-      const currentIndex=dated.findIndex(x=>x.trip.id===currentTrip.id);
-      if(currentIndex<=0) return null;
-      const previous=dated.slice(0,currentIndex).find(x=>!isTripClosed(x.trip));
-      return previous?.trip || null;
+      return null;
     }
-    function hasUnfinishedTripInDate(v){ return tripsOfDate(v).some(trip=>!isTripClosed(trip)); }
+    function hasUnfinishedTripInDate(v){ return false; }
     function makeReadonlyTicketFromTrip(trip){
       const t=buildTicketFromTrip(trip);
       t.status=trip.status==='DaHuy'?'DaHuy':'HoanThanh';
@@ -4199,12 +4194,11 @@
         const flowClass=flowOf(trip.type)==='XuatHang'?'export':'import';
         const teams=(trip.teams||[]).length ? trip.teams.join(', ') : 'Không có';
         const party=normalizeType(trip.type)==='NhapCongTy' ? teams : (trip.customer || 'Chưa có khách');
-        const blocker=previousBlockingTrip(v, trip);
-        const blockHint=blocker ? `Cần hoàn thành Chuyến ${blocker.number || '--'} trước` : tripStatusLabel(trip);
-        return `<div class="trip-card ${active?'active':''} ${flowClass} ${trip.isEudr?'':'manual'} ${blocker?'trip-blocked':''}" onclick="selectTrip('${trip.id}')">
+        const statusText=tripStatusLabel(trip);
+        return `<div class="trip-card ${active?'active':''} ${flowClass} ${trip.isEudr?'':'manual'}" onclick="selectTrip('${trip.id}')">
           <div class="trip-card-head">
-            <div><div class="trip-code">Chuyến ${trip.number || '--'} · ${typeLabel(trip.type)}</div><div class="trip-subline">${blockHint}</div></div>
-            <div class="flex gap-8 align-center"><span class="badge ${blocker?'badge-yellow':tripBadgeClass(trip)}">${blocker?'Chưa được cân':tripStatusLabel(trip)}</span><span class="badge ${flowClass==='export'?'badge-blue':'badge-green'}">${typeLabel(trip.type)}</span></div>
+            <div><div class="trip-code">Chuyến ${trip.number || '--'} · ${typeLabel(trip.type)}</div><div class="trip-subline">${statusText}</div></div>
+            <div class="flex gap-8 align-center"><span class="badge ${tripBadgeClass(trip)}">${statusText}</span><span class="badge ${flowClass==='export'?'badge-blue':'badge-green'}">${typeLabel(trip.type)}</span></div>
           </div>
           <div class="trip-card-grid">
             <span>🚚 Số chuyến: <b>${trip.number || '--'}</b></span>
@@ -4218,11 +4212,6 @@
     function selectTrip(tripId){
       const trip=getVehicle()?.trips.find(t=>t.id===tripId);
       if(!trip) return;
-      const blocker=previousBlockingTrip(getVehicle(), trip);
-      if(blocker){
-        showToast('warning',`Chuyến ${trip.number || '--'} chưa được cân vì Chuyến ${blocker.number || '--'} chưa hoàn thành.`);
-        return;
-      }
       selectedTripId=tripId;
       if(!trip.ticket){
         trip.ticket=isClosedStatus(trip.status) ? makeReadonlyTicketFromTrip(trip) : buildTicketFromTrip(trip);
@@ -4249,8 +4238,6 @@
     }
     function createManualTrip(){
       const v=getVehicle(); if(!v) return;
-      const blocker=hasUnfinishedTripInDate(v) ? tripsOfDate(v).find(trip=>!isTripClosed(trip)) : null;
-      if(blocker){ showToast('warning',`Cần hoàn thành Chuyến ${blocker.number || '--'} trước khi tạo phiếu mới.`); return; }
       const type=normalizeType(document.querySelector('input[name="manual-trip-type"]:checked')?.value || 'NhapCongTy');
       const customer=(document.getElementById('manual-customer')?.value || '').trim();
       if(type!=='NhapCongTy' && !customer){ showToast('warning','Mua ngoài/Xuất hàng cần chọn khách hàng.'); return; }
@@ -4377,9 +4364,7 @@
         return;
       }
 
-      const blocker=previousBlockingTrip(v, trip);
       const readonly=isReadonlyTrip(trip,ticket);
-      const blockedByPrevious=!!blocker && !readonly;
       const captureGrid=document.getElementById('capture-input-grid');
       const lockedPreview=document.getElementById('locked-weighing-preview');
       if(weightInput) { weightInput.disabled=false; weightInput.placeholder='0'; }
@@ -4393,7 +4378,7 @@
       document.getElementById('ticket-code-text').textContent=ticket.code || 'Chưa sinh mã';
       const tripDisplay=document.getElementById('trip-display'); if(tripDisplay) tripDisplay.textContent=`Chuyến ${trip.number || '--'}`;
       document.getElementById('trip-card-title').textContent=`Chuyến ${trip.number || '--'} · ${typeLabel(trip.type)}`;
-      document.getElementById('trip-card-desc').textContent=blockedByPrevious ? `${selectedPartyValue(trip,ticket)} · Cần hoàn thành Chuyến ${blocker.number || '--'} trước` : `${selectedPartyValue(trip,ticket)} · ${tripStatusLabel(trip)}${readonly ? ' · Chỉ xem lại' : ''}`;
+      document.getElementById('trip-card-desc').textContent=`${selectedPartyValue(trip,ticket)} · ${tripStatusLabel(trip)}${readonly ? ' · Chỉ xem lại' : ''}`;
       document.getElementById('trip-select-card').classList.add('selected');
       const typeDisplay=document.getElementById('ticket-type-display'); if(typeDisplay) typeDisplay.textContent=typeLabel(trip.type);
       const numDisplay=document.getElementById('trip-number-display'); if(numDisplay) numDisplay.textContent=trip.number || '--';
@@ -4422,7 +4407,7 @@
       renderLoadHint(v,ticket,rows);
       document.getElementById('weighing-list').innerHTML=detailRowsHtml(ticket, rows);
       renderTotals(ticket);
-      applyTicketReadonlyMode(readonly || blockedByPrevious, blockedByPrevious ? `Chờ Chuyến ${blocker.number || '--'} hoàn thành` : (ticket.status==='DaHuy' ? 'Phiếu đã hủy' : 'Phiếu đã hoàn thành'));
+      applyTicketReadonlyMode(readonly, ticket.status==='DaHuy' ? 'Phiếu đã hủy' : 'Phiếu đã hoàn thành');
       if(readonly){
         if(captureGrid) captureGrid.style.display='none';
         if(lockedPreview){
@@ -4430,9 +4415,6 @@
           lockedPreview.innerHTML=`<div class="locked-preview-header"><div><div class="locked-preview-title">Chi tiết cân</div><div class="info-banner-desc">Phiếu đã hoàn thành, chỉ xem lại thông tin đã cân.</div></div><button class="btn btn-secondary btn-sm" onclick="openCurrentDetail()">Mở rộng</button></div><div class="table-container"><table class="data-table"><thead><tr><th style="width:70px;text-align:center;">Lần</th><th>Thời gian</th><th>Loại hàng</th><th style="text-align:right;">Tổng trọng lượng (kg)</th><th style="text-align:right;">Trọng lượng hàng (kg)</th></tr></thead><tbody>${detailRowsHtml(ticket, rows)}</tbody></table></div>`;
         }
         if(productInput) productInput.placeholder='Chỉ xem lại';
-      }else if(blockedByPrevious){
-        if(weightInput) weightInput.placeholder=`Chờ Chuyến ${blocker.number || '--'} hoàn thành`;
-        if(productInput) productInput.placeholder='Chưa được cân chuyến này';
       }
       if(document.getElementById('live-detail-modal')?.classList.contains('active')) renderCurrentDetailRows();
     }
@@ -4485,8 +4467,6 @@
     function saveTicketInfo(){
       const trip=getTrip(), t=getTicket();
       if(!trip || !t){ showToast('warning','Chọn chuyến xe trước khi lưu thông tin.'); return; }
-      const blocker=previousBlockingTrip(getVehicle(), trip);
-      if(blocker){ showToast('warning',`Cần hoàn thành Chuyến ${blocker.number || '--'} trước khi lưu chuyến này.`); return; }
       if(isReadonlyTrip(trip,t)){ showToast('warning','Phiếu của chuyến này đã khóa, chỉ xem lại.'); return; }
       if(normalizeType(trip.type)!=='NhapCongTy'){
         t.customer=(document.getElementById('ticket-customer')?.value || '').trim();
@@ -4504,8 +4484,6 @@
     function saveWeighing(){
       const v=getVehicle(), trip=getTrip(), t=getTicket();
       if(!v || !trip || !t){ showToast('warning','Chọn chuyến xe trước khi lưu lần cân.'); return; }
-      const blocker=previousBlockingTrip(v, trip);
-      if(blocker){ showToast('warning',`Không thể cân chuyến này khi Chuyến ${blocker.number || '--'} chưa hoàn thành.`); return; }
       if(t.status==='HoanThanh' || t.status==='DaHuy'){ showToast('warning','Phiếu này đã khóa, không thể cân thêm.'); return; }
       const weight=Number(document.getElementById('weight-input').value);
       const productInput=document.getElementById('product-input');
